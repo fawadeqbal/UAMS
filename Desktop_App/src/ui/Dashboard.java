@@ -38,6 +38,7 @@ public class Dashboard extends JFrame {
     private void createHeaderPanel() {
         headerPanel = new JPanel();
         headerPanel.setBackground(new Color(41, 128, 185));
+        headerPanel.setLayout(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
@@ -47,7 +48,7 @@ public class Dashboard extends JFrame {
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        headerPanel.add(titleLabel,SwingConstants.CENTER);
+        headerPanel.add(titleLabel,BorderLayout.CENTER);
     }
 
     private void createMenuPanel() {

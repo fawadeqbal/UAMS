@@ -5,12 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import modal.autheticate.Authenticate;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class LoginUI extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
     public LoginUI() {
+        FlatLightLaf.install();
         setTitle("UAS - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600, 400));
