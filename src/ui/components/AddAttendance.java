@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
  * @author fawad
  */
 public class AddAttendance extends JPanel{
+    
     public AddAttendance() {
         setLayout(new BorderLayout());
         JLabel welcomeLabel = new JLabel("Welcome to the Add Attendance!");

@@ -34,21 +34,22 @@ public class Dashboard extends JFrame {
 
     private void createHeaderPanel() {
         headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(47, 53, 66));
+        headerPanel.setBackground(new Color(41, 128, 185));
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
         JLabel titleLabel = new JLabel("Attendance Management System");
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        headerPanel.add(titleLabel);
+        
+        headerPanel.add(titleLabel,SwingConstants.CENTER);
     }
 
     private void createMenuPanel() {
         menuPanel = new JPanel();
-        menuPanel.setBackground(new Color(87, 96, 111));
+        menuPanel.setBackground(new Color(52, 152, 219));
         menuPanel.setPreferredSize(new Dimension(200, 600));
         menuPanel.setLayout(new GridBagLayout());
         add(menuPanel, BorderLayout.WEST);
@@ -83,9 +84,9 @@ public class Dashboard extends JFrame {
         gbc.gridy++;
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(Color.WHITE);
-        logoutButton.setBackground(new Color(47, 53, 66));
+        logoutButton.setBackground(new Color(41, 128, 185));
         logoutButton.setFocusPainted(false);
-        logoutButton.setFont(new Font("Arial", Font.PLAIN, 11));
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 12));
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // Add ActionListener to handle logout functionality
@@ -106,9 +107,9 @@ public class Dashboard extends JFrame {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(180, 35));
         button.setForeground(Color.WHITE);
-        button.setBackground(new Color(47, 53, 66));
+        button.setBackground(new Color(41, 128, 185));
         button.setFocusPainted(false);
-        button.setFont(new Font("Arial", Font.BOLD, 12));
+        button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         // Hover Effect
@@ -164,7 +165,7 @@ public class Dashboard extends JFrame {
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }
 
-//    public static void main(String[] args) {
-//        new Dashboard().setVisible(true);
-//    }
+    public static void main(String[] args) {
+        new Dashboard().setVisible(true);
+    }
 }
