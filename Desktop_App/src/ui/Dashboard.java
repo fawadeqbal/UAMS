@@ -6,14 +6,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ui.signin.LoginUI;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class Dashboard extends JFrame {
+    
 
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
 
     public Dashboard() {
+        FlatLightLaf.install();
         setTitle("Attendance Management System - Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
@@ -50,7 +53,7 @@ public class Dashboard extends JFrame {
     private void createMenuPanel() {
         menuPanel = new JPanel();
         menuPanel.setBackground(new Color(52, 152, 219));
-        menuPanel.setPreferredSize(new Dimension(200, 600));
+        menuPanel.setPreferredSize(new Dimension(220, 600));
         menuPanel.setLayout(new GridBagLayout());
         add(menuPanel, BorderLayout.WEST);
 
@@ -105,12 +108,15 @@ public class Dashboard extends JFrame {
 
     private JButton createMenuButton(String text) {
         JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(180, 35));
+        button.setPreferredSize(new Dimension(200, 35));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(41, 128, 185));
         button.setFocusPainted(false);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
+        button.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219)); 
+        
 
         // Hover Effect
         button.addMouseListener(new java.awt.event.MouseAdapter() {
