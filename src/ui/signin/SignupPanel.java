@@ -1,4 +1,5 @@
 package ui.signin;
+
 import ui.signin.LoginUI;
 import javax.swing.*;
 import java.awt.*;
@@ -8,11 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class SignupPanel extends JFrame {
 
@@ -126,8 +122,8 @@ public class SignupPanel extends JFrame {
                 String phone = phoneField.getText();
 
                 // Validate the input
-                if (username.isEmpty() || password.isEmpty() || firstName.isEmpty() ||
-                        lastName.isEmpty() || userID.isEmpty() || dob.isEmpty() || phone.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty() || firstName.isEmpty()
+                        || lastName.isEmpty() || userID.isEmpty() || dob.isEmpty() || phone.isEmpty()) {
                     JOptionPane.showMessageDialog(SignupPanel.this,
                             "Please fill in all the fields.",
                             "Error",
@@ -135,80 +131,6 @@ public class SignupPanel extends JFrame {
                     return;
                 }
 
-                // Save the user information to an Excel sheet
-                try {
-                    String filePath = "users.xlsx";
-                    Workbook workbook;
-                    Sheet sheet;
-                    Row row;
-                    Cell cell;
-
-                    // Check if the Excel file exists
-                    File file = new File(filePath);
-                    if (!file.exists()) {
-                        // Create a new workbook and sheet
-                        workbook = new XSSFWorkbook();
-                        sheet = workbook.createSheet("Users");
-
-                        // Create column headers
-                        row = sheet.createRow(0);
-                        cell = row.createCell(0);
-                        cell.setCellValue("Username");
-                        cell = row.createCell(1);
-                        cell.setCellValue("Password");
-                        cell = row.createCell(2);
-                        cell.setCellValue("First Name");
-                        cell = row.createCell(3);
-                        cell.setCellValue("Last Name");
-                        cell = row.createCell(4);
-                        cell.setCellValue("User ID");
-                        cell = row.createCell(5);
-                        cell.setCellValue("Date of Birth");
-                        cell = row.createCell(6);
-                        cell.setCellValue("Phone Number");
-                    } else {
-                        // Load the existing workbook and sheet
-                        FileInputStream fileInputStream = new FileInputStream(file);
-                        workbook = new XSSFWorkbook(fileInputStream);
-                        sheet = workbook.getSheet("Users");
-                    }
-
-                    // Get the next available row index
-                    int nextRowIndex = sheet.getLastRowNum() + 1;
-                    row = sheet.createRow(nextRowIndex);
-
-                    // Write the user information to the row
-                    cell = row.createCell(0);
-                    cell.setCellValue(username);
-                    cell = row.createCell(1);
-                    cell.setCellValue(password);
-                    cell = row.createCell(2);
-                    cell.setCellValue(firstName);
-                    cell = row.createCell(3);
-                    cell.setCellValue(lastName);
-                    cell = row.createCell(4);
-                    cell.setCellValue(userID);
-                    cell = row.createCell(5);
-                    cell.setCellValue(dob);
-                    cell = row.createCell(6);
-                    cell.setCellValue(phone);
-
-                    // Write the changes to the Excel file
-                    FileOutputStream fileOutputStream = new FileOutputStream(file);
-                    workbook.write(fileOutputStream);
-                    fileOutputStream.close();
-
-                    JOptionPane.showMessageDialog(SignupPanel.this,
-                            "User registered successfully!",
-                            "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    clearFields();
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(SignupPanel.this,
-                            "Error saving user information.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
             }
         });
 
