@@ -19,7 +19,7 @@ public class AddAttendance extends JPanel{
     
     public AddAttendance() {
         setLayout(new BorderLayout());
-        JLabel welcomeLabel = new JLabel("Welcome to the Add Attendance!");
+        JLabel welcomeLabel = new JLabel("Welcome to the Add Attendance");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 25));
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
