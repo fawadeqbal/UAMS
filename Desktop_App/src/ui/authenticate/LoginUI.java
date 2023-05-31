@@ -1,7 +1,8 @@
-package ui.signin;
+package ui.authenticate;
 
 import ui.Dashboard;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import modal.autheticate.Authenticate;

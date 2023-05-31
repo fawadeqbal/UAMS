@@ -1,11 +1,15 @@
 package ui;
 
+import ui.components.attendance.ViewAttendance;
+import ui.components.attendance.ModifyAttendance;
+import ui.components.attendance.DeleteAttendance;
+import ui.components.attendance.AddAttendance;
 import ui.components.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import ui.signin.LoginUI;
+import ui.authenticate.LoginUI;
 
 
 public class Dashboard extends JFrame {

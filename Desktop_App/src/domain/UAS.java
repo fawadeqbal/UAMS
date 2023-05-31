@@ -1,5 +1,5 @@
-package uas;
-import ui.signin.LoginUI;
+package domain;
+import ui.authenticate.LoginUI;
 import javax.swing.*;
 
 

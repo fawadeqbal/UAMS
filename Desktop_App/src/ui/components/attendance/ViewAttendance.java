@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ui.components;
+package ui.components.attendance;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,10 +15,10 @@ import javax.swing.SwingConstants;
  *
  * @author fawad
  */
-public class DeleteAttendance extends JPanel{
-    public DeleteAttendance() {
+public class ViewAttendance extends JPanel{
+    public ViewAttendance() {
         setLayout(new BorderLayout());
-        JLabel welcomeLabel = new JLabel("Welcome to the Delete Attendance!");
+        JLabel welcomeLabel = new JLabel("Welcome to the View Attendance!");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 25));
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
