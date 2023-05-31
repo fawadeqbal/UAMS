@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ui.signin.LoginUI;
-import com.formdev.flatlaf.FlatLightLaf;
+
 
 public class Dashboard extends JFrame {
     
@@ -16,7 +16,7 @@ public class Dashboard extends JFrame {
     private JPanel contentPanel;
 
     public Dashboard() {
-        FlatLightLaf.install();
+        
         setTitle("Attendance Management System - Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
@@ -91,6 +91,9 @@ public class Dashboard extends JFrame {
         logoutButton.setFocusPainted(false);
         logoutButton.setFont(new Font("Arial", Font.BOLD, 12));
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        logoutButton.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
+        logoutButton.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219)); 
+        
 
         // Add ActionListener to handle logout functionality
         logoutButton.addActionListener(new ActionListener() {
@@ -166,7 +169,7 @@ public class Dashboard extends JFrame {
 
         JLabel welcomeLabel = new JLabel("Welcome to the Dashboard!");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        welcomeLabel.setForeground(new Color(16, 172, 132));
+        welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }

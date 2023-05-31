@@ -13,7 +13,7 @@ public class LoginUI extends JFrame {
     public LoginUI() {
         setTitle("UAS - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(450, 300));
+        setPreferredSize(new Dimension(600, 400));
         ImageIcon icon = new ImageIcon("icon.png");
         setIconImage(icon.getImage());
         setLayout(new BorderLayout());
@@ -31,6 +31,7 @@ public class LoginUI extends JFrame {
 
         JLabel titleLabel = new JLabel("Login");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(41, 128, 185));
         mainPanel.add(titleLabel, gbc);
 
         gbc.gridy++;
@@ -60,6 +61,15 @@ public class LoginUI extends JFrame {
         gbc.gridy++;
         passwordField = new JPasswordField(20);
         JButton loginButton = new JButton("Login");
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setBackground(new Color(41, 128, 185));
+        loginButton.setFocusPainted(false);
+        loginButton.setFont(new Font("Arial", Font.BOLD, 12));
+        loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loginButton.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
+        loginButton.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219)); 
+        
+        
         passwordField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,8 +83,7 @@ public class LoginUI extends JFrame {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         
-        loginButton.setBackground(Color.DARK_GRAY);
-        loginButton.setForeground(Color.WHITE);
+        
         loginButton.setFocusPainted(false);
         loginButton.setFont(new Font("Arial", Font.BOLD, 16));
         mainPanel.add(loginButton, gbc);

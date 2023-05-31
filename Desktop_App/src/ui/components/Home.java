@@ -17,8 +17,8 @@ public class Home extends JPanel {
         setLayout(new BorderLayout());
 
         JLabel welcomeLabel = new JLabel("Welcome to the Home Page!");
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        welcomeLabel.setForeground(new Color(16, 172, 132));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(welcomeLabel, BorderLayout.CENTER);
     }
