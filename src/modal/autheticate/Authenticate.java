@@ -4,6 +4,7 @@
  */
 package modal.autheticate;
 
+import common.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import modal.MySqlConnection;
  */
 public class Authenticate {
 
-    public static boolean autheticate(String username,String password) {
+    public static boolean autheticate(User user) {
         // Establish a database connection
         Connection connection = null;
         try {
@@ -30,8 +31,8 @@ public class Authenticate {
         try {
             String query = "SELECT * FROM user WHERE username = ? AND password = ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(1,user.getUsername());
+            statement.setString(2, user.getPassword());
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {

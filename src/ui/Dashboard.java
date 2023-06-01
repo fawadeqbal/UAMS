@@ -52,6 +52,7 @@ public class Dashboard extends JFrame {
         
         menuPanel.setPreferredSize(new Dimension(220, 600));
         menuPanel.setLayout(new GridBagLayout());
+        menuPanel.setBackground(new Color(34, 30, 31));
         add(menuPanel, BorderLayout.WEST);
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -107,6 +108,7 @@ public class Dashboard extends JFrame {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(200, 35));
        
+        button.setForeground(new Color(50,50,50));
         button.setFocusPainted(false);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

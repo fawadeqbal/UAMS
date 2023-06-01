@@ -1,4 +1,4 @@
-package main;
+package ui;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
