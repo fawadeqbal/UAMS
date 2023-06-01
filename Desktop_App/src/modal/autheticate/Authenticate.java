@@ -8,7 +8,7 @@ import common.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import modal.MySqlConnection;
+import modal.Conn;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Authenticate {
         // Establish a database connection
         Connection connection = null;
         try {
-            connection = MySqlConnection.getConnection();
+            connection = Conn.getConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

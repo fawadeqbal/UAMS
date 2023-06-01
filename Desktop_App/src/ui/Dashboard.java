@@ -178,5 +178,7 @@ public class Dashboard extends JFrame {
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }
-
+    public static void main(String[] args) {
+        new Dashboard().setVisible(true);
+    }
 }

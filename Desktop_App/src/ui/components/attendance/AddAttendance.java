@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import controller.StudentController;
-
 import java.util.Date;
 
 public class AddAttendance extends JPanel {
@@ -36,7 +35,7 @@ public class AddAttendance extends JPanel {
     private void initializeComponents() {
         
         courseLabel = new JLabel("Course:");
-        courseComboBox = new JComboBox<>(new String[]{"Math", "Physics", "English"});
+        courseComboBox = new JComboBox<>(new String[]{"Data Structures", "OOSE", "Statistics"});
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
 

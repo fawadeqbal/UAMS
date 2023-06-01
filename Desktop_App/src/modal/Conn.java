@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySqlConnection {
+public class Conn {
     private static final String URL = "jdbc:mysql://localhost:3306/attendance_system";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "fawad321";

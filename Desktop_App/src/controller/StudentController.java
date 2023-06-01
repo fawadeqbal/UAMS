@@ -2,18 +2,23 @@ package controller;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import common.Student;
 
 public class StudentController {
+    
     public static DefaultTableModel getStudentsByCourse(String selectedCourse) {
-        ArrayList<common.Student> studentList = new ArrayList<>();
+        ArrayList<Student> studentList = new ArrayList<>();
 
         // Add students to the list for the selected course
+        
         for (int j = 1; j <= 30; j++) {
+            Student student;
             String name = "Student " + j + " - " + selectedCourse;
             String regNo = "FA21/BSE/" + String.format("%03d", j);
             boolean attendance = false; 
+            student=new Student(name, regNo, attendance);
 
-            studentList.add(new common.Student(name, regNo, attendance));
+            studentList.add(student);
         }
 
         Vector<String> columnNames = new Vector<>();
@@ -23,7 +28,7 @@ public class StudentController {
 
         Vector<Vector<Object>> data = new Vector<>();
         // Create the data vector from the student list
-        for (common.Student student : studentList) {
+        for (Student student : studentList) {
             Vector<Object> rowData = new Vector<>();
             rowData.add(student.getName());
             rowData.add(student.getRegNo());
