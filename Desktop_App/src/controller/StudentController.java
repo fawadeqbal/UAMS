@@ -11,7 +11,7 @@ public class StudentController {
         for (int j = 1; j <= 30; j++) {
             String name = "Student " + j + " - " + selectedCourse;
             String regNo = "FA21/BSE/" + String.format("%03d", j);
-            boolean attendance = (j % 2 == 0); // Set attendance randomly for demonstration
+            boolean attendance = false; 
 
             studentList.add(new common.Student(name, regNo, attendance));
         }

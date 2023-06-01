@@ -179,7 +179,4 @@ public class Dashboard extends JFrame {
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        new Dashboard().setVisible(true);
-    }
 }

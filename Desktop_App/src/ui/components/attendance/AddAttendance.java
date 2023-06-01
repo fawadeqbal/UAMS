@@ -34,6 +34,7 @@ public class AddAttendance extends JPanel {
     }
 
     private void initializeComponents() {
+        
         courseLabel = new JLabel("Course:");
         courseComboBox = new JComboBox<>(new String[]{"Math", "Physics", "English"});
         dateLabel = new JLabel("Date:");
@@ -110,6 +111,7 @@ public class AddAttendance extends JPanel {
         add(remarksLabel, gbc);
 
         gbc.gridx = 1;
+        
         add(remarksField, gbc);
 
         // Add check/uncheck all checkbox
@@ -196,21 +198,5 @@ public class AddAttendance extends JPanel {
             }
         });
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame("Add Attendance");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                AddAttendance addAttendancePanel = new AddAttendance();
-                frame.getContentPane().add(addAttendancePanel);
-
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-        });
-    }
-    
+   
 }
