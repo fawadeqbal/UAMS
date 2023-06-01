@@ -1,5 +1,6 @@
 package ui;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import ui.authenticate.LoginUI;
 import javax.swing.*;
 
@@ -7,7 +8,7 @@ import javax.swing.*;
 public class UAS {
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
