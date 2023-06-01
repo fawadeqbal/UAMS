@@ -1,4 +1,4 @@
-package domain;
+package ui;
 import ui.authenticate.LoginUI;
 import javax.swing.*;
 

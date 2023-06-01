@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import modal.autheticate.Authenticate;
+import controller.AuthController;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class LoginUI extends JFrame {
@@ -97,7 +97,7 @@ public class LoginUI extends JFrame {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 // Perform authentication logic here
-                boolean authenticate=Authenticate.autheticate(username, password);
+                boolean authenticate=AuthController.authenticate(username, password);
                 if (authenticate) {
                     dispose(); // Close the login window
                     new Dashboard().setVisible(true);
