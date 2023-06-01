@@ -16,7 +16,7 @@ import modal.MySqlConnection;
  */
 public class Authenticate {
 
-    public static boolean authUser(User user) {
+    public static boolean verifyUser(User user) {
         // Establish a database connection
         Connection connection = null;
         try {

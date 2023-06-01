@@ -15,7 +15,6 @@ public class AuthController {
     public static boolean authenticate(String username,String password){
         
         User user=new User(username,password);
-        
-        return Authenticate.authUser(user);
+        return Authenticate.verifyUser(user);
     }
 }
