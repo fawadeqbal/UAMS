@@ -1,5 +1,6 @@
 package ui;
-import com.formdev.flatlaf.FlatDarculaLaf;
+
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -9,7 +10,7 @@ public class UAS {
     public static void main(String[] args) {
         // Create and display the login form
         try{
-        UIManager.setLookAndFeel(new FlatDarculaLaf());
+        UIManager.setLookAndFeel(new FlatLightLaf());
         }catch(Exception e){
             System.out.println(""+e.getMessage());
         }
