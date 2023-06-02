@@ -4,7 +4,7 @@
  */
 package controller;
 import common.User;
-import modal.autheticate.Authenticate;
+import model.autheticate.Authenticate;
 
 /**
  *
