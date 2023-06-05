@@ -4,11 +4,14 @@ import ui.components.attendance.ViewAttendance;
 import ui.components.attendance.ModifyAttendance;
 import ui.components.attendance.DeleteAttendance;
 import ui.components.attendance.AddAttendance;
+import ui.components.Reports;
 import ui.components.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
+import org.jfree.data.category.DefaultCategoryDataset;
 import ui.authenticate.LoginUI;
 
 
@@ -139,7 +142,8 @@ public class Dashboard extends JFrame {
 
                 contentPanel.removeAll();
                 if (buttonText.equals("Home")) {
-                    contentPanel.add(new Home());
+                    Home homePanel = new Home();
+                    contentPanel.add(homePanel);
                 } else if (buttonText.equals("Add Attendance")) {
                     contentPanel.add(new AddAttendance());
 
@@ -156,7 +160,7 @@ public class Dashboard extends JFrame {
                     contentPanel.add(new UserSettings());
 
                 } else if (buttonText.equals("Reports")) {
-                    contentPanel.add(new UserSettings());
+                    contentPanel.add(new Reports());
 
                 }
                 contentPanel.revalidate();

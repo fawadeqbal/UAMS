@@ -25,6 +25,12 @@ public class AddAttendance extends JPanel {
     private JTable studentTable;
     private JButton addAttendanceButton;
     private JCheckBox checkAllCheckBox;
+    JLabel facultyLabel;
+        JComboBox facultyComboBox;
+        JLabel lectureDateLabel;
+        JDatePicker lectureDatePicker;
+        JLabel lectureTopicLabel;
+        JTextField lectureTopicField;
 
     public AddAttendance() {
         initializeComponents();
@@ -43,6 +49,17 @@ public class AddAttendance extends JPanel {
         timeSlotField = new JTextField(10);
         remarksLabel = new JLabel("Remarks:");
         remarksField = new JTextField(20);
+        
+        
+        facultyLabel = new JLabel("Faculty:");
+    facultyComboBox = new JComboBox<>(new String[]{"John Doe", "Jane Smith", "Robert Johnson"});
+
+    lectureDateLabel = new JLabel("Lecture Date:");
+    lectureDatePicker = new JDatePicker(new Date());
+
+    lectureTopicLabel = new JLabel("Lecture Topic:");
+    lectureTopicField = new JTextField(20);
+
 
         // Set current time slot
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -142,6 +159,30 @@ public class AddAttendance extends JPanel {
         gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.CENTER;
         add(addAttendanceButton, gbc);
+     
+    // Add faculty label and combo box
+    gbc.gridx = 0;
+    gbc.gridy = 5;
+    add(facultyLabel, gbc);
+
+    gbc.gridx = 1;
+    add(facultyComboBox, gbc);
+
+    // Add lecture date label and date picker
+    gbc.gridx = 0;
+    gbc.gridy = 6;
+    add(lectureDateLabel, gbc);
+
+    gbc.gridx = 1;
+    add(lectureDatePicker, gbc);
+
+    // Add lecture topic label and text field
+    gbc.gridx = 0;
+    gbc.gridy = 7;
+    add(lectureTopicLabel, gbc);
+
+    gbc.gridx = 1;
+    add(lectureTopicField, gbc);
     }
 
     private void addListeners() {
@@ -197,5 +238,6 @@ public class AddAttendance extends JPanel {
             }
         });
     }
+    
    
 }
