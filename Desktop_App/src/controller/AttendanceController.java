@@ -3,17 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import common.UserDTO;
-import model.autheticate.Authenticate;
 
 /**
  *
  * @author fawad
  */
-public class AuthController {
+public class AttendanceController {
     
-    public static boolean authenticate(UserDTO user){
-        Authenticate auth=new Authenticate();
-        return auth.authenticate(user);
-    }
 }

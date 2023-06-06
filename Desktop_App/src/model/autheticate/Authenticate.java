@@ -4,7 +4,7 @@
  */
 package model.autheticate;
 
-import common.User;
+import common.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +15,9 @@ import model.Conn;
  * @author fawad
  */
 public class Authenticate {
+    
 
-    public static boolean verifyUser(User user) {
+    public boolean authenticate(UserDTO user) {
         // Establish a database connection
         Connection connection = null;
         try {
@@ -36,6 +37,7 @@ public class Authenticate {
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                System.out.println(resultSet.getString("username"));
                 // Authentication successful
                 return true;
             }

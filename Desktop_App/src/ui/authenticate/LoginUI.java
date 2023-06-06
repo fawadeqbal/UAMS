@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import controller.AuthController;
 import com.formdev.flatlaf.FlatLightLaf;
+import common.UserDTO;
 
 public class LoginUI extends JFrame {
     private JTextField usernameField;
@@ -97,7 +98,8 @@ public class LoginUI extends JFrame {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 // Perform authentication logic here
-                boolean authenticate=AuthController.authenticate(username, password);
+                UserDTO user=new UserDTO(username,password);
+                boolean authenticate=AuthController.authenticate(user);
                 if (authenticate) {
                     dispose(); // Close the login window
                     new Dashboard().setVisible(true);
