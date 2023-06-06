@@ -1,3 +1,0 @@
-John Doe,123456,Class 10,true
-Jane Smith,654321,Class 9,true
-Tom Johnson,987654,Class 11,true
