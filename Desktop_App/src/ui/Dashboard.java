@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 import org.jfree.data.category.DefaultCategoryDataset;
-import ui.authenticate.LoginUI;
+import ui.components.LoginUI;
 
 
 public class Dashboard extends JFrame {

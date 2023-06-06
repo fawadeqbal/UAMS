@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author fawad
  */
 public class EmployeeModel {
+    
+    
     private ArrayList<Employee> employeeList=new ArrayList<>();
     public static void main(String[] args) {
         EmployeeModel m=new EmployeeModel();
@@ -33,7 +35,7 @@ public class EmployeeModel {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT first_name,last_name FROM employees";
+            String query = "SELECT * FROM employees";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             if(!resultSet.next()){
@@ -42,10 +44,10 @@ public class EmployeeModel {
             } else{
                 while (resultSet.next()) {
                 Employee emp=new Employee();
-                //emp.setEmployeeId(resultSet.getInt("employee_id"));
+                emp.setEmployeeId(resultSet.getInt("employee_id"));
                 emp.setFirstName(resultSet.getString("first_name"));
                 emp.setLastName(resultSet.getString("last_name"));
-                //emp.setJobTitle(resultSet.getString("job_title"));
+                emp.setJobTitle(resultSet.getString("job_title"));
                 employeeList.add(emp);
                 System.out.println(emp.toString());
             }

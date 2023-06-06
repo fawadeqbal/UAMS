@@ -1,4 +1,4 @@
-package ui.authenticate;
+package ui.components;
 
 import ui.Dashboard;
 import javax.swing.*;
