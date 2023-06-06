@@ -1,0 +1,169 @@
+package ui;
+
+import ui.components.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import ui.signin.LoginUI;
+
+public class Dashboard extends JFrame {
+
+    private JPanel headerPanel;
+    private JPanel menuPanel;
+    private JPanel contentPanel;
+
+    public Dashboard() {
+        setTitle("Attendance Management System - Dashboard");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(800, 600));
+        setLayout(new BorderLayout());
+
+        // Header Panel
+        createHeaderPanel();
+
+        // Menu Panel
+        createMenuPanel();
+
+        // Content Panel
+        createContentPanel();
+
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    private void createHeaderPanel() {
+        headerPanel = new JPanel();
+        
+        headerPanel.setPreferredSize(new Dimension(800, 75));
+        add(headerPanel, BorderLayout.NORTH);
+
+        JLabel titleLabel = new JLabel("Attendance Management System");
+        titleLabel.setForeground(new Color(250, 250, 250));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setVerticalAlignment(SwingConstants.CENTER);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        headerPanel.add(titleLabel,SwingConstants.CENTER);
+    }
+
+    private void createMenuPanel() {
+        menuPanel = new JPanel();
+        
+        menuPanel.setPreferredSize(new Dimension(220, 600));
+        menuPanel.setLayout(new GridBagLayout());
+        menuPanel.setBackground(new Color(34, 30, 31));
+        add(menuPanel, BorderLayout.WEST);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        JButton homeButton = createMenuButton("Home");
+        JButton addAttendanceButton = createMenuButton("Add Attendance");
+        JButton viewAttendanceButton = createMenuButton("View Attendance");
+        JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
+        JButton modifyAttendanceButton = createMenuButton("Modify Attendance");
+        JButton settingsButton = createMenuButton("User Settings");
+        JButton reportsButton = createMenuButton("Reports");
+
+        menuPanel.add(homeButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(addAttendanceButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(viewAttendanceButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(deleteAttendanceButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(modifyAttendanceButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(reportsButton, gbc);
+        gbc.gridy++;
+        menuPanel.add(settingsButton, gbc);
+        gbc.gridy++;
+        gbc.gridy++;
+        JButton logoutButton = new JButton("Logout");
+        
+      
+        logoutButton.setFocusPainted(false);
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 12));
+        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // Add ActionListener to handle logout functionality
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Perform logout actions here
+                // For example, dispose the Dashboard frame and show the login page
+                dispose();
+                new LoginUI().setVisible(true);
+            }
+        });
+
+        menuPanel.add(logoutButton, gbc);
+    }
+
+    private JButton createMenuButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(200, 35));
+       
+        button.setForeground(new Color(50,50,50));
+        button.setFocusPainted(false);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // Hover Effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        });
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle button click event or navigate to the corresponding page
+                String buttonText = button.getText();
+
+                contentPanel.removeAll();
+                if (buttonText.equals("Home")) {
+                    contentPanel.add(new Home());
+                } else if (buttonText.equals("Add Attendance")) {
+                    contentPanel.add(new AddAttendance());
+
+                } else if (buttonText.equals("View Attendance")) {
+                    contentPanel.add(new ViewAttendance());
+
+                } else if (buttonText.equals("Delete Attendance")) {
+                    contentPanel.add(new DeleteAttendance());
+
+                } else if (buttonText.equals("Modify Attendance")) {
+                    contentPanel.add(new ModifyAttendance());
+
+                } else if (buttonText.equals("User Settings")) {
+                    contentPanel.add(new UserSettings());
+
+                } else if (buttonText.equals("Reports")) {
+                    contentPanel.add(new UserSettings());
+
+                }
+                contentPanel.revalidate();
+                contentPanel.repaint();
+            }
+        });
+        return button;
+    }
+
+    private void createContentPanel() {
+        contentPanel = new JPanel();
+
+        contentPanel.setLayout(new BorderLayout());
+        add(contentPanel, BorderLayout.CENTER);
+
+        JLabel welcomeLabel = new JLabel("Welcome to the Dashboard!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        welcomeLabel.setForeground(new Color(16, 172, 132));
+        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPanel.add(welcomeLabel, BorderLayout.CENTER);
+    }
+
+}
