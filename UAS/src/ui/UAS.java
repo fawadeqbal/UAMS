@@ -1,7 +1,7 @@
 package ui;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import ui.components.LoginUI;
+import ui.panels.LoginUI;
 import javax.swing.*;
 
 public class UAS {

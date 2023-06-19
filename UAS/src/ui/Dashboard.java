@@ -1,18 +1,17 @@
 package ui;
 
-import ui.components.attendance.ViewAttendance;
-import ui.components.attendance.ModifyAttendance;
-import ui.components.attendance.DeleteAttendance;
-import ui.components.attendance.AddAttendance;
-import ui.components.Reports;
-import ui.components.*;
+import ui.panels.UserSettings;
+import ui.panels.Home;
+import ui.panels.attendance.ViewAttendance;
+import ui.panels.attendance.ModifyAttendance;
+import ui.panels.attendance.DeleteAttendance;
+import ui.panels.attendance.AddAttendance;
+import ui.panels.Reports;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
-import org.jfree.data.category.DefaultCategoryDataset;
-import ui.components.LoginUI;
+import ui.panels.LoginUI;
 
 
 public class Dashboard extends JFrame {
@@ -107,8 +106,6 @@ public class Dashboard extends JFrame {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Perform logout actions here
-                // For example, dispose the Dashboard frame and show the login page
                 dispose();
                 new LoginUI().setVisible(true);
             }
@@ -181,8 +178,5 @@ public class Dashboard extends JFrame {
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
-    }
-    public static void main(String[] args) {
-        new Dashboard().setVisible(true);
     }
 }

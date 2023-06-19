@@ -13,20 +13,20 @@ import japa.parser.ParseException;
 public class UTCTime {  
       
     // main() method start  
-    public static void main(String args[])  
-    {  
-        // use try-catch block to execute the code or catch the exception  
-        try {  
-            // print current time zone   
-            System.out.println("IST Time is:"+new Date());  
-            System.out.println("UTC Time is: "+getCurrentUtcTime());  
-        }   
-        // for handling parsing errors and exceptions  
-        catch (ParseException e) {  
-            // TODO Auto-generated catch block  
-            e.printStackTrace();  
-        }  
-    }  
+//    public static void main(String args[])  
+//    {  
+//        // use try-catch block to execute the code or catch the exception  
+//        try {  
+//            // print current time zone   
+//            System.out.println("IST Time is:"+new Date());  
+//            System.out.println("UTC Time is: "+getCurrentUtcTime());  
+//        }   
+//        // for handling parsing errors and exceptions  
+//        catch (ParseException e) {  
+//            // TODO Auto-generated catch block  
+//            e.printStackTrace();  
+//        }  
+//    }  
       
     // create getCurrentUtcTime() method to get the current UTC time   
     public static Date getCurrentUtcTime() throws ParseException {  // handling ParseException  
