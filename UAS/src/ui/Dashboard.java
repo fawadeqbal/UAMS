@@ -57,7 +57,7 @@ public class Dashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System"+"Role"+UASController.objApplicationSession.UserName);
+        JLabel titleLabel = new JLabel("Attendance Management System"+"          "+UASController.objApplicationSession.UserName);
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);

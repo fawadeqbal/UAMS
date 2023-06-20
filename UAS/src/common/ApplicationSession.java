@@ -12,7 +12,7 @@ public class ApplicationSession {
         }
         
         long currentTimeMillis = System.currentTimeMillis();
-        long sessionDurationMillis = 60 * 1000; // 1 minute in milliseconds
+        long sessionDurationMillis = 30 * 1000; // 1 minute in milliseconds
         long sessionEndTimeMillis = sessionStartTime.getTime() + sessionDurationMillis;
         
         return currentTimeMillis > sessionEndTimeMillis;
