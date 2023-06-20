@@ -17,22 +17,32 @@ import model.dto.UserDTO;
  * @author fawad
  */
 public class UASController {
-    static ApplicationSession objApplicationSession;
-    public static boolean isUserLoggedIn() {
-       return objApplicationSession != null;
-    }
-     DALManager dalManagerObj;
+    
+    public static ApplicationSession objApplicationSession;
+    public DALManager dalManagerObj;
 
     public UASController() {
-        dalManagerObj=UASFactory.getDALManagerInstance();
-        
+        dalManagerObj = UASFactory.getDALManagerInstance();
     }
+    public static void initializeSession() {
+        objApplicationSession = new ApplicationSession();
+        objApplicationSession.UserName = "";
+        objApplicationSession.startSession();
+    }
+    public static boolean isSessionExpired() {
+        return objApplicationSession.isSessionExpired();
+    }
+    public static boolean isUserLoggedIn(){
+        return objApplicationSession != null;
+    }
+    
     
     public void verifyUser(UserDTO user,Response responseObj) {
         
         dalManagerObj.verifyUser(user, responseObj);
+        
         if(responseObj.isSuccessfull()){
-        objApplicationSession = new ApplicationSession();
+        initializeSession();
         objApplicationSession.UserName = user.getUsername();
         }
 

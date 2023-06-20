@@ -4,12 +4,12 @@ import org.jfree.chart.*;
 import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.category.*;
 import org.jfree.data.category.*;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Vector;
+import model.UASController;
 
 import org.jfree.chart.ChartFactory;
 
@@ -21,11 +21,18 @@ public class Home extends JPanel {
     private DefaultTableModel tableModel;
     private JPanel chartPanel;
 
-    public Home() {
-        FlatLightLaf.install();
+    public Home(JFrame dashboard) {
+        if (UASController.isSessionExpired()) {
+            dashboard.dispose();
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.setVisible(false);
 
-        initializeComponents();
-        setupLayout();
+        } else {
+            initializeComponents();
+            setupLayout();
+        }
+
     }
 
     private void initializeComponents() {
@@ -55,7 +62,7 @@ public class Home extends JPanel {
         // Set the table and chart panel in the layout
         setLayout(new BorderLayout());
         add(new JScrollPane(table), BorderLayout.CENTER);
-        add(chartPanel, BorderLayout.EAST);
+        add(chartPanel, BorderLayout.WEST);
     }
 
     private Vector<String> createRow(String course, String attendance) {
@@ -65,17 +72,16 @@ public class Home extends JPanel {
         return row;
     }
 
-   private void setTableData(Vector<Vector<String>> data) {
-    tableModel.setDataVector(data, getColumnHeaders());
-}
+    private void setTableData(Vector<Vector<String>> data) {
+        tableModel.setDataVector(data, getColumnHeaders());
+    }
 
-private Vector<String> getColumnHeaders() {
-    Vector<String> headers = new Vector<>();
-    headers.add("Course");
-    headers.add("Attendance");
-    return headers;
-}
-
+    private Vector<String> getColumnHeaders() {
+        Vector<String> headers = new Vector<>();
+        headers.add("Course");
+        headers.add("Attendance");
+        return headers;
+    }
 
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -118,6 +124,7 @@ private Vector<String> getColumnHeaders() {
     }
 
     private void setupLayout() {
-        setPreferredSize(new Dimension(800, 600));
-    }
+    
+    setPreferredSize(new Dimension(800, 600));
+}
 }

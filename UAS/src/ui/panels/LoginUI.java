@@ -101,13 +101,11 @@ public class LoginUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 // Perform authentication logic here
                 UserDTO user=new UserDTO(username,password);
                 Response responseObj=UASFactory.getResponseInstance();
-                
                 controllerObj.verifyUser(user,responseObj);
                 if (responseObj.isSuccessfull()) {
                     JOptionPane.showMessageDialog(null, "Login successfull press ok");

@@ -1,4 +1,4 @@
-package ui.panels.attendance;
+package ui.panels;
 
 import org.jdatepicker.JDatePicker;
 
@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import model.UASController;
 
 public class ModifyAttendance extends JPanel {
 
@@ -20,10 +21,18 @@ public class ModifyAttendance extends JPanel {
     private JTable attendanceTable;
     private JButton updateAttendanceButton;
 
-    public ModifyAttendance() {
-        initializeComponents();
-        setupLayout();
-        addListeners();
+    public ModifyAttendance(JFrame dashboard) {
+        if (UASController.isSessionExpired()) {
+            dashboard.dispose();
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.setVisible(false);
+
+        } else {
+            initializeComponents();
+            setupLayout();
+            addListeners();
+        }
     }
 
     private void initializeComponents() {

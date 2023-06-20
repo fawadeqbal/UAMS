@@ -2,29 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ui.panels.attendance;
+package ui.panels;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.awt.GridBagConstraints;
+import model.UASController;
 import org.jdatepicker.JDatePicker;
 
-public class DeleteAttendance extends JPanel {
+public class ViewAttendance extends JPanel {
 
     private JLabel courseLabel;
     private JComboBox<String> courseComboBox;
     private JLabel dateLabel;
     private JDatePicker datePicker;
-    private JButton deleteAttendanceButton;
+    private JButton viewAttendanceButton;
     private JTable attendanceTable;
 
-    public DeleteAttendance() {
-        initializeComponents();
-        setupLayout();
-        addListeners();
+    public ViewAttendance(JFrame frame) {
+        if (UASController.isSessionExpired()) {
+            frame.dispose();
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.setVisible(false);
+
+        } else {
+            initializeComponents();
+            setupLayout();
+            addListeners();
+        }
     }
 
     private void initializeComponents() {
@@ -32,7 +43,7 @@ public class DeleteAttendance extends JPanel {
         courseComboBox = new JComboBox<>(new String[]{"Data Structures", "OOSE", "Statistics"});
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
-        deleteAttendanceButton = new JButton("Delete Attendance");
+        viewAttendanceButton = new JButton("View Attendance");
 
         attendanceTable = new JTable();
     }
@@ -61,14 +72,14 @@ public class DeleteAttendance extends JPanel {
         gbc.gridx = 1;
         add(datePicker, gbc);
 
-        // Add delete attendance button
+        // Add view attendance button
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.weighty = 0;
         gbc.fill = GridBagConstraints.CENTER;
         gbc.anchor = GridBagConstraints.CENTER;
-        add(deleteAttendanceButton, gbc);
+        add(viewAttendanceButton, gbc);
 
         // Add attendance table
         gbc.gridx = 0;
@@ -82,22 +93,19 @@ public class DeleteAttendance extends JPanel {
     }
 
     private void addListeners() {
-        deleteAttendanceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedCourse = (String) courseComboBox.getSelectedItem();
-                // You can get the selected date in a similar way to the "ViewAttendance" panel
+        viewAttendanceButton.addActionListener(e -> {
+            String selectedCourse = (String) courseComboBox.getSelectedItem();
+            Date selectedDate = (Date) datePicker.getModel().getValue();
+            System.out.println("Selected Course: " + selectedCourse);
+            System.out.println("Selected Date: " + selectedDate);
 
-                // Get the selected attendance records to be deleted
-                int[] selectedRows = attendanceTable.getSelectedRows();
-                DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
-
-                // Delete the selected attendance records from the table model
-                for (int i = selectedRows.length - 1; i >= 0; i--) {
-                    int selectedRow = selectedRows[i];
-                    tableModel.removeRow(selectedRow);
-                }
-            }
+            // Query attendance records based on selected course and date
+            // Update the attendanceTable with the retrieved data
+            DefaultTableModel tableModel = new DefaultTableModel();
+            // Populate the table model with the retrieved attendance records
+            // tableModel.addColumn("Column Name"); // Add columns to the table model
+            // tableModel.addRow(new Object[]{"Value 1", "Value 2", ...}); // Add rows to the table model
+            attendanceTable.setModel(tableModel);
         });
     }
 }

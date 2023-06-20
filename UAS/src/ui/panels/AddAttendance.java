@@ -1,4 +1,4 @@
-package ui.panels.attendance;
+package ui.panels;
 
 import org.jdatepicker.JDatePicker;
 
@@ -14,7 +14,8 @@ import model.UASController;
 import model.UASFactory;
 
 public class AddAttendance extends JPanel {
-    UASController controllerObj=UASFactory.getUASControllerInstance();
+
+    UASController controllerObj = UASFactory.getUASControllerInstance();
 
     private JLabel courseLabel;
     private JComboBox<String> courseComboBox;
@@ -28,14 +29,22 @@ public class AddAttendance extends JPanel {
     private JButton addAttendanceButton;
     private JCheckBox checkAllCheckBox;
 
-    public AddAttendance() {
-        initializeComponents();
-        setupLayout();
-        addListeners();
+    public AddAttendance(JFrame dashboard) {
+        if (UASController.isSessionExpired()) {
+            dashboard.dispose();
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.setVisible(false);
+
+        } else {
+            initializeComponents();
+            setupLayout();
+            addListeners();
+        }
     }
 
     private void initializeComponents() {
-        
+
         courseLabel = new JLabel("Course:");
         courseComboBox = new JComboBox<>(new String[]{"Data Structures", "OOSE", "Statistics"});
         dateLabel = new JLabel("Date:");
@@ -45,7 +54,6 @@ public class AddAttendance extends JPanel {
         timeSlotField = new JTextField(10);
         remarksLabel = new JLabel("Remarks:");
         remarksField = new JTextField(20);
-
 
         // Set current time slot
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -113,7 +121,7 @@ public class AddAttendance extends JPanel {
         add(remarksLabel, gbc);
 
         gbc.gridx = 1;
-        
+
         add(remarksField, gbc);
 
         // Add check/uncheck all checkbox
@@ -200,6 +208,5 @@ public class AddAttendance extends JPanel {
             }
         });
     }
-    
-   
+
 }

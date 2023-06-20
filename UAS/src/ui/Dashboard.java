@@ -2,10 +2,10 @@ package ui;
 
 import ui.panels.UserSettings;
 import ui.panels.Home;
-import ui.panels.attendance.ViewAttendance;
-import ui.panels.attendance.ModifyAttendance;
-import ui.panels.attendance.DeleteAttendance;
-import ui.panels.attendance.AddAttendance;
+import ui.panels.ViewAttendance;
+import ui.panels.ModifyAttendance;
+import ui.panels.DeleteAttendance;
+import ui.panels.AddAttendance;
 import ui.panels.Reports;
 import javax.swing.*;
 import java.awt.*;
@@ -14,52 +14,40 @@ import java.awt.event.ActionListener;
 import model.UASController;
 import ui.panels.LoginUI;
 
-
 public class Dashboard extends JFrame {
-    
 
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
+    public static void main(String[] args) {
+        new Dashboard().setVisible(true);
+    }
 
     public Dashboard() {
-        if(!UASController.isUserLoggedIn()){
-                LoginUI loginScreen = new LoginUI();
-        loginScreen.setVisible(true); 
-        this.setVisible(false);
-        this.dispose();
-        
+        if (!UASController.isUserLoggedIn()) {
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.setVisible(false);
+            this.dispose();
+        } else {
+
+            setTitle("Attendance Management System - Dashboard");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
+            setLayout(new BorderLayout());
+
+            // Header Panel
+            createHeaderPanel();
+
+            // Menu Panel
+            createMenuPanel();
+
+            // Content Panel
+            createContentPanel();
+
+            pack();
+            setLocationRelativeTo(null);
         }
-        else{
-        
-        setTitle("Attendance Management System - Dashboard");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(800, 600));
-        setLayout(new BorderLayout());
-
-        // Header Panel
-        createHeaderPanel();
-
-        // Menu Panel
-        createMenuPanel();
-
-        // Content Panel
-        createContentPanel();
-
-        pack();
-        setLocationRelativeTo(null);
-        }
-    }
-    
-    public static void main(String[] args) {
-        try {
-            new Dashboard().setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        
-
     }
 
     private void createHeaderPanel() {
@@ -74,8 +62,8 @@ public class Dashboard extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        headerPanel.add(titleLabel,BorderLayout.CENTER);
+
+        headerPanel.add(titleLabel, BorderLayout.CENTER);
     }
 
     private void createMenuPanel() {
@@ -120,8 +108,7 @@ public class Dashboard extends JFrame {
         logoutButton.setFont(new Font("Arial", Font.BOLD, 12));
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         logoutButton.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
-        logoutButton.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219)); 
-        
+        logoutButton.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219));
 
         // Add ActionListener to handle logout functionality
         logoutButton.addActionListener(new ActionListener() {
@@ -144,8 +131,7 @@ public class Dashboard extends JFrame {
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
-        button.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219)); 
-        
+        button.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219));
 
         // Hover Effect
         button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,25 +146,25 @@ public class Dashboard extends JFrame {
 
                 contentPanel.removeAll();
                 if (buttonText.equals("Home")) {
-                    Home homePanel = new Home();
+                    Home homePanel = new Home(Dashboard.this);
                     contentPanel.add(homePanel);
                 } else if (buttonText.equals("Add Attendance")) {
-                    contentPanel.add(new AddAttendance());
+                    contentPanel.add(new AddAttendance(Dashboard.this));
 
                 } else if (buttonText.equals("View Attendance")) {
-                    contentPanel.add(new ViewAttendance());
+                    contentPanel.add(new ViewAttendance(Dashboard.this));
 
                 } else if (buttonText.equals("Delete Attendance")) {
-                    contentPanel.add(new DeleteAttendance());
+                    contentPanel.add(new DeleteAttendance(Dashboard.this));
 
                 } else if (buttonText.equals("Modify Attendance")) {
-                    contentPanel.add(new ModifyAttendance());
+                    contentPanel.add(new ModifyAttendance(Dashboard.this));
 
                 } else if (buttonText.equals("User Settings")) {
-                    contentPanel.add(new UserSettings());
+                    contentPanel.add(new UserSettings(Dashboard.this));
 
                 } else if (buttonText.equals("Reports")) {
-                    contentPanel.add(new Reports());
+                    contentPanel.add(new Reports(Dashboard.this));
 
                 }
                 contentPanel.revalidate();
