@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import common.ApplicationSession;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import common.Student;
@@ -16,6 +17,10 @@ import model.dto.UserDTO;
  * @author fawad
  */
 public class UASController {
+    static ApplicationSession objApplicationSession;
+    public static boolean isUserLoggedIn() {
+       return objApplicationSession != null;
+    }
      DALManager dalManagerObj;
 
     public UASController() {
@@ -26,6 +31,10 @@ public class UASController {
     public void verifyUser(UserDTO user,Response responseObj) {
         
         dalManagerObj.verifyUser(user, responseObj);
+        if(responseObj.isSuccessfull()){
+        objApplicationSession = new ApplicationSession();
+        objApplicationSession.UserName = user.getUsername();
+        }
 
     }
     

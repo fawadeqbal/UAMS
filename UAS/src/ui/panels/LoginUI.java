@@ -54,6 +54,7 @@ public class LoginUI extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         usernameField = new JTextField(20);
+        usernameField.setText("admin");
         usernameField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -68,6 +69,7 @@ public class LoginUI extends JFrame {
 
         gbc.gridy++;
         passwordField = new JPasswordField(20);
+        passwordField.setText("root");
         JButton loginButton = new JButton("Login");
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(new Color(41, 128, 185));
@@ -99,11 +101,13 @@ public class LoginUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 // Perform authentication logic here
                 UserDTO user=new UserDTO(username,password);
                 Response responseObj=UASFactory.getResponseInstance();
+                
                 controllerObj.verifyUser(user,responseObj);
                 if (responseObj.isSuccessfull()) {
                     JOptionPane.showMessageDialog(null, "Login successfull press ok");

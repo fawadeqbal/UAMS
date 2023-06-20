@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.UASController;
 import ui.panels.LoginUI;
 
 
@@ -22,6 +23,14 @@ public class Dashboard extends JFrame {
     private JPanel contentPanel;
 
     public Dashboard() {
+        if(!UASController.isUserLoggedIn()){
+                LoginUI loginScreen = new LoginUI();
+        loginScreen.setVisible(true); 
+        this.setVisible(false);
+        this.dispose();
+        
+        }
+        else{
         
         setTitle("Attendance Management System - Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,6 +48,18 @@ public class Dashboard extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+        }
+    }
+    
+    public static void main(String[] args) {
+        try {
+            new Dashboard().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        
+
     }
 
     private void createHeaderPanel() {
