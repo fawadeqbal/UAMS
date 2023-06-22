@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import common.ApplicationSession;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -11,54 +12,58 @@ import dal.DALManager;
 import java.util.Vector;
 import model.dto.Response;
 import model.dto.UserDTO;
+import model.validators.CommonValidator;
 
 /**
  *
  * @author fawad
  */
 public class UASController {
-    
+
     public static ApplicationSession objApplicationSession;
     public DALManager dalManagerObj;
 
     public UASController() {
         dalManagerObj = UASFactory.getDALManagerInstance();
     }
+
     public static void initializeSession() {
         objApplicationSession = new ApplicationSession();
         objApplicationSession.UserName = "";
         objApplicationSession.startSession();
     }
+
     public static boolean isSessionExpired() {
         return objApplicationSession.isSessionExpired();
     }
-    public static boolean isUserLoggedIn(){
+
+    public static boolean isUserLoggedIn() {
         return objApplicationSession != null;
     }
-    
-    
-    public void verifyUser(UserDTO user,Response responseObj) {
-        
-        dalManagerObj.verifyUser(user, responseObj);
-        
-        if(responseObj.isSuccessfull()){
-        initializeSession();
-        objApplicationSession.UserName = user.getUsername();
+
+    public void verifyUser(UserDTO user, Response responseObj) {
+        CommonValidator.validateUser(user, responseObj);
+        if (responseObj.isSuccessfull()) {
+            dalManagerObj.verifyUser(user, responseObj);
+
+            if (responseObj.isSuccessfull()) {
+                initializeSession();
+                objApplicationSession.UserName = user.getUsername();
+            }
         }
 
     }
-    
+
     public DefaultTableModel getStudentsByCourse(String selectedCourse) {
         ArrayList<Student> studentList = new ArrayList<>();
 
         // Add students to the list for the selected course
-        
         for (int j = 1; j <= 30; j++) {
             Student student;
             String name = "Student " + j + " - " + selectedCourse;
             String regNo = "FA21/BSE/" + String.format("%03d", j);
-            boolean attendance = false; 
-            student=new Student(name, regNo, attendance);
+            boolean attendance = false;
+            student = new Student(name, regNo, attendance);
 
             studentList.add(student);
         }
@@ -89,10 +94,5 @@ public class UASController {
 
         return tableModel;
     }
-    
+
 }
-
-
-
-    
-    

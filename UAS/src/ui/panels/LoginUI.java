@@ -108,7 +108,6 @@ public class LoginUI extends JFrame {
                 Response responseObj=UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user,responseObj);
                 if (responseObj.isSuccessfull()) {
-                    JOptionPane.showMessageDialog(null, "Login successfull press ok");
                     dispose(); // Close the login window
                     new Dashboard().setVisible(true);
                     

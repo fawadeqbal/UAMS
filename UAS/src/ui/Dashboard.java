@@ -19,6 +19,7 @@ public class Dashboard extends JFrame {
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
+    
     public static void main(String[] args) {
         new Dashboard().setVisible(true);
     }

@@ -8,7 +8,7 @@ public class ApplicationSession {
 
     public boolean isSessionExpired() {
         if (sessionStartTime == null) {
-            return true;
+            return true;    
         }
         
         long currentTimeMillis = System.currentTimeMillis();

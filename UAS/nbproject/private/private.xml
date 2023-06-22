@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/fawad/Desktop/UAMS/UAS/src/model/dto/MessageType.java</file>
+            <file>file:/home/fawad/Desktop/UAMS/UAS/src/dal/DALManager.java</file>
+            <file>file:/home/fawad/Desktop/UAMS/UAS/src/common/ApplicationSession.java</file>
+            <file>file:/home/fawad/Desktop/UAMS/UAS/src/model/dto/Message.java</file>
+            <file>file:/home/fawad/Desktop/UAMS/UAS/src/model/UASController.java</file>
+        </group>
     </open-files>
 </project-private>
