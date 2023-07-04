@@ -14,7 +14,7 @@ public class LoginUI extends JFrame {
 
     public LoginUI() {
         FlatLightLaf.install();
-        setTitle("UAS - Login");
+        setTitle("UAS - University Attendance System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600, 400));
         ImageIcon icon = new ImageIcon("icon.png");
@@ -23,7 +23,7 @@ public class LoginUI extends JFrame {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
-        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setBackground(new Color(178, 190, 181));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         add(mainPanel, BorderLayout.CENTER);
 
@@ -39,10 +39,12 @@ public class LoginUI extends JFrame {
 
         gbc.gridy++;
         JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         mainPanel.add(usernameLabel, gbc);
 
         gbc.gridy++;
         JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 14));
         mainPanel.add(passwordLabel, gbc);
 
         gbc.gridx++;

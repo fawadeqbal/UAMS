@@ -6,8 +6,8 @@ package ui;
 
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
-import java.util.TimeZone;  
-import japa.parser.ParseException;  
+import java.util.TimeZone;   
+import java.text.ParseException;
   
 // create class UTCTimeExample1 to get the current UTC time by using SimpleDateFormat  
 public class UTCTime {  

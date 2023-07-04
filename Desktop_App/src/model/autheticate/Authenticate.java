@@ -14,6 +14,7 @@ import model.Conn;
  *
  * @author fawad
  */
+<<<<<<< Updated upstream:Desktop_App/src/model/autheticate/Authenticate.java
 public class Authenticate {
 
     public static boolean verifyUser(User user) {
@@ -26,6 +27,17 @@ public class Authenticate {
         }
 
         // Query the database to validate the username and password
+=======
+public class DALManager {
+    MySQLConnection mySQL;
+    
+    public DALManager(){
+        mySQL=new MySQLConnection("jdbc:mysql://localhost:3306/attendance_system","root","Intunlock=2546");
+    }
+    
+    public void verifyUser(UserDTO user,Response responseObj){
+        Connection connection=mySQL.getConnection();
+>>>>>>> Stashed changes:UAS/src/dal/DALManager.java
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
