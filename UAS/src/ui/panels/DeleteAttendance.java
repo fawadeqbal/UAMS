@@ -22,19 +22,12 @@ public class DeleteAttendance extends JPanel {
     private JButton deleteAttendanceButton;
     private JTable attendanceTable;
 
-    public DeleteAttendance(JFrame dashboard) {
-        if (UASController.isSessionExpired()) {
-            dashboard.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
-
-        } else {
+    public DeleteAttendance() {
+        
             initializeComponents();
             setupLayout();
             addListeners();
-        }
-
+        
     }
 
     private void initializeComponents() {

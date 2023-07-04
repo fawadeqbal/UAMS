@@ -19,7 +19,7 @@ public class Dashboard extends JFrame {
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
-    
+
     public static void main(String[] args) {
         new Dashboard().setVisible(true);
     }
@@ -58,7 +58,7 @@ public class Dashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System"+"          "+UASController.objApplicationSession.UserName);
+        JLabel titleLabel = new JLabel("Attendance Management System" + "          " + UASController.objApplicationSession.UserName);
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -147,25 +147,78 @@ public class Dashboard extends JFrame {
 
                 contentPanel.removeAll();
                 if (buttonText.equals("Home")) {
-                    Home homePanel = new Home(Dashboard.this);
-                    contentPanel.add(homePanel);
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        Home homePanel = new Home();
+                        contentPanel.add(homePanel);
+                    }
                 } else if (buttonText.equals("Add Attendance")) {
-                    contentPanel.add(new AddAttendance(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new AddAttendance());
+                    }
+                    
 
                 } else if (buttonText.equals("View Attendance")) {
-                    contentPanel.add(new ViewAttendance(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new ViewAttendance());
+                    }
+                    
 
                 } else if (buttonText.equals("Delete Attendance")) {
-                    contentPanel.add(new DeleteAttendance(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new DeleteAttendance());
+                    }
 
                 } else if (buttonText.equals("Modify Attendance")) {
-                    contentPanel.add(new ModifyAttendance(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new ModifyAttendance());
+                    }
 
                 } else if (buttonText.equals("User Settings")) {
-                    contentPanel.add(new UserSettings(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new UserSettings());
+                    }
+                    
 
                 } else if (buttonText.equals("Reports")) {
-                    contentPanel.add(new Reports(Dashboard.this));
+                    if (UASController.isSessionExpired()) {
+                        dispose();
+                        LoginUI loginScreen = new LoginUI();
+                        loginScreen.setVisible(true);
+
+                    } else {
+                        contentPanel.add(new Reports());
+                    }
+                    
 
                 }
                 contentPanel.revalidate();

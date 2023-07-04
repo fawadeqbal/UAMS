@@ -24,18 +24,12 @@ public class ViewAttendance extends JPanel {
     private JButton viewAttendanceButton;
     private JTable attendanceTable;
 
-    public ViewAttendance(JFrame frame) {
-        if (UASController.isSessionExpired()) {
-            frame.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
+    public ViewAttendance() {
 
-        } else {
-            initializeComponents();
-            setupLayout();
-            addListeners();
-        }
+        initializeComponents();
+        setupLayout();
+        addListeners();
+
     }
 
     private void initializeComponents() {

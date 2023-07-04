@@ -13,17 +13,11 @@ public class Reports extends JPanel {
 
     private JLabel titleLabel;
 
-    public Reports(JFrame frame) {
-        if (UASController.isSessionExpired()) {
-            frame.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
+    public Reports() {
 
-        } else {
-            initializeComponents();
-            setupLayout();
-        }
+        initializeComponents();
+        setupLayout();
+
     }
 
     private void initializeComponents() {

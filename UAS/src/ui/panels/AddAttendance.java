@@ -29,18 +29,10 @@ public class AddAttendance extends JPanel {
     private JButton addAttendanceButton;
     private JCheckBox checkAllCheckBox;
 
-    public AddAttendance(JFrame dashboard) {
-        if (UASController.isSessionExpired()) {
-            dashboard.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
-
-        } else {
+    public AddAttendance() {
             initializeComponents();
             setupLayout();
             addListeners();
-        }
     }
 
     private void initializeComponents() {

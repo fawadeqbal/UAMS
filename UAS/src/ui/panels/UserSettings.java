@@ -19,18 +19,12 @@ public class UserSettings extends JPanel {
     JLabel usernameLabel;
     JLabel passwordLabel;
 
-    public UserSettings(JFrame frame) {
-        if (UASController.isSessionExpired()) {
-            frame.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
-
-        } else {
+    public UserSettings() {
+        
             initializeComponents();
             setupLayout();
             setupListeners();
-        }
+        
     }
 
     private void initializeComponents() {

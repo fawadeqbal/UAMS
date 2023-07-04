@@ -21,17 +21,10 @@ public class Home extends JPanel {
     private DefaultTableModel tableModel;
     private JPanel chartPanel;
 
-    public Home(JFrame dashboard) {
-        if (UASController.isSessionExpired()) {
-            dashboard.dispose();
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
+    public Home() {
 
-        } else {
-            initializeComponents();
-            setupLayout();
-        }
+        initializeComponents();
+        setupLayout();
 
     }
 
@@ -124,7 +117,7 @@ public class Home extends JPanel {
     }
 
     private void setupLayout() {
-    
-    setPreferredSize(new Dimension(800, 600));
-}
+
+        setPreferredSize(new Dimension(800, 600));
+    }
 }
