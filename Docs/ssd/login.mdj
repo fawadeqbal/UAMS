@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"name": "UAS",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -63,8 +63,8 @@
 												"$ref": "AAAAAAGI1wu170p99IU="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
-											"top": 13,
+											"left": 24.72998046875,
+											"top": 5,
 											"width": 32.80810546875,
 											"height": 13,
 											"text": "Login"
@@ -76,16 +76,14 @@
 												"$ref": "AAAAAAGI1wu170p99IU="
 											},
 											"font": "Arial;13;1",
-											"left": 13,
-											"top": 13,
+											"left": 5,
+											"top": 5,
 											"width": 14.72998046875,
 											"height": 13,
 											"text": "sd"
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 8,
-									"top": 8,
 									"width": 817,
 									"height": 592,
 									"nameLabel": {
@@ -644,5 +642,8 @@
 				}
 			]
 		}
-	]
+	],
+	"author": "fawad",
+	"company": "OOSE",
+	"version": "1.1"
 }
