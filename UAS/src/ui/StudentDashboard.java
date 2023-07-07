@@ -9,20 +9,6 @@ package ui;
  * @author Faizan
  */
 
-import ui.panels.UserSettings;
-import ui.panels.Home;
-import ui.panels.ViewAttendance;
-import ui.panels.ModifyAttendance;
-import ui.panels.DeleteAttendance;
-import ui.panels.AddAttendance;
-import ui.panels.Reports;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import model.UASController;
-import ui.panels.LoginUI;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
