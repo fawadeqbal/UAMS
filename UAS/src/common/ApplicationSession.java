@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ApplicationSession {
     public String UserName;
+    public String role;
     private Date sessionStartTime;
 
     public boolean isSessionExpired() {

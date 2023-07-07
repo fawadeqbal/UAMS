@@ -8,7 +8,6 @@ package dal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import model.dto.UserDTO;
 
 /**
  *
@@ -16,16 +15,10 @@ import model.dto.UserDTO;
  */
 public class DBReader {
 
-    ResultSet getUser(String dblQuery,UserDTO user,Connection conn) {
-        Statement statement = conn.createStatement();
+    ResultSet getRecords(String dblQuery,Connection conn) {
         try {
-            
-            
-            statement = conn.prepareStatement(dblQuery);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getRole());
-                   
+            Statement statement = conn.createStatement();
+            return statement.executeQuery(dblQuery);            
         }
         catch (Exception e) {
             System.out.println("Error Trace in getRecords() : " + e.getMessage());

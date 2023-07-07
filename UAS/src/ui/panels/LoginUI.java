@@ -109,8 +109,20 @@ public class LoginUI extends JFrame {
                 Response responseObj=UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user,responseObj);
                 if (responseObj.isSuccessfull()) {
-                    dispose(); // Close the login window
-                    new Dashboard().setVisible(true);
+                   switch(user.getRole()){
+                       case "admin":
+                           dispose();
+                           JOptionPane.showConfirmDialog(null, "Welcome to Admin");
+                           break;
+                        case "faculty":
+                           dispose();
+                           new Dashboard().setVisible(true);
+                           break;
+                           case "student":
+                           dispose();
+                           JOptionPane.showConfirmDialog(null, "Welcome to Student");
+                           break;
+                   }
                     
                 } else {
                     JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages(), "Error Message", HEIGHT);

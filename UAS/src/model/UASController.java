@@ -49,6 +49,7 @@ public class UASController {
             if (responseObj.isSuccessfull()) {
                 initializeSession();
                 objApplicationSession.UserName = user.getUsername();
+                objApplicationSession.role = user.getRole();
             }
         }
 
