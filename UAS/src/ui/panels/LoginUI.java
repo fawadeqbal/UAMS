@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.FlatLightLaf;
+import common.ApplicationSession;
 import model.UASController;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.UserDTO;
+import ui.StudentDashboard;
 
 public class LoginUI extends JFrame {
 
@@ -119,7 +121,7 @@ public class LoginUI extends JFrame {
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {
-                    switch (user.getRole()) {
+                    switch (UASController.objApplicationSession.getRole()) {
                         case "admin":
                             dispose();
                             JOptionPane.showConfirmDialog(null, "Welcome to Admin");
@@ -130,7 +132,7 @@ public class LoginUI extends JFrame {
                             break;
                         case "student":
                             dispose();
-                            JOptionPane.showConfirmDialog(null, "Welcome to Student");
+                            new StudentDashboard().setVisible(true);
                             break;
                     }
 

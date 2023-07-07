@@ -29,12 +29,16 @@ public class UASController {
 
     public static void initializeSession() {
         objApplicationSession = new ApplicationSession();
-        objApplicationSession.UserName = "";
+        objApplicationSession.setUserName("");
         objApplicationSession.startSession();
     }
 
     public static boolean isSessionExpired() {
         return objApplicationSession.isSessionExpired();
+    }
+    public static void expireSession(){
+        objApplicationSession=null;
+        System.out.println("Session Expired.");
     }
 
     public static boolean isUserLoggedIn() {
@@ -48,8 +52,8 @@ public class UASController {
 
             if (responseObj.isSuccessfull()) {
                 initializeSession();
-                objApplicationSession.UserName = user.getUsername();
-                objApplicationSession.role = user.getRole();
+                objApplicationSession.setUserName(user.getUsername()); 
+                objApplicationSession.setRole(user.getRole());
             }
         }
 
