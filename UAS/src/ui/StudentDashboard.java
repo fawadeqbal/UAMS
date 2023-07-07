@@ -40,10 +40,6 @@ public class StudentDashboard extends JFrame {
     private JPanel menuPanel;
     private JPanel contentPanel;
 
-    public static void main(String[] args) {
-        new Dashboard().setVisible(true);
-    }
-
     public StudentDashboard() {
         if (!UASController.isUserLoggedIn()) {
             LoginUI loginScreen = new LoginUI();
