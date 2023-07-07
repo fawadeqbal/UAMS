@@ -8,10 +8,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Stack;
 import model.UASController;
 import model.UASFactory;
+import model.dto.CourseDTO;
+import model.dto.Response;
 
 public class AddAttendance extends JPanel {
 
@@ -38,7 +43,16 @@ public class AddAttendance extends JPanel {
     private void initializeComponents() {
 
         courseLabel = new JLabel("Course:");
-        courseComboBox = new JComboBox<>(new String[]{"Data Structures", "OOSE", "Statistics"});
+        Response response=new Response();
+        ArrayList<CourseDTO> list=controllerObj.getCourses(response);
+        
+         Stack<String> course=new Stack<>();
+        for(CourseDTO c:list){
+            course.push(c.getC_Name());
+            System.out.println(c.getC_Name());
+        }
+       
+        courseComboBox = new JComboBox<>(course);
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
 
@@ -53,7 +67,7 @@ public class AddAttendance extends JPanel {
         String timeString = timeFormat.format(currentDate);
         timeSlotField.setText(timeString);
 
-        studentTable = new JTable(controllerObj.getStudentsByCourse((String) courseComboBox.getSelectedItem())) {
+        studentTable = new JTable(controllerObj.getStudentsByCourse()) {
             @Override
             public Class<?> getColumnClass(int column) {
                 if (column == 2) {
@@ -152,7 +166,7 @@ public class AddAttendance extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedCourse = (String) courseComboBox.getSelectedItem();
-                DefaultTableModel newTableModel = controllerObj.getStudentsByCourse(selectedCourse);
+                DefaultTableModel newTableModel = controllerObj.getStudentsByCourse();
                 studentTable.setModel(newTableModel);
             }
         });

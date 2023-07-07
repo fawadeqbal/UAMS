@@ -7,10 +7,12 @@ package model;
 import common.ApplicationSession;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import common.Student;
 import dal.DALManager;
 import java.util.Vector;
+import model.dto.CourseDTO;
+import model.dto.EnrollStudentsDTO;
 import model.dto.Response;
+import model.dto.StudentDTO;
 import model.dto.UserDTO;
 import model.validators.CommonValidator;
 
@@ -59,20 +61,17 @@ public class UASController {
 
     }
 
-    public DefaultTableModel getStudentsByCourse(String selectedCourse) {
-        ArrayList<Student> studentList = new ArrayList<>();
-
-        // Add students to the list for the selected course
-        for (int j = 1; j <= 30; j++) {
-            Student student;
-            String name = "Student " + j + " - " + selectedCourse;
-            String regNo = "FA21/BSE/" + String.format("%03d", j);
-            boolean attendance = false;
-            student = new Student(name, regNo, attendance);
-
-            studentList.add(student);
+    public DefaultTableModel getStudentsByCourse() {
+        ArrayList<EnrollStudentsDTO> enrollList = dalManagerObj.getStudentsByCourse(1);
+        for(EnrollStudentsDTO e:enrollList){
+            System.out.println(e.getCourse_Id());
         }
-
+        ArrayList<StudentDTO> studentlist=new ArrayList<>();
+        for(EnrollStudentsDTO std:enrollList){
+            StudentDTO student=getStudent(std.getStudent_Id());
+            studentlist.add(student);
+        }
+        
         Vector<String> columnNames = new Vector<>();
         columnNames.add("Name");
         columnNames.add("RegNo");
@@ -80,11 +79,11 @@ public class UASController {
 
         Vector<Vector<Object>> data = new Vector<>();
         // Create the data vector from the student list
-        for (Student student : studentList) {
+        for (StudentDTO student : studentlist) {
             Vector<Object> rowData = new Vector<>();
-            rowData.add(student.getName());
-            rowData.add(student.getRegNo());
-            rowData.add(student.isAttendance());
+            rowData.add(student.getF_name()+student.getL_name());
+            rowData.add(student.getS_Id());
+            rowData.add(true);
             data.add(rowData);
         }
 
@@ -98,6 +97,16 @@ public class UASController {
         };
 
         return tableModel;
+    }
+    public ArrayList<CourseDTO> getCourses(Response response){
+       
+        
+        return dalManagerObj.getCourses(response);
+    }
+    public StudentDTO getStudent(int id){
+       
+        
+        return dalManagerObj.getStudent(id);
     }
 
 }
