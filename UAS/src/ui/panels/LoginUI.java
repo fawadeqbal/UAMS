@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.FlatLightLaf;
-import common.ApplicationSession;
 import model.UASController;
 import model.UASFactory;
 import model.dto.Response;
