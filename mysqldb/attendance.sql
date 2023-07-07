@@ -70,6 +70,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES (1,'OOP',1),(2,'DSA',2),(3,'DBA',3);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +96,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (1,'ws','ssa',12);
+INSERT INTO `faculty` VALUES (1,'Mukhtiar','Mukhtiar@gmail.com',123),(2,'Sana','sana@abc.com',12345),(3,'rabnawaz','rabnawaz@abc.com',23456);
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,6 +154,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES ('11','faizan','ali',123,123),('12','fawad','iqbal',12,12),('50','basit','iqbal',1234,1234),('88','fatima','aftab',1234,2345);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,11 +168,10 @@ DROP TABLE IF EXISTS `studentenroll`;
 CREATE TABLE `studentenroll` (
   `student_sid` varchar(12) NOT NULL,
   `course_cid` int NOT NULL,
-  `course_faculty_t_id` int NOT NULL,
-  PRIMARY KEY (`student_sid`,`course_cid`,`course_faculty_t_id`),
-  KEY `fk_student_has_course_course1_idx` (`course_cid`,`course_faculty_t_id`),
+  PRIMARY KEY (`student_sid`,`course_cid`),
   KEY `fk_student_has_course_student1_idx` (`student_sid`),
-  CONSTRAINT `fk_student_has_course_course1` FOREIGN KEY (`course_cid`, `course_faculty_t_id`) REFERENCES `course` (`cid`, `faculty_t_id`),
+  KEY `fk_student_has_course_course1_idx` (`course_cid`),
+  CONSTRAINT `fk_student_has_course_course1` FOREIGN KEY (`course_cid`) REFERENCES `course` (`cid`),
   CONSTRAINT `fk_student_has_course_student1` FOREIGN KEY (`student_sid`) REFERENCES `student` (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -181,6 +182,7 @@ CREATE TABLE `studentenroll` (
 
 LOCK TABLES `studentenroll` WRITE;
 /*!40000 ALTER TABLE `studentenroll` DISABLE KEYS */;
+INSERT INTO `studentenroll` VALUES ('11',1),('12',1),('50',1),('88',1),('11',2),('12',2);
 /*!40000 ALTER TABLE `studentenroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-07 20:43:24
+-- Dump completed on 2023-07-08  3:31:56
