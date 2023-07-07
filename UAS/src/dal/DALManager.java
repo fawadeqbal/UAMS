@@ -12,7 +12,7 @@ public class DALManager {
     MySQLConnection mySQL;
     
     public DALManager(){
-        mySQL=new MySQLConnection("jdbc:mysql://localhost:3306/attendance","root","fawad321");
+        mySQL=new MySQLConnection("jdbc:mysql://localhost:3306/attendance","root","Admin123$");
     }
     
     public void verifyUser(UserDTO user,Response responseObj){
