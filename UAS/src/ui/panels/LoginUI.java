@@ -54,7 +54,7 @@ public class LoginUI extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         usernameField = new JTextField(20);
-        usernameField.setText("admin");
+        usernameField.setText("fawadeqbal");
         usernameField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -103,8 +103,9 @@ public class LoginUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
+                String role="faculty";
                 // Perform authentication logic here
-                UserDTO user=new UserDTO(username,password);
+                UserDTO user=new UserDTO(username,password,role);
                 Response responseObj=UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user,responseObj);
                 if (responseObj.isSuccessfull()) {

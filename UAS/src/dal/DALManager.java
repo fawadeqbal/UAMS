@@ -20,10 +20,11 @@ public class DALManager {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM user WHERE username = ? AND password = ? AND role = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
+            statement.setString(3, user.getRole());
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
