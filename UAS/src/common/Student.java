@@ -1,33 +1,90 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package common;
 
-/**
- *
- * @author fawad
- */
 public class Student {
-    private String name;
-    private String regNo;
-    private boolean attendance;
+    private String srNo;
 
-    public Student(String name, String regNo, boolean attendance) {
-        this.name = name;
+    public String getSrNo() {
+        return srNo;
+    }
+
+    public void setSrNo(String srNo) {
+        this.srNo = srNo;
+    }
+    private String regNo;
+    private String prog;
+    private String name;
+    private String fatherName;
+    private String nationality;
+    private String status;
+    private String group;
+
+    public String getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(String regNo) {
         this.regNo = regNo;
-        this.attendance = attendance;
+    }
+
+    public String getProg() {
+        return prog;
+    }
+
+    public void setProg(String prog) {
+        this.prog = prog;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getRegNo() {
-        return regNo;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean isAttendance() {
-        return attendance;
+    public String getFatherName() {
+        return fatherName;
     }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    @Override
+public String toString() {
+    return "{" +
+            "\"regNo\":\"" + regNo + "\"" +
+            ", \"prog\":\"" + prog + "\"" +
+            ", \"name\":\"" + name + "\"" +
+            ", \"fatherName\":\"" + fatherName + "\"" +
+            ", \"nationality\":\"" + nationality + "\"" +
+            ", \"status\":\"" + status + "\"" +
+            ", \"group\":\"" + group + "\"" +
+            "}";
+}
+
 }

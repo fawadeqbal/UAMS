@@ -5,9 +5,11 @@
 package model;
 
 import common.ApplicationSession;
+import common.Student;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import dal.DALManager;
+import java.io.IOException;
 import java.util.Vector;
 import model.dto.CourseDTO;
 import model.dto.EnrollStudentsDTO;
@@ -62,15 +64,15 @@ public class UASController {
     }
 
     public DefaultTableModel getStudentsByCourse() {
-        ArrayList<EnrollStudentsDTO> enrollList = dalManagerObj.getStudentsByCourse(1);
-        for(EnrollStudentsDTO e:enrollList){
-            System.out.println(e.getCourse_Id());
-        }
-        ArrayList<StudentDTO> studentlist=new ArrayList<>();
-        for(EnrollStudentsDTO std:enrollList){
-            StudentDTO student=getStudent(std.getStudent_Id());
-            studentlist.add(student);
-        }
+//        ArrayList<EnrollStudentsDTO> enrollList = dalManagerObj.getStudentsByCourse(1);
+//        for(EnrollStudentsDTO e:enrollList){
+//            System.out.println(e.getCourse_Id());
+//        }
+//        ArrayList<StudentDTO> studentlist=new ArrayList<>();
+//        for(EnrollStudentsDTO std:enrollList){
+//            StudentDTO student=getStudent(std.getStudent_Id());
+//            studentlist.add(student);
+//        }
         
         Vector<String> columnNames = new Vector<>();
         columnNames.add("Name");
@@ -79,10 +81,17 @@ public class UASController {
 
         Vector<Vector<Object>> data = new Vector<>();
         // Create the data vector from the student list
-        for (StudentDTO student : studentlist) {
+        ArrayList<Student> list=new ArrayList<>();
+        try{
+             list=StudentDataApp.getStudents("/home/fawad/Desktop/students.xlsx");
+        }catch(Exception e){
+            
+        }
+       
+        for (Student student : list) {
             Vector<Object> rowData = new Vector<>();
-            rowData.add(student.getF_name()+student.getL_name());
-            rowData.add(student.getS_Id());
+            rowData.add((String)student.getName());
+            rowData.add((String)student.getRegNo());
             rowData.add(true);
             data.add(rowData);
         }
