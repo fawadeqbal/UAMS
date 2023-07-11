@@ -115,7 +115,7 @@ public class LoginUI extends JFrame {
                     switch (UASController.objApplicationSession.getRole()) {
                         case "admin":
                             dispose();
-                            JOptionPane.showConfirmDialog(null, "Welcome to Admin");
+                            JOptionPane.showMessageDialog(null, "Welcome to Admin");
                             break;
                         case "faculty":
                             dispose();

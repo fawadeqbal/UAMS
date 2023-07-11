@@ -53,7 +53,6 @@ public class UASController {
         CommonValidator.validateUser(user, responseObj);
         if (responseObj.isSuccessfull()) {
             dalManagerObj.verifyUser(user, responseObj);
-
             if (responseObj.isSuccessfull()) {
                 initializeSession();
                 objApplicationSession.setUserName(user.getUsername()); 

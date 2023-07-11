@@ -96,27 +96,17 @@ public class StudentDashboard extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         JButton homeButton = createMenuButton("Home");
-        JButton addAttendanceButton = createMenuButton("Add Attendance");
         JButton viewAttendanceButton = createMenuButton("View Attendance");
-        JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
-        JButton modifyAttendanceButton = createMenuButton("Modify Attendance");
         JButton settingsButton = createMenuButton("User Settings");
         JButton reportsButton = createMenuButton("Reports");
 
         menuPanel.add(homeButton, gbc);
         gbc.gridy++;
-        menuPanel.add(addAttendanceButton, gbc);
-        gbc.gridy++;
         menuPanel.add(viewAttendanceButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(deleteAttendanceButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(modifyAttendanceButton, gbc);
         gbc.gridy++;
         menuPanel.add(reportsButton, gbc);
         gbc.gridy++;
         menuPanel.add(settingsButton, gbc);
-        gbc.gridy++;
         gbc.gridy++;
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(Color.WHITE);
@@ -172,17 +162,6 @@ public class StudentDashboard extends JFrame {
                         Home homePanel = new Home();
                         contentPanel.add(homePanel);
                     }
-                } else if (buttonText.equals("Add Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
-
-                    } else {
-                        contentPanel.add(new AddAttendance());
-                    }
-                    
-
                 } else if (buttonText.equals("View Attendance")) {
                     if (UASController.isSessionExpired()) {
                         dispose();
@@ -194,27 +173,7 @@ public class StudentDashboard extends JFrame {
                     }
                     
 
-                } else if (buttonText.equals("Delete Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
-
-                    } else {
-                        contentPanel.add(new DeleteAttendance());
-                    }
-
-                } else if (buttonText.equals("Modify Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
-
-                    } else {
-                        contentPanel.add(new ModifyAttendance());
-                    }
-
-                } else if (buttonText.equals("User Settings")) {
+                }  else if (buttonText.equals("User Settings")) {
                     if (UASController.isSessionExpired()) {
                         dispose();
                         LoginUI loginScreen = new LoginUI();
