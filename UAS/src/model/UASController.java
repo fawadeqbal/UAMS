@@ -58,6 +58,7 @@ public class UASController {
                 initializeSession();
                 objApplicationSession.setUserName(user.getUsername()); 
                 objApplicationSession.setRole(user.getRole());
+                System.out.println(user.getRole());
             }
         }
 

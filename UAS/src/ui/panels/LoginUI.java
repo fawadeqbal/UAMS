@@ -16,7 +16,6 @@ public class LoginUI extends JFrame {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
-    JComboBox<String> roleComboBox;
     public UASController controllerObj;
 
     public LoginUI() {
@@ -89,16 +88,7 @@ public class LoginUI extends JFrame {
             }
         });
         mainPanel.add(passwordField, gbc);
-        String[] roleOptions = {"admin", "faculty", "student"};
-        roleComboBox = new JComboBox<>(roleOptions);
-// Existing code...
-        gbc.gridx = 0;
-        gbc.gridy++;
-        JLabel roleLabel = new JLabel("Role:");
-        mainPanel.add(roleLabel, gbc);
-        gbc.gridx = 1;
-        mainPanel.add(roleComboBox, gbc);
-
+  
         gbc.gridx = 1;
         gbc.gridy++;
         gbc.gridwidth = 1;
@@ -114,9 +104,11 @@ public class LoginUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-                String role = (String)roleComboBox.getSelectedItem();
+                
                 // Perform authentication logic here
-                UserDTO user = new UserDTO(username, password, role);
+                UserDTO user = new UserDTO();
+                user.setUsername(username);
+                user.setPassword(password);
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {

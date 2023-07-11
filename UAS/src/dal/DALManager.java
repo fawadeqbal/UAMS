@@ -25,14 +25,14 @@ public class DALManager {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM user WHERE username = ? AND password = ? AND role = ?";
+            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.setString(3, user.getRole());
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                user.setRole(resultSet.getString(5));
                 responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
             } else {
                 responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
