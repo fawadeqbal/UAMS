@@ -10,7 +10,6 @@ import model.UASController;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.UserDTO;
-import ui.StudentDashboard;
 
 public class LoginUI extends JFrame {
 
@@ -112,20 +111,7 @@ public class LoginUI extends JFrame {
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {
-                    switch (UASController.objApplicationSession.getRole()) {
-                        case "admin":
-                            dispose();
-                            JOptionPane.showMessageDialog(null, "Welcome to Admin");
-                            break;
-                        case "faculty":
-                            dispose();
-                            new Dashboard().setVisible(true);
-                            break;
-                        case "student":
-                            dispose();
-                            new StudentDashboard().setVisible(true);
-                            break;
-                    }
+                    new Dashboard().setVisible(true);
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages(), "Error Message", HEIGHT);

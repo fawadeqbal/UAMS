@@ -20,7 +20,6 @@ public class Dashboard extends JFrame {
     private JPanel menuPanel;
     private JPanel contentPanel;
 
-
     public Dashboard() {
         if (!UASController.isUserLoggedIn()) {
             LoginUI loginScreen = new LoginUI();
@@ -63,7 +62,7 @@ public class Dashboard extends JFrame {
 
         headerPanel.add(titleLabel, BorderLayout.CENTER);
     }
-    
+
     private void createMenuPanel() {
         menuPanel = new JPanel();
         menuPanel.setBackground(new Color(52, 152, 219));
@@ -77,23 +76,29 @@ public class Dashboard extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         JButton homeButton = createMenuButton("Home");
-        JButton addAttendanceButton = createMenuButton("Add Attendance");
+
         JButton viewAttendanceButton = createMenuButton("View Attendance");
-        JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
-        JButton modifyAttendanceButton = createMenuButton("Modify Attendance");
+        menuPanel.add(homeButton, gbc);
+        gbc.gridy++;
+
+        menuPanel.add(viewAttendanceButton, gbc);
+        gbc.gridy++;
+        if (UASController.objApplicationSession.getRole().equals("faculty")) {
+            JButton addAttendanceButton = createMenuButton("Add Attendance");
+            JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
+            JButton modifyAttendanceButton = createMenuButton("Modify Attendance");
+
+            menuPanel.add(addAttendanceButton, gbc);
+            gbc.gridy++;
+            menuPanel.add(deleteAttendanceButton, gbc);
+            gbc.gridy++;
+            menuPanel.add(modifyAttendanceButton, gbc);
+            gbc.gridy++;
+
+        }
         JButton settingsButton = createMenuButton("User Settings");
         JButton reportsButton = createMenuButton("Reports");
 
-        menuPanel.add(homeButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(addAttendanceButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(viewAttendanceButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(deleteAttendanceButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(modifyAttendanceButton, gbc);
-        gbc.gridy++;
         menuPanel.add(reportsButton, gbc);
         gbc.gridy++;
         menuPanel.add(settingsButton, gbc);
@@ -166,7 +171,6 @@ public class Dashboard extends JFrame {
                     } else {
                         contentPanel.add(new AddAttendance());
                     }
-                    
 
                 } else if (buttonText.equals("View Attendance")) {
                     if (UASController.isSessionExpired()) {
@@ -178,7 +182,6 @@ public class Dashboard extends JFrame {
                     } else {
                         contentPanel.add(new ViewAttendance());
                     }
-                    
 
                 } else if (buttonText.equals("Delete Attendance")) {
                     if (UASController.isSessionExpired()) {
@@ -212,10 +215,9 @@ public class Dashboard extends JFrame {
                     } else {
                         contentPanel.add(new UserSettings());
                     }
-                    
 
                 } else if (buttonText.equals("Reports")) {
-                    
+
                     if (UASController.isSessionExpired()) {
                         UASController.expireSession();
                         dispose();
@@ -225,7 +227,6 @@ public class Dashboard extends JFrame {
                     } else {
                         contentPanel.add(new Reports());
                     }
-                    
 
                 }
                 contentPanel.revalidate();

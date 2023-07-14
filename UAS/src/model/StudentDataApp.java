@@ -74,7 +74,7 @@ public class StudentDataApp {
         Sheet sheet = workbook.getSheetAt(1);
         ArrayList<Student> studentList = new ArrayList<>();
 
-        for (int rowIndex = 500; rowIndex <= 600; rowIndex++) {
+        for (int rowIndex = 480; rowIndex <= 510; rowIndex++) {
             Row row = sheet.getRow(rowIndex);
             
             Student student = new Student();
@@ -86,7 +86,7 @@ public class StudentDataApp {
             student.setNationality(row.getCell(8).getStringCellValue());
             student.setStatus(row.getCell(9).getStringCellValue());
             student.setGroup(row.getCell(10).getStringCellValue());
-
+            
             studentList.add(student);
             System.out.println(student.toString());
         }
