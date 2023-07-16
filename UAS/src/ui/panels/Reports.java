@@ -7,7 +7,7 @@ import org.jfree.data.category.*;
 
 import javax.swing.*;
 import java.awt.*;
-import model.UASController;
+import controller.UASController;
 
 public class Reports extends JPanel {
 

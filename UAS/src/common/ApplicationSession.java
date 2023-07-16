@@ -1,10 +1,10 @@
 package common;
 
 import java.util.Date;
+import model.dto.UserDTO;
 
 public class ApplicationSession {
-    private String UserName;
-    private String role;
+    private UserDTO user;
     private Date sessionStartTime;
 
     public boolean isSessionExpired() {
@@ -24,19 +24,11 @@ public class ApplicationSession {
         System.out.println("Session Started");
     }
 
-    public String getUserName() {
-        return UserName;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

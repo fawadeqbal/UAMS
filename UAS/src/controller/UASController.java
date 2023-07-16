@@ -2,17 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package controller;
 
 import common.ApplicationSession;
 import common.Student;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import dal.DALManager;
-import java.io.IOException;
 import java.util.Vector;
+import model.StudentDataApp;
+import model.StudentDataApp;
+import model.UASFactory;
+import model.UASFactory;
+import model.dto.ClassDTO;
 import model.dto.CourseDTO;
-import model.dto.EnrollStudentsDTO;
 import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.UserDTO;
@@ -33,15 +36,16 @@ public class UASController {
 
     public static void initializeSession() {
         objApplicationSession = new ApplicationSession();
-        objApplicationSession.setUserName("");
+        
         objApplicationSession.startSession();
     }
 
     public static boolean isSessionExpired() {
         return objApplicationSession.isSessionExpired();
     }
-    public static void expireSession(){
-        objApplicationSession=null;
+
+    public static void expireSession() {
+        objApplicationSession = null;
         System.out.println("Session Expired.");
     }
 
@@ -55,12 +59,16 @@ public class UASController {
             dalManagerObj.verifyUser(user, responseObj);
             if (responseObj.isSuccessfull()) {
                 initializeSession();
-                objApplicationSession.setUserName(user.getUsername()); 
-                objApplicationSession.setRole(user.getRole());
+                objApplicationSession.setUser(user);
                 System.out.println(user.getRole());
             }
         }
 
+    }
+
+    public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
+
+        return dalManagerObj.getClasses(user, responseObj);
     }
 
     public DefaultTableModel getStudentsByCourse() {
@@ -73,7 +81,7 @@ public class UASController {
 //            StudentDTO student=getStudent(std.getStudent_Id());
 //            studentlist.add(student);
 //        }
-        
+
         Vector<String> columnNames = new Vector<>();
         columnNames.add("Name");
         columnNames.add("RegNo");
@@ -81,17 +89,17 @@ public class UASController {
 
         Vector<Vector<Object>> data = new Vector<>();
         // Create the data vector from the student list
-        ArrayList<Student> list=new ArrayList<>();
-        try{
-             list=StudentDataApp.getStudents("/home/fawad/Desktop/students.xlsx");
-        }catch(Exception e){
-            
+        ArrayList<Student> list = new ArrayList<>();
+        try {
+            list = StudentDataApp.getStudents("/home/fawad/Desktop/students.xlsx");
+        } catch (Exception e) {
+
         }
-       
+
         for (Student student : list) {
             Vector<Object> rowData = new Vector<>();
-            rowData.add((String)student.getName());
-            rowData.add((String)student.getRegNo());
+            rowData.add((String) student.getName());
+            rowData.add((String) student.getRegNo());
             rowData.add(true);
             data.add(rowData);
         }
@@ -107,14 +115,14 @@ public class UASController {
 
         return tableModel;
     }
-    public ArrayList<CourseDTO> getCourses(Response response){
-       
-        
+
+    public ArrayList<CourseDTO> getCourses(Response response) {
+
         return dalManagerObj.getCourses(response);
     }
-    public StudentDTO getStudent(int id){
-       
-        
+
+    public StudentDTO getStudent(int id) {
+
         return dalManagerObj.getStudent(id);
     }
 

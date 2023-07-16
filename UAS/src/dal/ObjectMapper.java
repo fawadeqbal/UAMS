@@ -7,7 +7,7 @@ package dal;
 import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
-import model.dto.EnrollStudentsDTO;
+import model.dto.ClassDTO;
 import model.dto.StudentDTO;
 /**
  *
@@ -31,6 +31,24 @@ public class ObjectMapper {
         return courselist;
     }
     
+    ArrayList<ClassDTO> getClasses(ResultSet rs) {
+        ArrayList<ClassDTO> classlist = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                ClassDTO objClass=new ClassDTO();                
+                objClass.setClass_id(rs.getString(1));
+                objClass.setEnroll(rs.getInt(6));
+                objClass.setStart_time(rs.getString(4));
+                objClass.setEnd_time(rs.getString(5));
+                classlist.add(objClass);
+            }
+        }catch (Exception e){
+            System.out.println("Error in mapper");
+        }
+        return classlist;
+    }
+    
     StudentDTO getStudent(ResultSet rs) {
         StudentDTO objCourse=new StudentDTO(); 
         try{
@@ -47,14 +65,14 @@ public class ObjectMapper {
         return objCourse;
     }
     
-    ArrayList<EnrollStudentsDTO> getStudentsByCourse(ResultSet rs) {
-        ArrayList<EnrollStudentsDTO> studentslist = new ArrayList<>();
+    ArrayList<Object> getStudentsByCourse(ResultSet rs) {
+        ArrayList<Object> studentslist = new ArrayList<>();
         try{
         while (rs.next())
             {
-                EnrollStudentsDTO objEnrollStudent=new EnrollStudentsDTO();                
-                objEnrollStudent.setCourse_Id(rs.getInt(2));
-                objEnrollStudent.setStudent_Id(rs.getInt(1));
+                Object objEnrollStudent=new Object();                
+//                objEnrollStudent.setCourse_Id(rs.getInt(2));
+//                objEnrollStudent.setStudent_Id(rs.getInt(1));
                                 
                 studentslist.add(objEnrollStudent);
             }

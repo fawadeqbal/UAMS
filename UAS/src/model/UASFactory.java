@@ -4,6 +4,7 @@
  */
 package model;
 
+import controller.UASController;
 import dal.DALManager;
 import model.dto.Response;
 

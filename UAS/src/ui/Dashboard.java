@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.UASController;
+import controller.UASController;
 import ui.panels.LoginUI;
 
 public class Dashboard extends JFrame {
@@ -54,7 +54,7 @@ public class Dashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System" + "          " + UASController.objApplicationSession.getRole());
+        JLabel titleLabel = new JLabel("Attendance Management System" + "          " + UASController.objApplicationSession.getUser().getRole());
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -83,7 +83,7 @@ public class Dashboard extends JFrame {
 
         menuPanel.add(viewAttendanceButton, gbc);
         gbc.gridy++;
-        if (UASController.objApplicationSession.getRole().equals("faculty")) {
+        if (UASController.objApplicationSession.getUser().getRole().equals("faculty")) {
             JButton addAttendanceButton = createMenuButton("Add Attendance");
             JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
             JButton modifyAttendanceButton = createMenuButton("Modify Attendance");

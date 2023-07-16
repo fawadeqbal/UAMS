@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import java.awt.GridBagConstraints;
-import model.UASController;
+import controller.UASController;
 import org.jdatepicker.JDatePicker;
 
 public class ViewAttendance extends JPanel {

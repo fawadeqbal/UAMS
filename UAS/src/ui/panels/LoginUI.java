@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.FlatLightLaf;
-import model.UASController;
+import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.UserDTO;
@@ -55,7 +55,7 @@ public class LoginUI extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         usernameField = new JTextField(20);
-        usernameField.setText("basit");
+        usernameField.setText("800");
         usernameField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -70,7 +70,7 @@ public class LoginUI extends JFrame {
 
         gbc.gridy++;
         passwordField = new JPasswordField(20);
-        passwordField.setText("root");
+        passwordField.setText("1234");
         JButton loginButton = new JButton("Login");
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(new Color(41, 128, 185));
@@ -112,6 +112,7 @@ public class LoginUI extends JFrame {
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {
                     new Dashboard().setVisible(true);
+                    dispose();
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages(), "Error Message", HEIGHT);

@@ -13,17 +13,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Stack;
-import model.UASController;
+import controller.UASController;
 import model.UASFactory;
+import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Response;
+import model.dto.UserDTO;
 
 public class AddAttendance extends JPanel {
 
     UASController controllerObj = UASFactory.getUASControllerInstance();
-
-    private JLabel courseLabel;
-    private JComboBox<String> courseComboBox;
+ArrayList<ClassDTO> list;
+    private JLabel classLabel;
+    private JComboBox<String> classComboBox;
     private JLabel dateLabel;
     private JDatePicker datePicker;
     private JLabel timeSlotLabel;
@@ -42,17 +44,18 @@ public class AddAttendance extends JPanel {
 
     private void initializeComponents() {
 
-        courseLabel = new JLabel("Course:");
+        classLabel = new JLabel("Class:");
         Response response=new Response();
-        ArrayList<CourseDTO> list=controllerObj.getCourses(response);
         
-         Stack<String> course=new Stack<>();
-        for(CourseDTO c:list){
-            course.push(c.getC_Name());
-            System.out.println(c.getC_Name());
+        list=controllerObj.getClasses(UASController.objApplicationSession.getUser(), response);
+        
+         Stack<String> cl=new Stack<>();
+        for(ClassDTO c:list){
+            cl.push(c.getClass_id());
+            System.out.println(c.getClass_id());
         }
        
-        courseComboBox = new JComboBox<>(course);
+        classComboBox = new JComboBox<>(cl);
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
 
@@ -65,6 +68,7 @@ public class AddAttendance extends JPanel {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date currentDate = new Date();
         String timeString = timeFormat.format(currentDate);
+        
         timeSlotField.setText(timeString);
 
         studentTable = new JTable(controllerObj.getStudentsByCourse()) {
@@ -100,10 +104,11 @@ public class AddAttendance extends JPanel {
         // Add course label and combo box
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(courseLabel, gbc);
+        add(classLabel, gbc);
 
         gbc.gridx = 1;
-        add(courseComboBox, gbc);
+        add(classComboBox, gbc);
+        //Add course
 
         // Add date label and date picker
         gbc.gridx = 0;
@@ -162,10 +167,10 @@ public class AddAttendance extends JPanel {
     }
 
     private void addListeners() {
-        courseComboBox.addActionListener(new ActionListener() {
+        classComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCourse = (String) courseComboBox.getSelectedItem();
+                String selectedCourse = (String) classComboBox.getSelectedItem();
                 DefaultTableModel newTableModel = controllerObj.getStudentsByCourse();
                 studentTable.setModel(newTableModel);
             }
@@ -186,7 +191,7 @@ public class AddAttendance extends JPanel {
         addAttendanceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCourse = (String) courseComboBox.getSelectedItem();
+                String selectedClass = (String) classComboBox.getSelectedItem();
                 Date selectedDate = (Date) datePicker.getModel().getValue();
                 String timeSlot = timeSlotField.getText();
                 String remarks = remarksField.getText();

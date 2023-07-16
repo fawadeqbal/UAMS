@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import model.UASController;
+import controller.UASController;
 import org.jdatepicker.JDatePicker;
 
 public class DeleteAttendance extends JPanel {
