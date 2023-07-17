@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/ObjectMapper.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/ui/panels/AddAttendance.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/DALManager.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/DBReader.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/ui/panels/LoginUI.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/validators/CommonValidator.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/dto/UserDTO.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/common/ApplicationSession.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/ui/Dashboard.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/controller/UASController.java</file>
+        </group>
     </open-files>
 </project-private>
