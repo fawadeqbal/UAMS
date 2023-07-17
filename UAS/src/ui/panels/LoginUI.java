@@ -13,7 +13,7 @@ import model.dto.UserDTO;
 
 public class LoginUI extends JFrame {
 
-    private JTextField usernameField;
+    private JTextField userIDField;
     private JPasswordField passwordField;
     public UASController controllerObj;
 
@@ -54,19 +54,19 @@ public class LoginUI extends JFrame {
         gbc.gridx++;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        usernameField = new JTextField(20);
-        usernameField.setText("800");
-        usernameField.addKeyListener(new KeyAdapter() {
+        userIDField = new JTextField(20);
+        userIDField.setText("800");
+        userIDField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (!usernameField.getText().isEmpty()) {
+                    if (!userIDField.getText().isEmpty()) {
                         passwordField.requestFocusInWindow();
                     }
                 }
             }
         });
-        mainPanel.add(usernameField, gbc);
+        mainPanel.add(userIDField, gbc);
 
         gbc.gridy++;
         passwordField = new JPasswordField(20);
@@ -101,12 +101,12 @@ public class LoginUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
+                String userID = userIDField.getText();
                 String password = new String(passwordField.getPassword());
                 
                 // Perform authentication logic here
                 UserDTO user = new UserDTO();
-                user.setUsername(username);
+                user.setUserID(userID);
                 user.setPassword(password);
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);

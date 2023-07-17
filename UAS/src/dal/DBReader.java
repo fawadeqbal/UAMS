@@ -23,11 +23,11 @@ public class DBReader {
     
     ResultSet getUser(Response responseObj,UserDTO user,Connection connection){
        PreparedStatement statement = null;
-       ResultSet resultSet = null;
+     
         try {
-            String query = "SELECT * FROM Users WHERE user_id = ? AND password = ?";
+            String query = "SELECT * FROM user WHERE user_id = ? AND password = ?";
             statement = connection.prepareStatement(query);
-            statement.setInt(1, Integer.parseInt(user.getUsername()));
+            statement.setString(1, user.getUserID());
             statement.setString(2, user.getPassword());
             return statement.executeQuery();
         } catch (Exception ex) {
@@ -43,7 +43,7 @@ public class DBReader {
         try {
             String query = "SELECT * FROM Classes WHERE teacher_id=? ";
             statement = connection.prepareStatement(query);
-            statement.setString(1, user.getUsername());
+            statement.setString(1, user.getUserID());
             return statement.executeQuery();
 
             

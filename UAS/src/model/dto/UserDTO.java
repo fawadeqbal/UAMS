@@ -10,28 +10,28 @@ package model.dto;
  */
 public class UserDTO {
 
-    private String username;
+    private String user_id;
     private String password;
     private String role;
     public UserDTO(){
         
     }
     public UserDTO(String username, String password,String role) {
-        this.username = username;
+        this.user_id = username;
         this.password = password;
         this.role=role;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserID() {
+        return user_id;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserID(String user_id) {
+        this.user_id = user_id;
     }
 
     public void setPassword(String password) {

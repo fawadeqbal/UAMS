@@ -23,7 +23,7 @@ public class DALManager {
     public DALManager() {
         mapper=new ObjectMapper();
         objReader=new DBReader();
-        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAS", "root", "Admin123$");
+        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAMS", "root", "Admin123$");
     }
 
     public void verifyUser(UserDTO user, Response responseObj) {
@@ -31,7 +31,7 @@ public class DALManager {
         ResultSet resultSet = objReader.getUser(responseObj,user,connection);
         try {
             if (resultSet.next()) {
-                user.setRole(resultSet.getString(4).toLowerCase());
+                user.setRole(resultSet.getString(3));
                 responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
             } else {
                 responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
@@ -106,8 +106,6 @@ public class DALManager {
             String query = "SELECT * FROM student where sid = "+id;
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            
-            ObjectMapper mapper=new ObjectMapper();
             return mapper.getStudent(resultSet);
         } catch (Exception ex) {
             
