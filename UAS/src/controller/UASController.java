@@ -125,7 +125,10 @@ public class UASController {
     }
     
     public void addCourse(CourseDTO course,Response responseObj){
+        CommonValidator.validateCourse(course, responseObj);
+        if(responseObj.isSuccessfull()){
+            dalManagerObj.addCourse(course, responseObj);
+        }
         
-        dalManagerObj.addCourse(course, responseObj);
     }
 }

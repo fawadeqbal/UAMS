@@ -1,6 +1,7 @@
 
 package model.validators;
 
+import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
@@ -12,6 +13,22 @@ public class CommonValidator {
         isValidUserID(objUser.getUserID(), objResponse);
         isValidPassword(objUser.getPassword(), objResponse);
         
+    }
+    
+    public static void validateCourse(CourseDTO objCOurse, Response objResponse) {
+        isValidCourseCode(objCOurse.getC_Id(),objResponse);
+        isValidCourseName(objCOurse.getC_Name(),objResponse);
+    }
+    
+    private static void isValidCourseName(String courseName, Response objResponse) {
+        if(courseName == null || courseName.length()==0){
+            objResponse.messagesList.add(new Message("Course Name is not valid, Provide valid Course Name.",MessageType.Error));
+        }
+    }
+    private static void isValidCourseCode(String courseCode, Response objResponse) {
+        if(courseCode == null || courseCode.length()==0){
+            objResponse.messagesList.add(new Message("Course Code is not valid, Provide valid Course Code.",MessageType.Error));
+        }
     }
 
     private static void isValidUserID(String usernameToValidate, Response objResponse) {

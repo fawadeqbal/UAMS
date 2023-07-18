@@ -15,17 +15,18 @@ import java.awt.event.ActionListener;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import controller.UASController;
+import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Response;
 
 public class AddCourse extends JPanel {
-
     UASController controllerObj;
     private JTextField courseCodeField;
     private JTextField courseNameField;
-    private JTextField creditHoursField;
+    private JComboBox<Integer> creditHoursComboBox; // Use JComboBox for credit hours selection
 
     public AddCourse() {
+        controllerObj=UASFactory.getUASControllerInstance();
         // Set FlatLaf for a modern look and feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -50,17 +51,17 @@ public class AddCourse extends JPanel {
         JLabel courseCodeLabel = new JLabel("Course Code:");
         gbc.gridy++;
         gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.EAST; // Set anchor to EAST for labels
+        gbc.anchor = GridBagConstraints.EAST;
         add(courseCodeLabel, gbc);
 
         courseCodeField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST; // Reset anchor to WEST for text fields
+        gbc.anchor = GridBagConstraints.WEST;
         add(courseCodeField, gbc);
 
         // Course Name
         JLabel courseNameLabel = new JLabel("Course Name:");
-         gbc.gridx = 0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(courseNameLabel, gbc);
 
@@ -74,9 +75,11 @@ public class AddCourse extends JPanel {
         gbc.gridx=0;
         add(creditHoursLabel, gbc);
 
-        creditHoursField = new JTextField(20);
+        // Create the ComboBox for credit hours selection with options "2" and "3"
+        Integer[] creditHoursOptions = { 2, 3, 4 };
+        creditHoursComboBox = new JComboBox<>(creditHoursOptions);
         gbc.gridx = 1;
-        add(creditHoursField, gbc);
+        add(creditHoursComboBox, gbc);
 
         // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
@@ -90,19 +93,26 @@ public class AddCourse extends JPanel {
             public void actionPerformed(ActionEvent ae) {
                 String courseCode = courseCodeField.getText();
                 String courseName = courseNameField.getText();
-                int creditHours = Integer.parseInt(creditHoursField.getText());
+                int creditHours = (int) creditHoursComboBox.getSelectedItem();
+
+                // TODO: Handle the course submission here
+                // You can use the values entered in the text fields and selected credit hours
+                // to add the course
+                // For example:
                 CourseDTO courseObj = new CourseDTO(courseCode, courseName, creditHours);
-                Response responseObj = new Response();
+                Response responseObj =UASFactory.getResponseInstance();
                 controllerObj.addCourse(courseObj, responseObj);
-                if(responseObj.isSuccessfull()){
+                 if (responseObj.isSuccessfull()) {
                     JOptionPane.showMessageDialog(courseCodeField, responseObj.getInfoMessages());
-                    
-                }else{
+                     // Clear the text fields after submission
+                courseCodeField.setText("");
+                courseNameField.setText("");
+                } else {
                      JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
                 }
 
+               
             }
-
         });
     }
 
@@ -115,9 +125,15 @@ public class AddCourse extends JPanel {
         return courseNameField;
     }
 
-    public JTextField getCreditHoursField() {
-        return creditHoursField;
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Course Form");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 300);
+            frame.add(new AddCourse());
+            frame.setVisible(true);
+        });
     }
-    
 }
+
 
