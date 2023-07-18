@@ -19,19 +19,25 @@ public class DALManager {
     ObjectMapper mapper;
     MySQLConnection mySQL;
     DBReader objReader;
+    ObjectAdder objAdder;
 
     public DALManager() {
+        objAdder=new ObjectAdder();
         mapper=new ObjectMapper();
         objReader=new DBReader();
-        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAMS", "root", "Admin123$");
+        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAS", "root", "Admin123$");
     }
 
     public void verifyUser(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = objReader.getUser(responseObj,user,connection);
+        if(resultSet==null){
+            System.out.println("Response Error");
+            return;
+        }
         try {
             if (resultSet.next()) {
-                user.setRole(resultSet.getString(3));
+                user.setRole(resultSet.getString(4));
                 responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
             } else {
                 responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
@@ -46,6 +52,22 @@ public class DALManager {
         
         return mapper.getClasses(resultSet);
     }
+    
+    public void addCourse(CourseDTO course,Response responseObj){
+        Connection connection=mySQL.getConnection();
+        objAdder.addCourse(course, connection, responseObj);
+    }
+    public static void main(String[] args) {
+        DALManager dal=new DALManager();
+        CourseDTO course=new CourseDTO("CS207","Database",4);
+        Response res=new Response();
+        dal.addCourse(course, res);
+        if(res.isSuccessfull()){
+            System.out.println("Successfully Added.");
+        }else{
+            System.out.println(res.getErrorMessages());
+        }
+    }
 
     public ArrayList<CourseDTO> getCourses(Response response) {
         ArrayList<CourseDTO> coursesList = new ArrayList<>();
@@ -56,8 +78,6 @@ public class DALManager {
             String query = "SELECT * FROM course";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            
-            
             return mapper.getCourses(resultSet);
         } catch (Exception ex) {
             response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));

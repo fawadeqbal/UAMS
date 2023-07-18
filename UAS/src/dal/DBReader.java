@@ -25,7 +25,7 @@ public class DBReader {
        PreparedStatement statement = null;
      
         try {
-            String query = "SELECT * FROM user WHERE user_id = ? AND password = ?";
+            String query = "SELECT * FROM Users WHERE user_id = ? AND password = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getUserID());
             statement.setString(2, user.getPassword());

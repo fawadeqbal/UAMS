@@ -21,7 +21,7 @@ public class ObjectMapper {
         while (rs.next())
             {
                 CourseDTO objCourse=new CourseDTO();                
-                objCourse.setC_Id(rs.getInt(1));
+                objCourse.setC_Id(rs.getString(1));
                 objCourse.setC_Name(rs.getString(2));
                                 
                 courselist.add(objCourse);
