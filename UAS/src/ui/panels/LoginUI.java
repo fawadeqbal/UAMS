@@ -10,6 +10,7 @@ import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.UserDTO;
+import ui.AdminDashboard;
 
 public class LoginUI extends JFrame {
 
@@ -111,8 +112,13 @@ public class LoginUI extends JFrame {
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {
-                    new Dashboard().setVisible(true);
-                    dispose();
+                    if(UASController.objApplicationSession.getUser().getRole().equals("admin")){
+                        new AdminDashboard().setVisible(true);
+                        dispose();
+                    }else{
+                        new Dashboard().setVisible(true);
+                        dispose();
+                    }
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages(), "Error Message", HEIGHT);

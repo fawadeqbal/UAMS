@@ -125,5 +125,9 @@ public class UASController {
 
         return dalManagerObj.getStudent(id);
     }
-
+    
+    public void addCourse(CourseDTO course,Response responseObj){
+        
+        dalManagerObj.addCourse(course, responseObj);
+    }
 }
