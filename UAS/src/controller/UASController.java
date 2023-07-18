@@ -11,8 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import dal.DALManager;
 import java.util.Vector;
 import model.StudentDataApp;
-import model.StudentDataApp;
-import model.UASFactory;
 import model.UASFactory;
 import model.dto.ClassDTO;
 import model.dto.CourseDTO;

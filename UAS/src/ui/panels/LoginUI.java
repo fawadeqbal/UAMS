@@ -121,7 +121,7 @@ public class LoginUI extends JFrame {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages(), "Error Message", HEIGHT);
+                    JOptionPane.showMessageDialog(rootPane, responseObj.getErrorMessages());
                 }
             }
         });

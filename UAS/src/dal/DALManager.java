@@ -1,5 +1,6 @@
 package dal;
 
+import dal.db.MySQLConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;

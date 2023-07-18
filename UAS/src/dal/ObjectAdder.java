@@ -42,8 +42,8 @@ public class ObjectAdder {
             }
         } catch (SQLException e) {
             // Handle any SQL errors
-            objResponse.messagesList.add(new Message(e.getMessage(),MessageType.Exception));
-            //objResponse.setMessage("An error occurred while adding the course: " + e.getMessage());
+            objResponse.messagesList.add(new Message("Course already exists.",MessageType.Error));
+            
         }
     }
 }

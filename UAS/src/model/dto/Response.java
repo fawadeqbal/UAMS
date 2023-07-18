@@ -33,6 +33,18 @@ public class Response {
         }
         return sb.toString();
     }
+    
+    public String getInfoMessages() {
+        StringBuilder sb = new StringBuilder();    
+        for(Message m : messagesList)
+        {
+           if(sb.length() > 0) 
+               sb.append(",\n");
+            if(m.Type == MessageType.Information)
+                sb.append(m.Message);
+        }
+        return sb.toString();
+    }
 
     public boolean isSuccessfull() {
         return !hasError();

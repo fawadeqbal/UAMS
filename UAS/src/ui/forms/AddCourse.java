@@ -18,6 +18,7 @@ import model.dto.CourseDTO;
 import model.dto.Response;
 
 public class AddCourse extends JPanel {
+
     UASController controllerObj;
     private JTextField courseCodeField;
     private JTextField courseNameField;
@@ -68,26 +69,24 @@ public class AddCourse extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 3;
         add(submitButton, gbc);
-        submitButton.addActionListener(new ActionListener(){
+        submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String courseCode=courseCodeField.getText();
-                String courseName=courseNameField.getText();
-                int creditHours=Integer.parseInt(creditHoursField.getText());
-                CourseDTO courseObj=new CourseDTO(courseCode,courseName,creditHours);
-                Response responseObj=new Response();
+                String courseCode = courseCodeField.getText();
+                String courseName = courseNameField.getText();
+                int creditHours = Integer.parseInt(creditHoursField.getText());
+                CourseDTO courseObj = new CourseDTO(courseCode, courseName, creditHours);
+                Response responseObj = new Response();
                 controllerObj.addCourse(courseObj, responseObj);
-                if(responseObj.isSuccessfull()){
-                    JOptionPane.showMessageDialog(courseCodeField, "Course Added Successfully");
-                    
-                }else{
-                     JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
+                if (responseObj.isSuccessfull()) {
+                    JOptionPane.showMessageDialog(courseCodeField, responseObj.getInfoMessages());
+
+                } else {
+                    JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
                 }
-                
-                
-             // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
             }
-            
+
         });
     }
 
@@ -103,5 +102,5 @@ public class AddCourse extends JPanel {
     public JTextField getCreditHoursField() {
         return creditHoursField;
     }
-    
+
 }
