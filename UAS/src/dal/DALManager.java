@@ -60,22 +60,22 @@ public class DALManager {
         objAdder.addCourse(course, connection, responseObj);
     }
     
-    
-    
-    public static void main(String[] args) {
-        DALManager dal=new DALManager();
-        Response res=UASFactory.getResponseInstance();
-        ArrayList<CourseDTO> list=dal.getCourses(res);
-        if(res.isSuccessfull()){
-            int i=0;
-            for(CourseDTO c:list){
-                i++;
-                System.out.print(""+i+": ");
-                System.out.println(c.getCourseCode()+"\t"+c.getCourseName());
-            }
-            System.out.println("Total: "+i);
-        }
-    }
+//    
+//    
+//    public static void main(String[] args) {
+//        DALManager dal=new DALManager();
+//        Response res=UASFactory.getResponseInstance();
+//        ArrayList<CourseDTO> list=dal.getCourses(res);
+//        if(res.isSuccessfull()){
+//            int i=0;
+//            for(CourseDTO c:list){
+//                i++;
+//                System.out.print(""+i+": ");
+//                System.out.println(c.getCourseCode()+"\t"+c.getCourseName());
+//            }
+//            System.out.println("Total: "+i);
+//        }
+//    }
 
     public ArrayList<CourseDTO> getCourses(Response response) {
         ArrayList<CourseDTO> coursesList = new ArrayList<>();

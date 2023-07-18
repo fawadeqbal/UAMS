@@ -19,13 +19,13 @@ import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Response;
 
-public class AddCourse extends JPanel {
+public class AddUser extends JPanel {
     UASController controllerObj;
     private JTextField courseCodeField;
     private JTextField courseNameField;
     private JComboBox<Integer> creditHoursComboBox; // Use JComboBox for credit hours selection
 
-    public AddCourse() {
+    public AddUser() {
         controllerObj=UASFactory.getUASControllerInstance();
         // Set FlatLaf for a modern look and feel
         try {
@@ -40,7 +40,7 @@ public class AddCourse extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
 
         // Title: Add Course
-        JLabel titleLabel = new JLabel("Add Course");
+        JLabel titleLabel = new JLabel("Add User");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -126,5 +126,6 @@ public class AddCourse extends JPanel {
     }
 
 }
+
 
 

@@ -140,20 +140,20 @@ public class StudentDataApp {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) throws IOException {
-        String excelFilePath = "/home/fawad/Desktop/students.xlsx";
-        ArrayList<Student> students = getStudents(excelFilePath);
-
-        int i = 0;
-        for (Student student : students) {
-            System.out.println(student.toString() + "\n");
-            i++;
-
-            // Create and start a new thread for each student to send the data asynchronously
-            StudentSenderThread senderThread = new StudentSenderThread(student);
-            senderThread.start();
-
-        }
-        System.out.println("Total students: " + i);
-    }
+//    public static void main(String[] args) throws IOException {
+//        String excelFilePath = "/home/fawad/Desktop/students.xlsx";
+//        ArrayList<Student> students = getStudents(excelFilePath);
+//
+//        int i = 0;
+//        for (Student student : students) {
+//            System.out.println(student.toString() + "\n");
+//            i++;
+//
+//            // Create and start a new thread for each student to send the data asynchronously
+//            StudentSenderThread senderThread = new StudentSenderThread(student);
+//            senderThread.start();
+//
+//        }
+//        System.out.println("Total students: " + i);
+//    }
 }

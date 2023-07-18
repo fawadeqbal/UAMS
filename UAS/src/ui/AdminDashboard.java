@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import ui.forms.AddCourse;
+import ui.panels.Courses;
 
 public class AdminDashboard extends JFrame {
 
@@ -85,6 +86,9 @@ public class AdminDashboard extends JFrame {
         JButton addCourseButton = createMenuButton("Add Course");
         menuPanel.add(addCourseButton, gbc);
         gbc.gridy++;
+        JButton viewCoursesButton = createMenuButton("View Courses");
+        menuPanel.add(viewCoursesButton, gbc);
+        gbc.gridy++;
 
         
         gbc.gridy++;
@@ -136,6 +140,8 @@ public class AdminDashboard extends JFrame {
                 if (buttonText.equals("Add Course")) {
                     contentPanel.add(new AddCourse());
                     
+                } else if(buttonText.equals("View Courses")){
+                    contentPanel.add(new Courses());
                 }
                 contentPanel.revalidate();
                 contentPanel.repaint();
@@ -156,7 +162,5 @@ public class AdminDashboard extends JFrame {
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }
-    public static void main(String[] args) {
-        new AdminDashboard().setVisible(true);
-    }
+
 }
