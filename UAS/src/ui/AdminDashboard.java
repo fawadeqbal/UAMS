@@ -9,20 +9,8 @@ package ui;
  * @author fawad
  */
 
-import ui.panels.UserSettings;
-import ui.panels.Home;
-import ui.panels.ViewAttendance;
-import ui.panels.ModifyAttendance;
-import ui.panels.DeleteAttendance;
-import ui.panels.AddAttendance;
-import ui.panels.Reports;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import controller.UASController;
 import ui.panels.LoginUI;
-
 import controller.UASController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -34,19 +22,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import ui.panels.AddAttendance;
-import ui.panels.DeleteAttendance;
-import ui.panels.Home;
-import ui.panels.LoginUI;
-import ui.panels.ModifyAttendance;
-import ui.panels.Reports;
-import ui.panels.UserSettings;
-import ui.panels.ViewAttendance;
 
 import javax.swing.JFrame;
 
@@ -57,12 +32,7 @@ public class AdminDashboard extends JFrame {
     private JPanel contentPanel;
 
     public AdminDashboard() {
-        if (!UASController.isUserLoggedIn()) {
-            LoginUI loginScreen = new LoginUI();
-            loginScreen.setVisible(true);
-            this.setVisible(false);
-            this.dispose();
-        } else {
+       
 
             setTitle("Attendance Management System - Dashboard");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +50,7 @@ public class AdminDashboard extends JFrame {
 
             pack();
             setLocationRelativeTo(null);
-        }
+        
     }
 
     private void createHeaderPanel() {
@@ -90,7 +60,7 @@ public class AdminDashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System" + "          " + UASController.objApplicationSession.getUser().getRole());
+        JLabel titleLabel = new JLabel("Admin Dashboard" );
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -111,34 +81,11 @@ public class AdminDashboard extends JFrame {
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        JButton homeButton = createMenuButton("Home");
-
-        JButton viewAttendanceButton = createMenuButton("View Attendance");
-        menuPanel.add(homeButton, gbc);
+        JButton addCourseButton = createMenuButton("Add Course");
+        menuPanel.add(addCourseButton, gbc);
         gbc.gridy++;
 
-        menuPanel.add(viewAttendanceButton, gbc);
-        gbc.gridy++;
-        if (UASController.objApplicationSession.getUser().getRole().equals("faculty")) {
-            JButton addAttendanceButton = createMenuButton("Add Attendance");
-            JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
-            JButton modifyAttendanceButton = createMenuButton("Modify Attendance");
-
-            menuPanel.add(addAttendanceButton, gbc);
-            gbc.gridy++;
-            menuPanel.add(deleteAttendanceButton, gbc);
-            gbc.gridy++;
-            menuPanel.add(modifyAttendanceButton, gbc);
-            gbc.gridy++;
-
-        }
-        JButton settingsButton = createMenuButton("User Settings");
-        JButton reportsButton = createMenuButton("Reports");
-
-        menuPanel.add(reportsButton, gbc);
-        gbc.gridy++;
-        menuPanel.add(settingsButton, gbc);
-        gbc.gridy++;
+        
         gbc.gridy++;
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(Color.WHITE);
@@ -185,7 +132,9 @@ public class AdminDashboard extends JFrame {
                 String buttonText = button.getText();
 
                 contentPanel.removeAll();
-                if (buttonText.equals("Home")) {
+                if (buttonText.equals("Add Course")) {
+                    //Here put your panel contentPanel.add( );
+                    
                 }
                 contentPanel.revalidate();
                 contentPanel.repaint();
@@ -205,5 +154,8 @@ public class AdminDashboard extends JFrame {
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(welcomeLabel, BorderLayout.CENTER);
+    }
+    public static void main(String[] args) {
+        new AdminDashboard().setVisible(true);
     }
 }
