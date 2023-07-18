@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import ui.forms.AddCourse;
 
 public class AdminDashboard extends JFrame {
 
@@ -133,7 +134,7 @@ public class AdminDashboard extends JFrame {
 
                 contentPanel.removeAll();
                 if (buttonText.equals("Add Course")) {
-                    //Here put your panel contentPanel.add( );
+                    contentPanel.add(new AddCourse());
                     
                 }
                 contentPanel.revalidate();

@@ -9,41 +9,41 @@ package model.dto;
  * @author fawad
  */
 public class CourseDTO {
-    private String c_Id;
-    private String c_Name;
-    private int c_credit_hours;
+    private String courseCode;
+    private String courseName;
+    private int creditHours;
     public CourseDTO(){
         
     }
-    public CourseDTO(String c_Id, String c_Name, int c_credit_hours) {
-        this.c_Id = c_Id;
-        this.c_Name = c_Name;
-        this.c_credit_hours = c_credit_hours;
+    public CourseDTO(String courseCode, String courseName, int creditHours) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.creditHours = creditHours;
     }
     
 
     public int getC_credit_hours() {
-        return c_credit_hours;
+        return creditHours;
     }
 
     public void setC_credit_hours(int c_credit_hours) {
-        this.c_credit_hours = c_credit_hours;
+        this.creditHours = c_credit_hours;
     }
 
     public String getC_Id() {
-        return c_Id;
+        return courseCode;
     }
 
     public void setC_Id(String c_Id) {
-        this.c_Id = c_Id;
+        this.courseCode = c_Id;
     }
 
     public String getC_Name() {
-        return c_Name;
+        return courseName;
     }
 
     public void setC_Name(String c_Name) {
-        this.c_Name = c_Name;
+        this.courseName = c_Name;
     }
 
     
