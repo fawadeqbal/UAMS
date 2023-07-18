@@ -56,7 +56,7 @@ public class LoginUI extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         userIDField = new JTextField(20);
-        userIDField.setText("800");
+        userIDField.setText("5000");
         userIDField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -71,7 +71,7 @@ public class LoginUI extends JFrame {
 
         gbc.gridy++;
         passwordField = new JPasswordField(20);
-        passwordField.setText("1234");
+        passwordField.setText("9257");
         JButton loginButton = new JButton("Login");
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(new Color(41, 128, 185));
