@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `attendance` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `attendance`;
+CREATE DATABASE  IF NOT EXISTS `UAS` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `UAS`;
 -- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: attendance
+-- Host: 127.0.0.1    Database: UAS
 -- ------------------------------------------------------
 -- Server version	8.0.33-0ubuntu0.22.04.2
 
@@ -18,199 +18,191 @@ USE `attendance`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `attendance`
+-- Table structure for table `Admins`
 --
 
-DROP TABLE IF EXISTS `attendance`;
+DROP TABLE IF EXISTS `Admins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `attendance` (
-  `at_id` int NOT NULL,
-  `present` tinyint(1) DEFAULT NULL,
-  `student_sid` varchar(12) NOT NULL,
-  `Lessons_l_id` int NOT NULL,
-  `Lessons_faculty_t_id` int NOT NULL,
-  PRIMARY KEY (`at_id`,`student_sid`,`Lessons_l_id`,`Lessons_faculty_t_id`),
-  KEY `fk_attendance_student1_idx` (`student_sid`),
-  KEY `fk_attendance_Lessons1_idx` (`Lessons_l_id`,`Lessons_faculty_t_id`),
-  CONSTRAINT `fk_attendance_Lessons1` FOREIGN KEY (`Lessons_l_id`, `Lessons_faculty_t_id`) REFERENCES `lessons` (`l_id`, `faculty_t_id`),
-  CONSTRAINT `fk_attendance_student1` FOREIGN KEY (`student_sid`) REFERENCES `student` (`sid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Admins` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `admin_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `Admins_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `attendance`
+-- Dumping data for table `Admins`
 --
 
-LOCK TABLES `attendance` WRITE;
-/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
-/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+LOCK TABLES `Admins` WRITE;
+/*!40000 ALTER TABLE `Admins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `course`
+-- Table structure for table `Classes`
 --
 
-DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `Classes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `course` (
-  `cid` int NOT NULL,
-  `c_name` varchar(45) DEFAULT NULL,
-  `faculty_t_id` int NOT NULL,
-  PRIMARY KEY (`cid`,`faculty_t_id`),
-  KEY `fk_course_faculty_idx` (`faculty_t_id`),
-  CONSTRAINT `fk_course_faculty` FOREIGN KEY (`faculty_t_id`) REFERENCES `faculty` (`t_id`)
+CREATE TABLE `Classes` (
+  `class_id` varchar(15) NOT NULL,
+  `Enrollments_Students_student_id` varchar(15) NOT NULL,
+  `Enrollments_faculty_teaches_course_Courses_course_code` varchar(10) NOT NULL,
+  `Enrollments_faculty_teaches_course_Teachers_teacher_id` int NOT NULL,
+  PRIMARY KEY (`class_id`),
+  KEY `fk_class_Enrollments1_idx` (`Enrollments_Students_student_id`,`Enrollments_faculty_teaches_course_Courses_course_code`,`Enrollments_faculty_teaches_course_Teachers_teacher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `course`
+-- Dumping data for table `Classes`
 --
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'OOP',1),(2,'DSA',2),(3,'DBA',3);
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+LOCK TABLES `Classes` WRITE;
+/*!40000 ALTER TABLE `Classes` DISABLE KEYS */;
+INSERT INTO `Classes` VALUES ('bse-4b','','',0),('bse-4c','','',0);
+/*!40000 ALTER TABLE `Classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `faculty`
+-- Table structure for table `Courses`
 --
 
-DROP TABLE IF EXISTS `faculty`;
+DROP TABLE IF EXISTS `Courses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `faculty` (
-  `t_id` int NOT NULL,
-  `t_name` varchar(30) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `phone_no` int DEFAULT NULL,
-  PRIMARY KEY (`t_id`)
+CREATE TABLE `Courses` (
+  `course_code` varchar(10) NOT NULL,
+  `course_name` varchar(255) NOT NULL,
+  `credit_hours` varchar(45) NOT NULL,
+  PRIMARY KEY (`course_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `faculty`
+-- Dumping data for table `Courses`
 --
 
-LOCK TABLES `faculty` WRITE;
-/*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (1,'Mukhtiar','Mukhtiar@gmail.com',123),(2,'Sana','sana@abc.com',12345),(3,'rabnawaz','rabnawaz@abc.com',23456);
-/*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
+LOCK TABLES `Courses` WRITE;
+/*!40000 ALTER TABLE `Courses` DISABLE KEYS */;
+INSERT INTO `Courses` VALUES ('CS207','Database','4'),('CSC103','Programming Fundamentals','4'),('CSC207','Data Structures','4'),('CSC209','Object Oriented Software Engineering','4'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4');
+/*!40000 ALTER TABLE `Courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `lessons`
+-- Table structure for table `Enrollments`
 --
 
-DROP TABLE IF EXISTS `lessons`;
+DROP TABLE IF EXISTS `Enrollments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lessons` (
-  `l_id` int NOT NULL,
-  `l_name` varchar(30) DEFAULT NULL,
-  `l_date` date DEFAULT NULL,
-  `faculty_t_id` int NOT NULL,
-  `course_cid` int NOT NULL,
-  `course_faculty_t_id` int NOT NULL,
-  PRIMARY KEY (`l_id`,`faculty_t_id`,`course_cid`,`course_faculty_t_id`),
-  KEY `fk_Lessons_faculty1_idx` (`faculty_t_id`),
-  KEY `fk_Lessons_course1_idx` (`course_cid`,`course_faculty_t_id`),
-  CONSTRAINT `fk_Lessons_course1` FOREIGN KEY (`course_cid`, `course_faculty_t_id`) REFERENCES `course` (`cid`, `faculty_t_id`),
-  CONSTRAINT `fk_Lessons_faculty1` FOREIGN KEY (`faculty_t_id`) REFERENCES `faculty` (`t_id`)
+CREATE TABLE `Enrollments` (
+  `Students_student_id` varchar(15) NOT NULL,
+  `Courses_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`Courses_course_code`,`Students_student_id`),
+  KEY `fk_Enrollments_Students1_idx` (`Students_student_id`),
+  KEY `fk_Enrollments_Courses1_idx` (`Courses_course_code`),
+  CONSTRAINT `fk_Enrollments_Students1` FOREIGN KEY (`Students_student_id`) REFERENCES `Students` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lessons`
+-- Dumping data for table `Enrollments`
 --
 
-LOCK TABLES `lessons` WRITE;
-/*!40000 ALTER TABLE `lessons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lessons` ENABLE KEYS */;
+LOCK TABLES `Enrollments` WRITE;
+/*!40000 ALTER TABLE `Enrollments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Enrollments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `student`
+-- Table structure for table `Students`
 --
 
-DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `Students`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `student` (
-  `sid` varchar(12) NOT NULL,
-  `f_name` varchar(20) DEFAULT NULL,
-  `l_name` varchar(20) DEFAULT NULL,
-  `contact` int DEFAULT NULL,
-  `cnic` int DEFAULT NULL,
-  PRIMARY KEY (`sid`)
+CREATE TABLE `Students` (
+  `student_id` varchar(15) NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `student_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`student_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `Students_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student`
+-- Dumping data for table `Students`
 --
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('11','faizan','ali',123,123),('12','fawad','iqbal',12,12),('50','basit','iqbal',1234,1234),('88','fatima','aftab',1234,2345);
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+LOCK TABLES `Students` WRITE;
+/*!40000 ALTER TABLE `Students` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Students` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `studentenroll`
+-- Table structure for table `Teachers`
 --
 
-DROP TABLE IF EXISTS `studentenroll`;
+DROP TABLE IF EXISTS `Teachers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `studentenroll` (
-  `student_sid` varchar(12) NOT NULL,
-  `course_cid` int NOT NULL,
-  PRIMARY KEY (`student_sid`,`course_cid`),
-  KEY `fk_student_has_course_student1_idx` (`student_sid`),
-  KEY `fk_student_has_course_course1_idx` (`course_cid`),
-  CONSTRAINT `fk_student_has_course_course1` FOREIGN KEY (`course_cid`) REFERENCES `course` (`cid`),
-  CONSTRAINT `fk_student_has_course_student1` FOREIGN KEY (`student_sid`) REFERENCES `student` (`sid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Teachers` (
+  `teacher_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `teacher_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`teacher_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `Teachers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=801 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `studentenroll`
+-- Dumping data for table `Teachers`
 --
 
-LOCK TABLES `studentenroll` WRITE;
-/*!40000 ALTER TABLE `studentenroll` DISABLE KEYS */;
-INSERT INTO `studentenroll` VALUES ('11',1),('12',1),('50',1),('88',1),('11',2),('12',2);
-/*!40000 ALTER TABLE `studentenroll` ENABLE KEYS */;
+LOCK TABLES `Teachers` WRITE;
+/*!40000 ALTER TABLE `Teachers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `Users`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `Users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `username` varchar(16) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `role` varchar(45) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `Users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` enum('admin','faculty','student') DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `Users`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('basit','basit@yahoo.com','root','2023-07-07 09:54:32','faculty'),('faizan','faizanswabi95@gmail.com','root','2023-06-06 18:17:14','student'),('fawad','fawadeqbal@yahoo.com','root','2023-06-06 18:32:01','admin');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (100,'faizan','2546','student'),(5000,'fawad','9257','admin'),(6000,'sana_malik','1234','faculty');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -222,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-08  3:31:56
+-- Dump completed on 2023-07-19  1:27:52
