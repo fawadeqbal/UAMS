@@ -8,12 +8,13 @@ package ui.forms;
  *
  * @author Faizan
  */
-import controller.UASController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.UASFactory;
+
+import com.formdev.flatlaf.FlatLightLaf;
+import controller.UASController;
 import model.dto.CourseDTO;
 import model.dto.Response;
 
@@ -24,50 +25,65 @@ public class AddCourse extends JPanel {
     private JTextField creditHoursField;
 
     public AddCourse() {
+        // Set FlatLaf for a modern look and feel
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         setLayout(new GridBagLayout());
-        controllerObj = UASFactory.getUASControllerInstance();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Course Code
-        JLabel courseCodeLabel = new JLabel("Course Code:");
+        // Title: Add Course
+        JLabel titleLabel = new JLabel("Add Course");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        add(titleLabel, gbc);
+
+        // Course Code
+        JLabel courseCodeLabel = new JLabel("Course Code:");
+        gbc.gridy++;
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.EAST; // Set anchor to EAST for labels
         add(courseCodeLabel, gbc);
 
-        courseCodeField = new JTextField(15);
+        courseCodeField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST; // Reset anchor to WEST for text fields
         add(courseCodeField, gbc);
 
         // Course Name
         JLabel courseNameLabel = new JLabel("Course Name:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+         gbc.gridx = 0;
+        gbc.gridy++;
         add(courseNameLabel, gbc);
 
-        courseNameField = new JTextField(15);
+        courseNameField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 1;
         add(courseNameField, gbc);
 
         // Credit Hours
         JLabel creditHoursLabel = new JLabel("Credit Hours:");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy++;
+        gbc.gridx=0;
         add(creditHoursLabel, gbc);
 
-        creditHoursField = new JTextField(15);
+        creditHoursField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 2;
         add(creditHoursField, gbc);
 
         // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
-        gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
         add(submitButton, gbc);
+
         submitButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -103,5 +119,15 @@ public class AddCourse extends JPanel {
     public JTextField getCreditHoursField() {
         return creditHoursField;
     }
-    
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Course Form");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 300);
+            frame.add(new AddCourse());
+            frame.setVisible(true);
+        });
+    }
 }
+
