@@ -95,7 +95,7 @@ public class AddCourse extends JPanel {
                 Response responseObj = new Response();
                 controllerObj.addCourse(courseObj, responseObj);
                 if(responseObj.isSuccessfull()){
-                    JOptionPane.showMessageDialog(courseCodeField, "Course Added Successfully");
+                    JOptionPane.showMessageDialog(courseCodeField, responseObj.getInfoMessages());
                     
                 }else{
                      JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
