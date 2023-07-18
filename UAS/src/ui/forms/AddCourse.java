@@ -8,18 +8,24 @@ package ui.forms;
  *
  * @author Faizan
  */
+import controller.UASController;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import model.UASFactory;
+import model.dto.CourseDTO;
+import model.dto.Response;
 
 public class AddCourse extends JPanel {
-
+    UASController controllerObj;
     private JTextField courseCodeField;
     private JTextField courseNameField;
     private JTextField creditHoursField;
 
     public AddCourse() {
         setLayout(new GridBagLayout());
-
+        controllerObj = UASFactory.getUASControllerInstance();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
@@ -62,6 +68,27 @@ public class AddCourse extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 3;
         add(submitButton, gbc);
+        submitButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String courseCode=courseCodeField.getText();
+                String courseName=courseNameField.getText();
+                int creditHours=Integer.parseInt(creditHoursField.getText());
+                CourseDTO courseObj=new CourseDTO(courseCode,courseName,creditHours);
+                Response responseObj=new Response();
+                controllerObj.addCourse(courseObj, responseObj);
+                if(responseObj.isSuccessfull()){
+                    JOptionPane.showMessageDialog(courseCodeField, "Course Added Successfully");
+                    
+                }else{
+                     JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
+                }
+                
+                
+             // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+            
+        });
     }
 
     // Getter methods to access the text fields if needed
@@ -76,22 +103,5 @@ public class AddCourse extends JPanel {
     public JTextField getCreditHoursField() {
         return creditHoursField;
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            try {
-//                // Apply a modern look and feel (e.g., Nimbus)
-//                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//
-//            // Create a frame to display the panel
-//            JFrame frame = new JFrame("Course Form");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(400, 200);
-//            frame.add(new AddCourse());
-//            frame.setVisible(true);
-//        });
-//    }
+    
 }
