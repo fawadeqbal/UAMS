@@ -22,28 +22,28 @@ public class CourseDTO {
     }
     
 
-    public int getC_credit_hours() {
+    public int getCreditHours() {
         return creditHours;
     }
 
-    public void setC_credit_hours(int c_credit_hours) {
-        this.creditHours = c_credit_hours;
+    public void setCreditHours(int creditHours) {
+        this.creditHours = creditHours;
     }
 
-    public String getC_Id() {
+    public String getCourseCode() {
         return courseCode;
     }
 
-    public void setC_Id(String c_Id) {
-        this.courseCode = c_Id;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public String getC_Name() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setC_Name(String c_Name) {
-        this.courseName = c_Name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     

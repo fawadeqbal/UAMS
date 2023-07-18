@@ -16,8 +16,8 @@ public class CommonValidator {
     }
     
     public static void validateCourse(CourseDTO objCOurse, Response objResponse) {
-        isValidCourseCode(objCOurse.getC_Id(),objResponse);
-        isValidCourseName(objCOurse.getC_Name(),objResponse);
+        isValidCourseCode(objCOurse.getCourseCode(),objResponse);
+        isValidCourseName(objCOurse.getCourseName(),objResponse);
     }
     
     private static void isValidCourseName(String courseName, Response objResponse) {

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.UASFactory;
 import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
@@ -17,14 +18,14 @@ import model.dto.StudentDTO;
 import model.dto.UserDTO;
 
 public class DALManager {
-    ObjectMapper mapper;
+    ObjectMapper objMapper;
     MySQLConnection mySQL;
     DBReader objReader;
     ObjectAdder objAdder;
 
     public DALManager() {
         objAdder=new ObjectAdder();
-        mapper=new ObjectMapper();
+        objMapper=new ObjectMapper();
         objReader=new DBReader();
         mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAS", "root", "Admin123$");
     }
@@ -51,56 +52,38 @@ public class DALManager {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = objReader.getClasses(responseObj, user, connection);
         
-        return mapper.getClasses(resultSet);
+        return objMapper.getClasses(resultSet);
     }
     
     public void addCourse(CourseDTO course,Response responseObj){
         Connection connection=mySQL.getConnection();
         objAdder.addCourse(course, connection, responseObj);
     }
+    
+    
+    
     public static void main(String[] args) {
         DALManager dal=new DALManager();
-        CourseDTO course=new CourseDTO("CS207","Database",4);
-        Response res=new Response();
-        dal.addCourse(course, res);
+        Response res=UASFactory.getResponseInstance();
+        ArrayList<CourseDTO> list=dal.getCourses(res);
         if(res.isSuccessfull()){
-            System.out.println("Successfully Added.");
-        }else{
-            System.out.println(res.getErrorMessages());
+            int i=0;
+            for(CourseDTO c:list){
+                i++;
+                System.out.print(""+i+": ");
+                System.out.println(c.getCourseCode()+"\t"+c.getCourseName());
+            }
+            System.out.println("Total: "+i);
         }
     }
 
     public ArrayList<CourseDTO> getCourses(Response response) {
         ArrayList<CourseDTO> coursesList = new ArrayList<>();
         Connection connection = mySQL.getConnection();
-        PreparedStatement statement = null;
+        
         ResultSet resultSet = null;
-        try {
-            String query = "SELECT * FROM course";
-            statement = connection.prepareStatement(query);
-            resultSet = statement.executeQuery();
-            return mapper.getCourses(resultSet);
-        } catch (Exception ex) {
-            response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
-
-        } finally {
-
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-
-            } catch (Exception ex) {
-                response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
-            }
-        }
-        return coursesList;
+        resultSet=objReader.getCourses(connection, response);
+            return objMapper.getCourses(resultSet);
     }
     public ArrayList<Object> getStudentsByCourse(int id){
         Connection connection = mySQL.getConnection();
@@ -127,7 +110,7 @@ public class DALManager {
             String query = "SELECT * FROM student where sid = "+id;
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            return mapper.getStudent(resultSet);
+            return objMapper.getStudent(resultSet);
         } catch (Exception ex) {
             
         } finally {

@@ -26,9 +26,9 @@ public class ObjectAdder {
             PreparedStatement statement = connection.prepareStatement(query);
             
             // Set the values for the parameters in the query
-            statement.setString(1, course.getC_Id());
-            statement.setString(2, course.getC_Name());
-            statement.setInt(3, course.getC_credit_hours());
+            statement.setString(1, course.getCourseCode());
+            statement.setString(2, course.getCourseName());
+            statement.setInt(3, course.getCreditHours());
             
             // Execute the query
             int rowsAffected = statement.executeUpdate();
