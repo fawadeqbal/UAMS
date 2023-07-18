@@ -81,7 +81,7 @@ public class AddCourse extends JPanel {
                     JOptionPane.showMessageDialog(courseCodeField, "Course Added Successfully");
                     
                 }else{
-                     JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
+                     JOptionPane.showMessageDialog(courseCodeField, "Failed to add course");
                 }
                 
                 

@@ -60,7 +60,7 @@ public class UASController {
             if (responseObj.isSuccessfull()) {
                 initializeSession();
                 objApplicationSession.setUser(user);
-                System.out.println(user.getRole());
+                
             }
         }
 
