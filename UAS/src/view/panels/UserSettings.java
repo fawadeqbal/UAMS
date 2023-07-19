@@ -12,12 +12,16 @@ import controller.UASController;
 
 public class UserSettings extends JPanel {
 
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    private JTextField emailField;
+    private JPasswordField currentPasswordField;
+    private JPasswordField newPasswordField;
+    private JPasswordField confirmPasswordField;
     private JCheckBox notificationsCheckbox;
     private JButton saveButton;
-    JLabel usernameLabel;
-    JLabel passwordLabel;
+    JLabel emailLabel;
+    JLabel currentPasswordLabel;
+    JLabel newPasswordLabel;
+    JLabel confirmPasswordLabel;
 
     public UserSettings() {
         
@@ -28,11 +32,15 @@ public class UserSettings extends JPanel {
     }
 
     private void initializeComponents() {
-        usernameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password:");
-        usernameField = new JTextField(20);
-        passwordField = new JPasswordField(20);
-        notificationsCheckbox = new JCheckBox("Enable Notifications");
+        emailLabel = new JLabel("Email:");
+        currentPasswordLabel = new JLabel("Current Password:");
+        newPasswordLabel = new JLabel("New Password:");
+        confirmPasswordLabel = new JLabel("Confirm Password:");
+        emailField = new JTextField(20);
+        currentPasswordField = new JPasswordField(20);
+        newPasswordField = new JPasswordField(20);
+        confirmPasswordField = new JPasswordField(20);
+        notificationsCheckbox = new JCheckBox("Agree");
         saveButton = new JButton("Save");
     }
 
@@ -59,16 +67,29 @@ public class UserSettings extends JPanel {
         add(new JLabel(" "), gbc);
 
         gbc.gridy++;
-        add(usernameLabel, gbc);
+        add(emailLabel, gbc);
+        emailField.setText(UASController.objApplicationSession.getUser().getEmail());
+        emailField.setEditable(false);
+        gbc.gridy++;
+        add(emailField, gbc);
+        
+        gbc.gridy++;
+        add(currentPasswordLabel, gbc);
 
         gbc.gridy++;
-        add(usernameField, gbc);
+        add(currentPasswordField, gbc);
+        
+        gbc.gridy++;
+        add(newPasswordLabel, gbc);
 
         gbc.gridy++;
-        add(passwordLabel, gbc);
+        add(newPasswordField, gbc);
 
         gbc.gridy++;
-        add(passwordField, gbc);
+        add(confirmPasswordLabel, gbc);
+
+        gbc.gridy++;
+        add(confirmPasswordField, gbc);
 
         gbc.gridy++;
         add(notificationsCheckbox, gbc);
@@ -80,8 +101,8 @@ public class UserSettings extends JPanel {
     private void setupListeners() {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
+                String username = emailField.getText();
+                String password = new String(currentPasswordField.getPassword());
                 boolean notificationsEnabled = notificationsCheckbox.isSelected();
 
                 // Save the user settings
