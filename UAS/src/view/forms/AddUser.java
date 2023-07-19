@@ -90,6 +90,7 @@ public class AddUser extends JPanel {
         JButton submitButton = new JButton("Submit");
         submitButton.setBackground(new Color(52, 152, 219));
         submitButton.setForeground(Color.WHITE);
+        submitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         gbc.gridy++;
         gbc.gridx = 1;
         gbc.gridwidth = 1;
