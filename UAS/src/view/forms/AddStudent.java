@@ -18,19 +18,21 @@ import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import org.jdatepicker.JDatePicker;
 
 public class AddStudent extends JPanel {
+
     UASController controllerObj;
     private JTextField regNoField;
     private JTextField nameField;
     private JTextField fatherNameField;
-    private JFormattedTextField dobField;
+    private JDatePicker dobField;
     private JTextField cnicField;
     private JTextField phoneNumberField;
     private JTextField userEmailField;
 
     public AddStudent() {
-        controllerObj=UASFactory.getUASControllerInstance();
+        controllerObj = UASFactory.getUASControllerInstance();
         // Set FlatLaf for a modern look and feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -53,7 +55,7 @@ public class AddStudent extends JPanel {
 
         // Registration Number
         JLabel regNoLabel = new JLabel("Registration No:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.EAST;
@@ -66,7 +68,7 @@ public class AddStudent extends JPanel {
 
         // Name
         JLabel nameLabel = new JLabel("Name:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(nameLabel, gbc);
 
@@ -76,7 +78,7 @@ public class AddStudent extends JPanel {
 
         // Father's Name
         JLabel fatherNameLabel = new JLabel("Father's Name:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(fatherNameLabel, gbc);
 
@@ -86,17 +88,17 @@ public class AddStudent extends JPanel {
 
         // Date of Birth
         JLabel dobLabel = new JLabel("Date of Birth:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(dobLabel, gbc);
 
-        dobField = new JFormattedTextField(new Date());
+        dobField=new JDatePicker(new Date());
         gbc.gridx = 1;
         add(dobField, gbc);
 
         // CNIC
         JLabel cnicLabel = new JLabel("CNIC:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(cnicLabel, gbc);
 
@@ -106,7 +108,7 @@ public class AddStudent extends JPanel {
 
         // Phone Number
         JLabel phoneNumberLabel = new JLabel("Phone Number:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(phoneNumberLabel, gbc);
 
@@ -116,7 +118,7 @@ public class AddStudent extends JPanel {
 
         // User Email
         JLabel userEmailLabel = new JLabel("Email:");
-        gbc.gridx=0;
+        gbc.gridx = 0;
         gbc.gridy++;
         add(userEmailLabel, gbc);
 
@@ -140,29 +142,28 @@ public class AddStudent extends JPanel {
                 String regNo = regNoField.getText();
                 String name = nameField.getText();
                 String fatherName = fatherNameField.getText();
-                Date dob = (Date) dobField.getValue();
+                Date dob = (Date) dobField.getModel().getValue();
                 String cnic = cnicField.getText();
                 String phoneNumber = phoneNumberField.getText();
                 String userEmail = userEmailField.getText();
 
-                
                 StudentDTO userDetails = new StudentDTO(regNo, name, fatherName, dob, cnic, phoneNumber, userEmail);
-                Response responseObj=UASFactory.getResponseInstance();
+                Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.addStudent(userDetails, responseObj);
                 if (responseObj.isSuccessfull()) {
-                     JOptionPane.showMessageDialog(regNoField, "User Details Added Successfully");
-                 } else {
-                     JOptionPane.showMessageDialog(regNoField, "Failed to add user details");
-                 }
+                    JOptionPane.showMessageDialog(regNoField, "User Details Added Successfully");
+                    // Clear the text fields after submission
+                    regNoField.setText("");
+                    nameField.setText("");
+                    fatherNameField.setText("");
+                    //dobField.se(new Date());
+                    cnicField.setText("");
+                    phoneNumberField.setText("");
+                    userEmailField.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(regNoField, "Failed to add user details");
+                }
 
-                // Clear the text fields after submission
-                regNoField.setText("");
-                nameField.setText("");
-                fatherNameField.setText("");
-                dobField.setValue(new Date());
-                cnicField.setText("");
-                phoneNumberField.setText("");
-                userEmailField.setText("");
             }
         });
     }
@@ -180,10 +181,7 @@ public class AddStudent extends JPanel {
         return fatherNameField;
     }
 
-    public JFormattedTextField getDobField() {
-        return dobField;
-    }
-
+   
     public JTextField getCnicField() {
         return cnicField;
     }

@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.UASFactory;
 import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
@@ -76,6 +78,11 @@ public class DALManager {
         resultSet = objReader.getUsers(connection, response);
         return objMapper.getUsers(resultSet);
     }
+    
+    public void addStudent(StudentDTO studentObj, Response responseObj) {
+        Connection connection = mySQL.getConnection();
+        objAdder.addStudent(studentObj, connection, responseObj);
+    }
 
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
@@ -86,20 +93,17 @@ public class DALManager {
 
 //    
 //    
-//    public static void main(String[] args) {
-//        DALManager dal=new DALManager();
-//        Response res=UASFactory.getResponseInstance();
-//        ArrayList<CourseDTO> list=dal.getCourses(res);
-//        if(res.isSuccessfull()){
-//            int i=0;
-//            for(CourseDTO c:list){
-//                i++;
-//                System.out.print(""+i+": ");
-//                System.out.println(c.getCourseCode()+"\t"+c.getCourseName());
-//            }
-//            System.out.println("Total: "+i);
-//        }
-//    }
+    public static void main(String[] args) {
+        DALManager dal=new DALManager();
+        Response res=UASFactory.getResponseInstance();
+        
+        dal.addStudent(new StudentDTO("FA21-BSE-012","Fawad","Saleem Akbar",new Date(),"15101","123","fawadeqbal@yahoo.com"), res);
+        if(res.isSuccessfull()){
+            System.out.println(res.getInfoMessages());
+        }else{
+            System.out.println(res.getErrorMessages());
+        }
+    }
     public ArrayList<Object> getStudentsByCourse(int id) {
         Connection connection = mySQL.getConnection();
         PreparedStatement statement = null;

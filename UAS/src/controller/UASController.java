@@ -89,10 +89,8 @@ public class UASController {
     }
     
     public void addStudent(StudentDTO studentObj,Response responseObj){
-        
+        dalManagerObj.addStudent(studentObj, responseObj);
     }
-    
-    
 
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
 
