@@ -10,7 +10,7 @@ import model.dto.UserDTO;
 public class CommonValidator {
 
     public static void validateUser(UserDTO objUser, Response objResponse) {
-        isValidUserID(objUser.getUserID(), objResponse);
+        isValidUserID(objUser.getEmail(), objResponse);
         isValidPassword(objUser.getPassword(), objResponse);
         
     }

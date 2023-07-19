@@ -25,9 +25,9 @@ public class DBReader {
        PreparedStatement statement = null;
      
         try {
-            String query = "SELECT * FROM Users WHERE user_id = ? AND password = ?";
+            String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
             statement = connection.prepareStatement(query);
-            statement.setString(1, user.getUserID());
+            statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             return statement.executeQuery();
         } catch (Exception ex) {
@@ -43,7 +43,7 @@ public class DBReader {
         try {
             String query = "SELECT * FROM Classes WHERE teacher_id=? ";
             statement = connection.prepareStatement(query);
-            statement.setString(1, user.getUserID());
+            statement.setString(1, user.getEmail());
             return statement.executeQuery();
 
             

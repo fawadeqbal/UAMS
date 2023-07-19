@@ -39,7 +39,7 @@ public class DALManager {
         }
         try {
             if (resultSet.next()) {
-                user.setRole(resultSet.getString(4));
+                user.setRole(resultSet.getString(3));
                 responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
             } else {
                 responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));

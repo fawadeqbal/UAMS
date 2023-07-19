@@ -56,7 +56,7 @@ public class LoginUI extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         userIDField = new JTextField(20);
-        userIDField.setText("5000");
+        userIDField.setText("fawadeqbal@yahoo.com");
         userIDField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -71,7 +71,7 @@ public class LoginUI extends JFrame {
 
         gbc.gridy++;
         passwordField = new JPasswordField(20);
-        passwordField.setText("9257");
+        passwordField.setText("root");
         JButton loginButton = new JButton("Login");
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(new Color(41, 128, 185));
@@ -102,12 +102,12 @@ public class LoginUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String userID = userIDField.getText();
+                String email = userIDField.getText();
                 String password = new String(passwordField.getPassword());
                 
                 // Perform authentication logic here
                 UserDTO user = new UserDTO();
-                user.setUserID(userID);
+                user.setEmail(email);
                 user.setPassword(password);
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.verifyUser(user, responseObj);
