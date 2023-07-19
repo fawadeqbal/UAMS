@@ -8,7 +8,6 @@ package view;
  *
  * @author fawad
  */
-
 import javax.swing.*;
 import view.panels.LoginUI;
 import controller.UASController;
@@ -38,25 +37,24 @@ public class AdminDashboard extends JFrame {
     private JPanel contentPanel;
 
     public AdminDashboard() {
-       
 
-            setTitle("Attendance Management System - Dashboard");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setExtendedState(JFrame.MAXIMIZED_BOTH);
-            setLayout(new BorderLayout());
+        setTitle("Attendance Management System - Dashboard");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLayout(new BorderLayout());
 
-            // Header Panel
-            createHeaderPanel();
+        // Header Panel
+        createHeaderPanel();
 
-            // Menu Panel
-            createMenuPanel();
+        // Menu Panel
+        createMenuPanel();
 
-            // Content Panel
-            createContentPanel();
+        // Content Panel
+        createContentPanel();
 
-            pack();
-            setLocationRelativeTo(null);
-        
+        pack();
+        setLocationRelativeTo(null);
+
     }
 
     private void createHeaderPanel() {
@@ -66,7 +64,7 @@ public class AdminDashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Admin Dashboard" );
+        JLabel titleLabel = new JLabel("Admin Dashboard");
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -86,11 +84,11 @@ public class AdminDashboard extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
-        
+
         JButton addStudentButton = createMenuButton("Add Student");
         menuPanel.add(addStudentButton, gbc);
         gbc.gridy++;
-         JButton viewStudentsButton = createMenuButton("View Students");
+        JButton viewStudentsButton = createMenuButton("View Students");
         menuPanel.add(viewStudentsButton, gbc);
         gbc.gridy++;
         JButton addCourseButton = createMenuButton("Add Course");
@@ -106,7 +104,6 @@ public class AdminDashboard extends JFrame {
         menuPanel.add(viewUsersButton, gbc);
         gbc.gridy++;
 
-        
         gbc.gridy++;
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(Color.WHITE);
@@ -155,15 +152,15 @@ public class AdminDashboard extends JFrame {
                 contentPanel.removeAll();
                 if (buttonText.equals("Add Course")) {
                     contentPanel.add(new AddCourse());
-                } else if(buttonText.equals("View Courses")){
+                } else if (buttonText.equals("View Courses")) {
                     contentPanel.add(new Courses());
-                } else if(buttonText.equals("Add User")) {
+                } else if (buttonText.equals("Add User")) {
                     contentPanel.add(new AddUser());
-                } else if(buttonText.equals("View Users")) {
+                } else if (buttonText.equals("View Users")) {
                     contentPanel.add(new ViewUsers());
-                } else if(buttonText.equals("Add Student")) {
+                } else if (buttonText.equals("Add Student")) {
                     contentPanel.add(new AddStudent());
-                } else if(buttonText.equals("View Students")) {
+                } else if (buttonText.equals("View Students")) {
                     contentPanel.add(new ViewStudents());
                 }
                 contentPanel.revalidate();
@@ -178,8 +175,9 @@ public class AdminDashboard extends JFrame {
 
         contentPanel.setLayout(new BorderLayout());
         add(contentPanel, BorderLayout.CENTER);
-
-        JLabel welcomeLabel = new JLabel("Welcome to the Dashboard!");
+        String[] parts = UASController.objApplicationSession.getUser().getEmail().split("@");
+        String username = parts[0];
+        JLabel welcomeLabel = new JLabel("Hey there " + username + "!");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);

@@ -54,7 +54,7 @@ public class Dashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System" + "          " + UASController.objApplicationSession.getUser().getRole());
+        JLabel titleLabel = new JLabel("Attendance Management System");
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -241,8 +241,9 @@ public class Dashboard extends JFrame {
 
         contentPanel.setLayout(new BorderLayout());
         add(contentPanel, BorderLayout.CENTER);
-
-        JLabel welcomeLabel = new JLabel("Welcome to the Dashboard!");
+        String[] parts = UASController.objApplicationSession.getUser().getEmail().split("@");
+        String username = parts[0];
+        JLabel welcomeLabel = new JLabel("Hey there "+username+"!");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
