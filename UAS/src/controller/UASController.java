@@ -11,6 +11,7 @@ import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 import model.validators.CommonValidator;
 
@@ -100,6 +101,11 @@ public class UASController {
     
     public ArrayList<StudentDTO> getStudents(Response response) {
         return dalManagerObj.getStudents(response);
+    }
+
+    public ArrayList<TeacherDTO> getTeachers(Response response) {
+    
+        return dalManagerObj.getTeachers(response);
     }
     
 }

@@ -7,6 +7,10 @@ package dal;
 import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.dto.Message;
+import model.dto.MessageType;
+import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
@@ -15,7 +19,20 @@ import model.dto.UserDTO;
  * @author fawad
  */
 public class ObjectMapper {
-    
+    void verifyUser(ResultSet resultSet,UserDTO user,Response responseObj){
+        try {
+            if (resultSet.next()) {
+                user.setRole(resultSet.getString(3));
+                responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
+            } else {
+                responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
+            }
+        } catch (SQLException ex) {
+            Message message = new Message("Resultset Issue issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+//            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     ArrayList<CourseDTO> getCourses(ResultSet rs) {
         ArrayList<CourseDTO> courselist = new ArrayList<>();
         try{

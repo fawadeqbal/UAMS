@@ -35,34 +35,21 @@ public class DALManager {
     public void verifyUser(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = null;
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
             String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
             resultSet = objReader.getUser(responseObj, user, connection, query);
         }
-        if(!responseObj.isSuccessfull()){
-            return;
-        }
-
-        try {
-            if (resultSet.next()) {
-                user.setRole(resultSet.getString(3));
-                responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
-            } else {
-                responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
-            }
-        } catch (SQLException ex) {
-            Message message = new Message("Resultset Issue issue please contact customer services.", MessageType.Exception);
-            responseObj.messagesList.add((message));
-//            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
+        if (responseObj.isSuccessfull()) {
+            objMapper.verifyUser(resultSet, user, responseObj);
         }
     }
 
     public void addCourse(CourseDTO course, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
@@ -72,7 +59,7 @@ public class DALManager {
 
     public ArrayList<CourseDTO> getCourses(Response response) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
@@ -84,7 +71,7 @@ public class DALManager {
 
     public void addUser(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
@@ -94,7 +81,7 @@ public class DALManager {
 
     public ArrayList<UserDTO> getUsers(Response response) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
@@ -106,7 +93,7 @@ public class DALManager {
 
     public void updatePassword(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
@@ -118,7 +105,7 @@ public class DALManager {
     public void deleteUser(UserDTO userObj, Response responseObj) {
 
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
@@ -128,7 +115,7 @@ public class DALManager {
 
     public void addStudent(StudentDTO studentObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        if (connection==null) {
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
@@ -139,7 +126,7 @@ public class DALManager {
     public ArrayList<StudentDTO> getStudents(Response response) {
 
         Connection connection = mySQL.getConnection();
-        if(connection==null){
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
@@ -152,7 +139,7 @@ public class DALManager {
 
     public ArrayList<TeacherDTO> getTeachers(Response response) {
         Connection connection = mySQL.getConnection();
-        if(connection==null){
+        if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
@@ -162,12 +149,13 @@ public class DALManager {
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getTeachers(resultSet);
     }
-
+    /*
     public static void main(String[] args) {
         DALManager dal=new DALManager();
         Response res=UASFactory.getResponseInstance();
         for(TeacherDTO t:dal.getTeachers(res)){
             System.out.println(t.toString());
         }
-    }
+    } 
+     */
 }
