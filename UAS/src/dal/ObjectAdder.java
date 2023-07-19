@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.StudentDTO;
+import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
 public class ObjectAdder {
@@ -100,6 +101,34 @@ public class ObjectAdder {
             } else {
                 // Failed to add the course
                 objResponse.messagesList.add(new Message("Failed to add new User.", MessageType.Error));
+            }
+        } catch (SQLException e) {
+            // Handle any SQL errors
+            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+
+        }
+    }
+
+    void addTeacher(TeacherDTO teacher, Connection connection, Response objResponse) {
+         try {
+            // Prepare the SQL query
+            String query = "INSERT INTO Teachers (teacher_id, teacher_name, phone_number, Users_email) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, teacher.getId());
+            statement.setString(2, teacher.getName());
+            statement.setString(3, teacher.getPhoneNumber());
+            statement.setString(4, teacher.getEmail() );
+
+            // Execute the query
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Course added successfully
+                objResponse.messagesList.add(new Message("Teacher added successfully.", MessageType.Information));
+            } else {
+                // Failed to add the course
+                objResponse.messagesList.add(new Message("Failed to add new Teacher.", MessageType.Error));
             }
         } catch (SQLException e) {
             // Handle any SQL errors

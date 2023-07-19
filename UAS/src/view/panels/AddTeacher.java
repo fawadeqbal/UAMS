@@ -15,6 +15,7 @@ import java.awt.Insets;
 import javax.swing.JOptionPane;
 
 public class AddTeacher extends JPanel {
+
     private UASController objController;
     private JTextField idField;
     private JTextField nameField;
@@ -78,7 +79,7 @@ public class AddTeacher extends JPanel {
     }
 
     private void addTeacher() {
-        int id=0;
+        int id = 0;
         //int id = Integer.parseInt(idField.getText());
         String name = nameField.getText();
         String phoneNumber = phoneNumberField.getText();
@@ -87,12 +88,10 @@ public class AddTeacher extends JPanel {
         TeacherDTO teacherObj = new TeacherDTO(id, name, phoneNumber, email);
         Response responseObj = UASFactory.getResponseInstance();
         objController.addTeacher(teacherObj, responseObj);
-        if(responseObj.isSuccessfull()){
+        if (responseObj.isSuccessfull()) {
             JOptionPane.showMessageDialog(nameField, responseObj.getInfoMessages());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(nameField, responseObj.getErrorMessages());
         }
-        // TODO: Handle the response, show success or error message
-        // You can update the UI accordingly based on the response received
     }
 }

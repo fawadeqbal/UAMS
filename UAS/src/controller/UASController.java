@@ -110,6 +110,9 @@ public class UASController {
 
     public void addTeacher(TeacherDTO teacher, Response response) {
         CommonValidator.validateTeacher(teacher,response);
+        if(response.isSuccessfull()){
+            dalManagerObj.addTeacher(teacher,response);
+        }
     }
     
 }
