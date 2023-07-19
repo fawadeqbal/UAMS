@@ -17,12 +17,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 public class AddTeacher extends JPanel {
-<<<<<<< Updated upstream
 
-    private UASController objController;
-=======
     private UASController controllerObj;
->>>>>>> Stashed changes
+
     private JTextField idField;
     private JTextField nameField;
     private JTextField phoneNumberField;
@@ -98,23 +95,17 @@ public class AddTeacher extends JPanel {
     }
 
     private void addTeacher() {
-<<<<<<< Updated upstream
-        int id = 0;
         //int id = Integer.parseInt(idField.getText());
-=======
+
         int id = Integer.parseInt(idField.getText());
->>>>>>> Stashed changes
+
         String name = nameField.getText();
         String phoneNumber = phoneNumberField.getText();
         String email = emailField.getText();
 
         TeacherDTO teacherObj = new TeacherDTO(id, name, phoneNumber, email);
         Response responseObj = UASFactory.getResponseInstance();
-<<<<<<< Updated upstream
-        objController.addTeacher(teacherObj, responseObj);
-        if (responseObj.isSuccessfull()) {
-            JOptionPane.showMessageDialog(nameField, responseObj.getInfoMessages());
-=======
+
         controllerObj.addTeacher(teacherObj, responseObj);
         if (responseObj.isSuccessfull()) {
             JOptionPane.showMessageDialog(nameField, responseObj.getInfoMessages());
@@ -123,7 +114,6 @@ public class AddTeacher extends JPanel {
             nameField.setText("");
             phoneNumberField.setText("");
             emailField.setText("");
->>>>>>> Stashed changes
         } else {
             JOptionPane.showMessageDialog(nameField, responseObj.getErrorMessages());
         }
