@@ -6,6 +6,7 @@ import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
 public class CommonValidator {
@@ -23,6 +24,12 @@ public class CommonValidator {
         validateCNIC(student.getCnic(), responseObj);
         validatePhoneNumber(student.getPhoneNumber(), responseObj);
         validateUserEmail(student.getUserEmail(), responseObj);
+    }
+    
+    public static void validateTeacher(TeacherDTO teacher, Response response) {
+        validateName(teacher.getName(),response);
+        validateUserEmail(teacher.getEmail(),response);
+        validateTeacherID(teacher.getId(),response);
     }
 
     public static void validateCourse(CourseDTO objCOurse, Response objResponse) {
@@ -109,5 +116,15 @@ public class CommonValidator {
             responseObj.messagesList.add(new Message("User email is valid.", MessageType.Information));
         }
     }
+
+    private static void validateTeacherID(int id, Response response) {
+        if (id <5000) {
+            response.messagesList.add(new Message("Faculty ID cannot be less than 5000.", MessageType.Error));
+        } else {
+            response.messagesList.add(new Message("User email is valid.", MessageType.Information));
+        }
+    }
+
+    
 
 }
