@@ -168,4 +168,15 @@ public class DALManager {
             objAdder.addTeacher(teacher, connection, response);
         }
     }
+    
+    public void assignCourseTeacher(TeacherDTO teacher,CourseDTO course, Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        } else {
+            objAdder.assignCourseTeacher(teacher, course,connection, response);
+        }
+    }
+    
 }

@@ -136,4 +136,30 @@ public class ObjectAdder {
 
         }
     }
+    
+    void assignCourseTeacher(TeacherDTO teacher,CourseDTO course,Connection connection, Response objResponse) {
+         try {
+            // Prepare the SQL query
+            String query = "INSERT INTO teacher_course (Courses_course_code, Teachers_teacher_id) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1, course.getCourseCode());
+            statement.setInt(2, teacher.getId());
+
+            // Execute the query
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Course added successfully
+                objResponse.messagesList.add(new Message("Course Assigned to Teacher successfully.", MessageType.Information));
+            } else {
+                // Failed to add the course
+                objResponse.messagesList.add(new Message("Failed to assign Course.", MessageType.Error));
+            }
+        } catch (SQLException e) {
+            // Handle any SQL errors
+            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+
+        }
+    }
 }

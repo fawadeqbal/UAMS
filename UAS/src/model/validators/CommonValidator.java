@@ -27,9 +27,12 @@ public class CommonValidator {
     }
     
     public static void validateTeacher(TeacherDTO teacher, Response response) {
-        validateName(teacher.getName(),response);
-        validateUserEmail(teacher.getEmail(),response);
         validateTeacherID(teacher.getId(),response);
+        validateName(teacher.getName(),response);
+        validatePhoneNumber(teacher.getPhoneNumber(),response);
+        validateUserEmail(teacher.getEmail(),response);
+        
+        
     }
 
     public static void validateCourse(CourseDTO objCOurse, Response objResponse) {

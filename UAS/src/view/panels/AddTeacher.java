@@ -97,14 +97,21 @@ public class AddTeacher extends JPanel {
     private void addTeacher() {
         //int id = Integer.parseInt(idField.getText());
 
-        int id = Integer.parseInt(idField.getText());
-
+        String idText  = idField.getText();
+        Response responseObj = UASFactory.getResponseInstance();
+// Validate the ID field
+    int id = 0;
+    try {
+        id = Integer.parseInt(idText);
+    } catch (NumberFormatException e) {
+       
+    }
         String name = nameField.getText();
         String phoneNumber = phoneNumberField.getText();
         String email = emailField.getText();
 
         TeacherDTO teacherObj = new TeacherDTO(id, name, phoneNumber, email);
-        Response responseObj = UASFactory.getResponseInstance();
+        
 
         controllerObj.addTeacher(teacherObj, responseObj);
         if (responseObj.isSuccessfull()) {

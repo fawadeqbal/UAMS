@@ -22,6 +22,7 @@ import view.forms.AddCourse;
 import view.forms.AddStudent;
 import view.forms.AddUser;
 import view.panels.AddTeacher;
+import view.panels.AssignCourse;
 import view.panels.Courses;
 import view.panels.ViewStudents;
 import view.panels.ViewTeachers;
@@ -130,6 +131,9 @@ public class AdminDashboard extends JFrame {
         JButton viewTeachersButton = createMenuButton("View Teachers");
         menuPanel.add(viewTeachersButton, gbc);
         gbc.gridy++;
+        JButton assignCourseTeacherButton = createMenuButton("Assign Course Teacher");
+        menuPanel.add(assignCourseTeacherButton, gbc);
+        gbc.gridy++;
 
         gbc.gridy++;
         JButton logoutButton = new JButton("Logout");
@@ -193,7 +197,10 @@ public class AdminDashboard extends JFrame {
                     contentPanel.add(new ViewTeachers());
                 }else if (buttonText.equals("Add Teacher")) {
                     contentPanel.add(new AddTeacher());
+                } else if (buttonText.equals("Assign Course Teacher")) {
+                    contentPanel.add(new AssignCourse());
                 }
+                
                 
                 contentPanel.revalidate();
                 contentPanel.repaint();
