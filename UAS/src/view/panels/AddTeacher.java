@@ -7,36 +7,52 @@ import model.dto.TeacherDTO;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JOptionPane;
 
 public class AddTeacher extends JPanel {
+<<<<<<< Updated upstream
 
     private UASController objController;
+=======
+    private UASController controllerObj;
+>>>>>>> Stashed changes
     private JTextField idField;
     private JTextField nameField;
     private JTextField phoneNumberField;
     private JTextField emailField;
 
     public AddTeacher() {
-        objController = UASFactory.getUASControllerInstance();
+        
+        controllerObj = UASFactory.getUASControllerInstance();
         setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
+        
+        constraints.insets = new Insets(5, 5, 5, 5);
+        
+        JLabel titleLabel = new JLabel("Add Teacher Details");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(5, 5, 5, 5);
-
+        constraints.gridwidth = 2;
+        add(titleLabel, constraints);
+        constraints.gridy++;
+        constraints.gridwidth = 1;
         // ID label and text field
         JLabel idLabel = new JLabel("ID:");
+        constraints.gridx=0;
         add(idLabel, constraints);
 
-        idField = new JTextField(10);
-        constraints.gridx++;
+        idField = new JTextField();
+        idField.setPreferredSize(new Dimension(200, idField.getPreferredSize().height));
+        constraints.gridx=1;
         add(idField, constraints);
 
         // Name label and text field
@@ -45,7 +61,8 @@ public class AddTeacher extends JPanel {
         JLabel nameLabel = new JLabel("Name:");
         add(nameLabel, constraints);
 
-        nameField = new JTextField(20);
+        nameField = new JTextField();
+        nameField.setPreferredSize(new Dimension(200, nameField.getPreferredSize().height));
         constraints.gridx++;
         add(nameField, constraints);
 
@@ -55,7 +72,8 @@ public class AddTeacher extends JPanel {
         JLabel phoneNumberLabel = new JLabel("Phone Number:");
         add(phoneNumberLabel, constraints);
 
-        phoneNumberField = new JTextField(15);
+        phoneNumberField = new JTextField();
+        phoneNumberField.setPreferredSize(new Dimension(200, phoneNumberField.getPreferredSize().height));
         constraints.gridx++;
         add(phoneNumberField, constraints);
 
@@ -65,7 +83,8 @@ public class AddTeacher extends JPanel {
         JLabel emailLabel = new JLabel("Email:");
         add(emailLabel, constraints);
 
-        emailField = new JTextField(30);
+        emailField = new JTextField();
+        emailField.setPreferredSize(new Dimension(200, emailField.getPreferredSize().height));
         constraints.gridx++;
         add(emailField, constraints);
 
@@ -79,17 +98,32 @@ public class AddTeacher extends JPanel {
     }
 
     private void addTeacher() {
+<<<<<<< Updated upstream
         int id = 0;
         //int id = Integer.parseInt(idField.getText());
+=======
+        int id = Integer.parseInt(idField.getText());
+>>>>>>> Stashed changes
         String name = nameField.getText();
         String phoneNumber = phoneNumberField.getText();
         String email = emailField.getText();
 
         TeacherDTO teacherObj = new TeacherDTO(id, name, phoneNumber, email);
         Response responseObj = UASFactory.getResponseInstance();
+<<<<<<< Updated upstream
         objController.addTeacher(teacherObj, responseObj);
         if (responseObj.isSuccessfull()) {
             JOptionPane.showMessageDialog(nameField, responseObj.getInfoMessages());
+=======
+        controllerObj.addTeacher(teacherObj, responseObj);
+        if (responseObj.isSuccessfull()) {
+            JOptionPane.showMessageDialog(nameField, responseObj.getInfoMessages());
+            // Clear the text fields after successful addition
+            idField.setText("");
+            nameField.setText("");
+            phoneNumberField.setText("");
+            emailField.setText("");
+>>>>>>> Stashed changes
         } else {
             JOptionPane.showMessageDialog(nameField, responseObj.getErrorMessages());
         }
