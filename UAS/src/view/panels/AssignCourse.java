@@ -45,6 +45,7 @@ public class AssignCourse extends JPanel {
         // Create the table model
         tableModel = new DefaultTableModel();
         tableModel.addColumn("Course Name");
+        tableModel.addColumn("Credit Hours");
         tableModel.addColumn("Teacher Name");
         
         loadTableData();
@@ -85,7 +86,7 @@ public class AssignCourse extends JPanel {
         Response response = UASFactory.getResponseInstance();
         List<TeacherCourseDTO> assignCourseList = objController.getAssignCourseTeacher(response);
         for (TeacherCourseDTO assignCourse : assignCourseList) {
-            tableModel.addRow(new Object[]{objController.getCourseById(assignCourse.getCourseCode(), response).getCourseName(), objController.getTeacherById(assignCourse.getFacultyId(), response).getName()});
+            tableModel.addRow(new Object[]{objController.getCourseById(assignCourse.getCourseCode(), response).getCourseName(),objController.getCourseById(assignCourse.getCourseCode(), response).getCreditHours(), objController.getTeacherById(assignCourse.getFacultyId(), response).getName()});
         }
     }
 
