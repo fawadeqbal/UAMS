@@ -3,7 +3,6 @@ package dal;
 import dal.db.MySQLConnection;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import model.UASFactory;
 import model.dto.CourseDTO;
@@ -11,6 +10,7 @@ import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import model.dto.TeacherCourseDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
@@ -91,6 +91,30 @@ public class DALManager {
         return objMapper.getUsers(resultSet);
     }
 
+    public CourseDTO getCoursebyId(CourseDTO course, Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM Courses WHERE course_code=?";
+        resultSet = objReader.getCourse(course, connection, response, query);
+        return objMapper.getCourseById(resultSet);
+    }
+
+    public TeacherDTO getTeacherbyId(TeacherDTO teacher, Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM Teachers WHERE teacher_id=?";
+        resultSet = objReader.getTeacher(teacher, connection, response, query);
+        return objMapper.getTeacherById(resultSet);
+    }
+
     public void updatePassword(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
         if (connection == null) {
@@ -149,15 +173,16 @@ public class DALManager {
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getTeachers(resultSet);
     }
-    /*
+
     public static void main(String[] args) {
-        DALManager dal=new DALManager();
-        Response res=UASFactory.getResponseInstance();
-        for(TeacherDTO t:dal.getTeachers(res)){
-            System.out.println(t.toString());
+        DALManager dal = new DALManager();
+        Response res = UASFactory.getResponseInstance();
+        ArrayList<TeacherCourseDTO> list=dal.getAssignCourseTeacher(res);
+        for(TeacherCourseDTO s:list){
+            System.out.println(s.getCourseCode());
         }
-    } 
-     */
+
+    }
 
     public void addTeacher(TeacherDTO teacher, Response response) {
         Connection connection = mySQL.getConnection();
@@ -168,15 +193,27 @@ public class DALManager {
             objAdder.addTeacher(teacher, connection, response);
         }
     }
-    
-    public void assignCourseTeacher(TeacherDTO teacher,CourseDTO course, Response response) {
+
+    public void assignCourseTeacher(TeacherDTO teacher, CourseDTO course, Response response) {
         Connection connection = mySQL.getConnection();
         if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         } else {
-            objAdder.assignCourseTeacher(teacher, course,connection, response);
+            objAdder.assignCourseTeacher(teacher, course, connection, response);
         }
     }
-    
+
+    public ArrayList<TeacherCourseDTO> getAssignCourseTeacher(Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM teacher_course";
+        resultSet = objReader.getRecords(connection, response, query);
+        return objMapper.getAssignCourseTeacher(resultSet);
+    }
+
 }

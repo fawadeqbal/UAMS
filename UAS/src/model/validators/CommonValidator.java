@@ -25,14 +25,13 @@ public class CommonValidator {
         validatePhoneNumber(student.getPhoneNumber(), responseObj);
         validateUserEmail(student.getUserEmail(), responseObj);
     }
-    
+
     public static void validateTeacher(TeacherDTO teacher, Response response) {
-        validateTeacherID(teacher.getId(),response);
-        validateName(teacher.getName(),response);
-        validatePhoneNumber(teacher.getPhoneNumber(),response);
-        validateUserEmail(teacher.getEmail(),response);
-        
-        
+        validateTeacherID(teacher.getId(), response);
+        validateName(teacher.getName(), response);
+        validatePhoneNumber(teacher.getPhoneNumber(), response);
+        validateUserEmail(teacher.getEmail(), response);
+
     }
 
     public static void validateCourse(CourseDTO objCOurse, Response objResponse) {
@@ -81,8 +80,6 @@ public class CommonValidator {
     private static void validateFatherName(String fatherName, Response responseObj) {
         if (fatherName == null || fatherName.length() < 3) {
             responseObj.messagesList.add(new Message("Father's name cannot be less than 3 characters..", MessageType.Error));
-        } else {
-            responseObj.messagesList.add(new Message("Father's name is valid.", MessageType.Information));
         }
     }
 
@@ -91,43 +88,31 @@ public class CommonValidator {
 
         if (dob.after(currentDate)) {
             responseObj.messagesList.add(new Message("Invalid date of birth. Date cannot be in the future.", MessageType.Error));
-        } else {
-            responseObj.messagesList.add(new Message("Date of birth is valid.", MessageType.Information));
         }
     }
 
     private static void validateCNIC(String cnic, Response responseObj) {
         if (cnic == null || cnic.length() < 13) {
             responseObj.messagesList.add(new Message("CNIC length cannot be less than 13.", MessageType.Error));
-        } else {
-            responseObj.messagesList.add(new Message("CNIC is valid.", MessageType.Information));
         }
     }
 
     private static void validatePhoneNumber(String phoneNumber, Response responseObj) {
         if (phoneNumber == null || phoneNumber.length() < 6) {
             responseObj.messagesList.add(new Message("Phone number length cannot be less than 6.", MessageType.Error));
-        } else {
-            responseObj.messagesList.add(new Message("Phone number is valid.", MessageType.Information));
         }
     }
 
     private static void validateUserEmail(String userEmail, Response responseObj) {
         if (userEmail == null || userEmail.length() < 5) {
             responseObj.messagesList.add(new Message("User email length cannot be less than 5.", MessageType.Error));
-        } else {
-            responseObj.messagesList.add(new Message("User email is valid.", MessageType.Information));
         }
     }
 
     private static void validateTeacherID(int id, Response response) {
-        if (id <5000) {
+        if (id < 5000) {
             response.messagesList.add(new Message("Faculty ID cannot be less than 5000.", MessageType.Error));
-        } else {
-            response.messagesList.add(new Message("User email is valid.", MessageType.Information));
         }
     }
-
-    
 
 }

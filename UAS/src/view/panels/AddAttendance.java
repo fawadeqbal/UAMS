@@ -63,24 +63,24 @@ public class AddAttendance extends JPanel {
 
         timeSlotField.setText(timeString);
 //controllerObj.getStudentsByCourse()
-        studentTable = new JTable() {
-            @Override
-            public Class<?> getColumnClass(int column) {
-                if (column == 2) {
-                    return Boolean.class; // Set the class of "Attendance" column to Boolean
-                }
-                return super.getColumnClass(column);
-            }
-        };
-        studentTable.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JCheckBox checkBox = new JCheckBox();
-                checkBox.setSelected((boolean) value);
-                checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-                return checkBox;
-            }
-        });
+//        studentTable = new JTable() {
+//            @Override
+//            public Class<?> getColumnClass(int column) {
+//                if (column == 2) {
+//                    return Boolean.class; // Set the class of "Attendance" column to Boolean
+//                }
+//                return super.getColumnClass(column);
+//            }
+//        };
+//        studentTable.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {
+//            @Override
+//            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//                JCheckBox checkBox = new JCheckBox();
+//                checkBox.setSelected((boolean) value);
+//                checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+//                return checkBox;
+//            }
+//        });
 
         addAttendanceButton = new JButton("Add Attendance");
     }

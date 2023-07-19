@@ -46,6 +46,11 @@ public class CourseDTO {
         this.courseName = courseName;
     }
 
+    @Override
+    public String toString() {
+        return "CourseDTO{" + "courseCode=" + courseCode + ", courseName=" + courseName + ", creditHours=" + creditHours + '}';
+    }
+
     
     
 }

@@ -12,6 +12,7 @@ import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import model.dto.TeacherCourseDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 /**
@@ -104,6 +105,51 @@ public class ObjectMapper {
         }catch (Exception e){
         }
         return teacherList;
+    }
+
+    TeacherDTO getTeacherById(ResultSet rs) {
+        TeacherDTO teacher = new TeacherDTO();
+        try{
+        if (rs.next())
+            {
+                teacher.setId(rs.getInt(1));
+                teacher.setName(rs.getString(2));
+                teacher.setPhoneNumber(rs.getString(3));
+                teacher.setEmail(rs.getString(4));
+            }
+        }catch (Exception e){
+        }
+        return teacher;
+    }
+
+    CourseDTO getCourseById(ResultSet rs) {
+    CourseDTO course = new CourseDTO();
+        try{
+        if (rs.next())
+            {
+                course.setCourseCode(rs.getString(1));
+                course.setCourseName(rs.getString(2));
+                course.setCreditHours(rs.getInt(3));
+            }
+        }catch (Exception e){
+        }
+        return course;
+    }
+
+    ArrayList<TeacherCourseDTO> getAssignCourseTeacher(ResultSet rs) {
+        ArrayList<TeacherCourseDTO> assignCourseList=new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                TeacherCourseDTO cf=new TeacherCourseDTO();
+                cf.setCourseCode(rs.getString(1));
+                cf.setFacultyId(rs.getInt(2));
+                assignCourseList.add(cf);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return assignCourseList;
     }
 
 }
