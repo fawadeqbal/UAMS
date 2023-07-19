@@ -11,17 +11,12 @@ package view;
 import javax.swing.*;
 import view.panels.LoginUI;
 import controller.UASController;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import japa.parser.ParseException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFrame;
 import view.forms.AddCourse;
 import view.forms.AddStudent;
@@ -69,8 +64,32 @@ public class AdminDashboard extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
         headerPanel.add(titleLabel, BorderLayout.CENTER);
+
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.setOpaque(false);
+        headerPanel.add(rightPanel, BorderLayout.EAST);
+
+        JLabel timeLabel = new JLabel();
+        timeLabel.setForeground(new Color(250, 250, 250));
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        rightPanel.add(timeLabel, BorderLayout.NORTH);
+
+        // Update the time label using the UTCTime class
+        Thread updateTimeThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Date utcTime = UTCTime.getCurrentUtcTime();
+                    String formattedTime = new SimpleDateFormat("HH:mm:ss").format(utcTime);
+                    SwingUtilities.invokeLater(() -> timeLabel.setText("UTC Time: " + formattedTime));
+                    Thread.sleep(1000); // Update every second
+                } catch (InterruptedException | ParseException e) {
+                    
+                }
+            }
+        });
+
+        updateTimeThread.start();
     }
 
     private void createMenuPanel() {

@@ -9,22 +9,32 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.UASController;
+import java.util.Arrays;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import model.UASFactory;
+import model.dto.Response;
+import model.dto.UserDTO;
 
 public class UserSettings extends JPanel {
+    UASController objController;
 
     private JTextField emailField;
     private JPasswordField currentPasswordField;
     private JPasswordField newPasswordField;
     private JPasswordField confirmPasswordField;
-    private JCheckBox notificationsCheckbox;
+   // private JCheckBox notificationsCheckbox;
     private JButton saveButton;
     JLabel emailLabel;
     JLabel currentPasswordLabel;
     JLabel newPasswordLabel;
     JLabel confirmPasswordLabel;
+    private JLabel passwordMatchIndicatorLabel; // New label for the indicator
+
+    private boolean passwordsMatch = false; 
 
     public UserSettings() {
-        
+         objController=UASFactory.getUASControllerInstance();
             initializeComponents();
             setupLayout();
             setupListeners();
@@ -40,8 +50,9 @@ public class UserSettings extends JPanel {
         currentPasswordField = new JPasswordField(20);
         newPasswordField = new JPasswordField(20);
         confirmPasswordField = new JPasswordField(20);
-        notificationsCheckbox = new JCheckBox("Agree");
+        //notificationsCheckbox = new JCheckBox("Agree");
         saveButton = new JButton("Save");
+        passwordMatchIndicatorLabel = new JLabel();
     }
 
     private void setupLayout() {
@@ -60,11 +71,6 @@ public class UserSettings extends JPanel {
         gbc.gridy++;
         add(new JLabel(" "), gbc);
 
-        gbc.gridy++;
-        add(new JLabel(" "), gbc);
-
-        gbc.gridy++;
-        add(new JLabel(" "), gbc);
 
         gbc.gridy++;
         add(emailLabel, gbc);
@@ -90,9 +96,11 @@ public class UserSettings extends JPanel {
 
         gbc.gridy++;
         add(confirmPasswordField, gbc);
-
         gbc.gridy++;
-        add(notificationsCheckbox, gbc);
+        add(passwordMatchIndicatorLabel, gbc);
+
+//        gbc.gridy++;
+//        add(notificationsCheckbox, gbc);
 
         gbc.gridy++;
         add(saveButton, gbc);
@@ -102,24 +110,82 @@ public class UserSettings extends JPanel {
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = emailField.getText();
-                String password = new String(currentPasswordField.getPassword());
-                boolean notificationsEnabled = notificationsCheckbox.isSelected();
-
+                String currentPassword = new String(currentPasswordField.getPassword());
+                boolean notificationsEnabled = true;
+                String newPassword = new String(newPasswordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
                 // Save the user settings
-                saveUserSettings(username, password, notificationsEnabled);
-
-                // Show confirmation message
-                JOptionPane.showMessageDialog(UserSettings.this, "User settings saved successfully");
-            }
+                saveUserSettings(username, currentPassword,newPassword,confirmPassword, notificationsEnabled);
+}
         });
+        
+        DocumentListener documentListener = new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                checkPasswordMatch();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                checkPasswordMatch();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                checkPasswordMatch();
+            }
+        };
+
+        newPasswordField.getDocument().addDocumentListener(documentListener);
+        confirmPasswordField.getDocument().addDocumentListener(documentListener);
+    
     }
 
-    private void saveUserSettings(String username, String password, boolean notificationsEnabled) {
+    private void saveUserSettings(String username, String currPassword,String newPass,String confirmPass, boolean notificationsEnabled) {
         // Implement the logic to save user settings here
         // This is just a placeholder method
-        System.out.println("Saving user settings:");
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Notifications Enabled: " + notificationsEnabled);
+        Response responseObj=UASFactory.getResponseInstance();
+        UserDTO userObj=new UserDTO();
+        if(newPass.equals(confirmPass)){
+            userObj.setPassword(newPass);
+            userObj.setEmail(username);
+        }else{
+            JOptionPane.showMessageDialog(saveButton,"Password does not match.");
+            return;
+        }
+        if(notificationsEnabled){
+            if(currPassword.equals(UASController.objApplicationSession.getUser().getPassword())){
+                objController.updatePassword(userObj, responseObj);
+                if(responseObj.isSuccessfull()){
+                    JOptionPane.showMessageDialog(emailField, responseObj.getInfoMessages());
+                }else{
+                    JOptionPane.showMessageDialog(emailField, responseObj.getErrorMessages());
+               
+                }
+            }else{
+                JOptionPane.showMessageDialog(emailField, "Your current password incorrect");
+            }
+        }
+    }
+    private void checkPasswordMatch() {
+        char[] newPassword = newPasswordField.getPassword();
+        char[] confirmPassword = confirmPasswordField.getPassword();
+
+        if (newPassword.length == 0 || confirmPassword.length == 0) {
+            passwordsMatch = false;
+        } else {
+            passwordsMatch = Arrays.equals(newPassword, confirmPassword);
+        }
+
+        updatePasswordMatchIndicator();
+    }
+
+    private void updatePasswordMatchIndicator() {
+        SwingUtilities.invokeLater(() -> {
+            if (passwordsMatch) {
+                passwordMatchIndicatorLabel.setText("\u2714"+" Password Matched"); // Set a checkmark symbol for matching passwords
+                passwordMatchIndicatorLabel.setForeground(Color.GREEN);
+            } else {
+                passwordMatchIndicatorLabel.setText("\u2718"+" Password not Matched"); // Set a cross symbol for non-matching passwords
+                passwordMatchIndicatorLabel.setForeground(Color.RED);
+            }
+        });
     }
 }

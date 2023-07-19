@@ -45,7 +45,7 @@ public class LoginUI extends JFrame {
         mainPanel.add(titleLabel, gbc);
 
         gbc.gridy++;
-        JLabel usernameLabel = new JLabel("Username:");
+        JLabel usernameLabel = new JLabel("Email:");
         mainPanel.add(usernameLabel, gbc);
 
         gbc.gridy++;

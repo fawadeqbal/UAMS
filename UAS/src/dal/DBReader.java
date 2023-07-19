@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
@@ -36,29 +35,8 @@ public class DBReader {
         return null;
     }
 
-    ResultSet getCourses(Connection connection, Response responseObj,String query) {
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(query);
-            return statement.executeQuery();
-        } catch (SQLException e) {
-            responseObj.messagesList.add(new Message(e.getMessage(), MessageType.Exception));
-        }
-        return null;
-    }
 
-    ResultSet getUsers(Connection connection, Response responseObj,String query) {
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(query);
-            return statement.executeQuery();
-        } catch (SQLException e) {
-            responseObj.messagesList.add(new Message(e.getMessage(), MessageType.Exception));
-        }
-        return null;
-    }
-
-    ResultSet getStudents(Connection connection, Response responseObj,String query) {
+    ResultSet getRecords(Connection connection, Response responseObj,String query) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);

@@ -12,17 +12,13 @@ import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Stack;
 import controller.UASController;
 import model.UASFactory;
-import model.dto.CourseDTO;
-import model.dto.Response;
-import model.dto.UserDTO;
 
 public class AddAttendance extends JPanel {
 
     UASController controllerObj = UASFactory.getUASControllerInstance();
-ArrayList<Object> list;
+    ArrayList<Object> list;
     private JLabel classLabel;
     private JComboBox<String> classComboBox;
     private JLabel dateLabel;
@@ -36,22 +32,21 @@ ArrayList<Object> list;
     private JCheckBox checkAllCheckBox;
 
     public AddAttendance() {
-            initializeComponents();
-            setupLayout();
-            addListeners();
+        initializeComponents();
+        setupLayout();
+        addListeners();
     }
 
     private void initializeComponents() {
 
         classLabel = new JLabel("Class:");
 //        list=controllerObj.getClasses(UASController.objApplicationSession.getUser(), response);
-        
+
 //         Stack<String> cl=new Stack<>();
 //        for(ClassDTO c:list){
 //            cl.push(c.getClass_id());
 //            System.out.println(c.getClass_id());
 //        }
-       
         classComboBox = new JComboBox<>();
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
@@ -65,7 +60,7 @@ ArrayList<Object> list;
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date currentDate = new Date();
         String timeString = timeFormat.format(currentDate);
-        
+
         timeSlotField.setText(timeString);
 //controllerObj.getStudentsByCourse()
         studentTable = new JTable() {
@@ -169,7 +164,7 @@ ArrayList<Object> list;
             public void actionPerformed(ActionEvent e) {
                 String selectedCourse = (String) classComboBox.getSelectedItem();
                 //= controllerObj.getStudentsByCourse();
-                DefaultTableModel newTableModel =new DefaultTableModel();
+                DefaultTableModel newTableModel = new DefaultTableModel();
                 studentTable.setModel(newTableModel);
             }
         });

@@ -8,7 +8,6 @@ package dal.db;
  *
  * @author fawad
  */
-import dal.db.IConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

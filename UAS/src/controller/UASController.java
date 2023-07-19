@@ -81,6 +81,10 @@ public class UASController {
         return dalManagerObj.getUsers(response);
     }
     
+    public void updatePassword(UserDTO userObj,Response responseObj){
+        dalManagerObj.updatePassword(userObj, responseObj);
+    }
+    
     public void addStudent(StudentDTO studentObj,Response responseObj){
         CommonValidator.validateStudent(studentObj,responseObj);
         if(responseObj.isSuccessfull()){
@@ -90,6 +94,11 @@ public class UASController {
     
     public ArrayList<StudentDTO> getStudents(Response response) {
         return dalManagerObj.getStudents(response);
+    }
+
+    public void deleteUser(UserDTO userObj, Response reponseObj) {
+        
+        dalManagerObj.deleteUser(userObj,reponseObj);
     }
     
 }

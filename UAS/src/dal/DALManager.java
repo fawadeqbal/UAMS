@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
+import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
 public class DALManager {
@@ -21,8 +21,12 @@ public class DALManager {
     MySQLConnection mySQL;
     DBReader objReader;
     ObjectAdder objAdder;
+    ObjectModifier objModifier;
+    ObjectRemover objRemover;
 
     public DALManager() {
+        objRemover = new ObjectRemover();
+        objModifier = new ObjectModifier();
         objAdder = new ObjectAdder();
         objMapper = new ObjectMapper();
         objReader = new DBReader();
@@ -57,8 +61,8 @@ public class DALManager {
     public ArrayList<CourseDTO> getCourses(Response response) {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = null;
-         String query = "SELECT * FROM Courses";
-        resultSet = objReader.getCourses(connection, response,query);
+        String query = "SELECT * FROM Courses";
+        resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getCourses(resultSet);
     }
 
@@ -71,8 +75,18 @@ public class DALManager {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = null;
         String query = "SELECT * FROM Users";
-        resultSet = objReader.getUsers(connection, response, query);
+        resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getUsers(resultSet);
+    }
+
+    public void updatePassword(UserDTO userObj, Response responseObj) {
+        Connection connection = mySQL.getConnection();
+        objModifier.updatePassword(userObj, connection, responseObj);
+    }
+
+    public void deleteUser(UserDTO userObj, Response responseObj) {
+        Connection connection = mySQL.getConnection();
+        objRemover.deleteUser(connection, responseObj, userObj);
     }
 
     public void addStudent(StudentDTO studentObj, Response responseObj) {
@@ -85,19 +99,24 @@ public class DALManager {
 
         ResultSet resultSet = null;
         String query = "SELECT * FROM Students";
-        resultSet = objReader.getStudents(connection, response, query);
+        resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getStudents(resultSet);
+    }
+
+    public ArrayList<TeacherDTO> getTeachers(Response response) {
+        Connection connection = mySQL.getConnection();
+
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM Teachers";
+        resultSet = objReader.getRecords(connection, response, query);
+        return objMapper.getTeachers(resultSet);
     }
 
 //    public static void main(String[] args) {
 //        DALManager dal=new DALManager();
 //        Response res=UASFactory.getResponseInstance();
-//        
-//        dal.getStudents(res);
-//        if(res.isSuccessfull()){
-//            System.out.println("yes");
-//        }else{
-//            System.out.println("no");
+//        for(TeacherDTO t:dal.getTeachers(res)){
+//            System.out.println(t.toString());
 //        }
 //    }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
 import model.dto.StudentDTO;
+import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 /**
  *
@@ -68,6 +69,24 @@ public class ObjectMapper {
             
         }
         return studentsList;
+    }
+    
+    ArrayList<TeacherDTO> getTeachers(ResultSet rs) {
+        ArrayList<TeacherDTO> teacherList = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                TeacherDTO objTeacher=new TeacherDTO();
+                objTeacher.setId(rs.getInt(1));
+                objTeacher.setName(rs.getString(2));
+                objTeacher.setPhoneNumber(rs.getString(3));
+                objTeacher.setEmail(rs.getString(4));
+                
+                teacherList.add(objTeacher);
+            }
+        }catch (Exception e){
+        }
+        return teacherList;
     }
 
 }
