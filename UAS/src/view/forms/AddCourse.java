@@ -46,6 +46,12 @@ public class AddCourse extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
+        
+        //Description
+        JLabel descriptionLabel = new JLabel("Please fill out the following details to add a new course:");
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        add(descriptionLabel, gbc);
 
         // Course Code
         JLabel courseCodeLabel = new JLabel("Course Code:");

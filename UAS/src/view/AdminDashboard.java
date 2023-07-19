@@ -89,6 +89,9 @@ public class AdminDashboard extends JFrame {
         JButton viewCoursesButton = createMenuButton("View Courses");
         menuPanel.add(viewCoursesButton, gbc);
         gbc.gridy++;
+        JButton addUserButton = createMenuButton("Add User");
+        menuPanel.add(addUserButton, gbc);
+        gbc.gridy++;
 
         
         gbc.gridy++;
@@ -141,7 +144,7 @@ public class AdminDashboard extends JFrame {
                     contentPanel.add(new AddCourse());
                 } else if(buttonText.equals("View Courses")){
                     contentPanel.add(new Courses());
-                }
+                } 
                 contentPanel.revalidate();
                 contentPanel.repaint();
             }

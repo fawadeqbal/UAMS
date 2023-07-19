@@ -14,19 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import controller.UASController;
-import model.UASFactory;
-import model.dto.CourseDTO;
-import model.dto.Response;
 
 public class AddUser extends JPanel {
-    UASController controllerObj;
-    private JTextField courseCodeField;
-    private JTextField courseNameField;
-    private JComboBox<Integer> creditHoursComboBox; // Use JComboBox for credit hours selection
+    private JTextField emailField;
+    private JPasswordField passwordField;
+    private JComboBox<String> roleComboBox;
 
     public AddUser() {
-        controllerObj=UASFactory.getUASControllerInstance();
         // Set FlatLaf for a modern look and feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -39,7 +33,7 @@ public class AddUser extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // Title: Add Course
+        // Title: Add User
         JLabel titleLabel = new JLabel("Add User");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
@@ -47,85 +41,93 @@ public class AddUser extends JPanel {
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
 
-        // Course Code
-        JLabel courseCodeLabel = new JLabel("Course Code:");
+        // Email
+        JLabel emailLabel = new JLabel("Email:");
         gbc.gridy++;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.EAST;
-        add(courseCodeLabel, gbc);
+        add(emailLabel, gbc);
 
-        courseCodeField = new JTextField(20);
+        emailField = new JTextField(20);
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        add(courseCodeField, gbc);
+        add(emailField, gbc);
 
-        // Course Name
-        JLabel courseNameLabel = new JLabel("Course Name:");
-        gbc.gridx = 0;
-        gbc.gridy++;
-        add(courseNameLabel, gbc);
-
-        courseNameField = new JTextField(20);
-        gbc.gridx = 1;
-        add(courseNameField, gbc);
-
-        // Credit Hours
-        JLabel creditHoursLabel = new JLabel("Credit Hours:");
-        gbc.gridy++;
+        // Password
+        JLabel passwordLabel = new JLabel("Password:");
         gbc.gridx=0;
-        add(creditHoursLabel, gbc);
+        gbc.gridy++;
+        add(passwordLabel, gbc);
 
-        // Create the ComboBox for credit hours selection with options "2" and "3"
-        Integer[] creditHoursOptions = { 2, 3, 4 };
-        creditHoursComboBox = new JComboBox<>(creditHoursOptions);
+        passwordField = new JPasswordField(20);
         gbc.gridx = 1;
-        add(creditHoursComboBox, gbc);
+        add(passwordField, gbc);
+
+        // Role
+        JLabel roleLabel = new JLabel("Role:");
+        gbc.gridx=0;
+        gbc.gridy++;
+        add(roleLabel, gbc);
+
+        // Create the ComboBox for role selection with options "Faculty," "Student," and "Admin"
+        String[] roleOptions = { "Faculty", "Student", "Admin" };
+        roleComboBox = new JComboBox<>(roleOptions);
+        gbc.gridx = 1;
+        add(roleComboBox, gbc);
 
         // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
         gbc.gridy++;
-        gbc.gridx = 0;
-        gbc.gridwidth = 2;
+        gbc.gridx = 1;
+        gbc.gridwidth = 1;
         add(submitButton, gbc);
 
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String courseCode = courseCodeField.getText();
-                String courseName = courseNameField.getText();
-                int creditHours = (int) creditHoursComboBox.getSelectedItem();
+                String email = emailField.getText();
+                char[] password = passwordField.getPassword();
+                String role = (String) roleComboBox.getSelectedItem();
 
-                // TODO: Handle the course submission here
-                // You can use the values entered in the text fields and selected credit hours
-                // to add the course
+                // TODO: Handle the user submission here
+                // You can use the values entered in the text fields and selected role
+                // to add the user
                 // For example:
-                CourseDTO courseObj = new CourseDTO(courseCode, courseName, creditHours);
-                Response responseObj =UASFactory.getResponseInstance();
-                controllerObj.addCourse(courseObj, responseObj);
-                 if (responseObj.isSuccessfull()) {
-                    JOptionPane.showMessageDialog(courseCodeField, responseObj.getInfoMessages());
-                     // Clear the text fields after submission
-                courseCodeField.setText("");
-                courseNameField.setText("");
-                } else {
-                     JOptionPane.showMessageDialog(courseCodeField, responseObj.getErrorMessages());
-                }
+                // UserDTO userObj = new UserDTO(email, new String(password), role);
+                // controllerObj.addUser(userObj, responseObj);
+                // if (responseObj.isSuccessfull()) {
+                //     JOptionPane.showMessageDialog(emailField, "User Added Successfully");
+                // } else {
+                //     JOptionPane.showMessageDialog(emailField, "Failed to add user");
+                // }
 
-               
+                // Clear the text fields after submission
+                emailField.setText("");
+                passwordField.setText("");
             }
         });
     }
 
     // Getter methods to access the text fields if needed
-    public JTextField getCourseCodeField() {
-        return courseCodeField;
+    public JTextField getEmailField() {
+        return emailField;
     }
 
-    public JTextField getCourseNameField() {
-        return courseNameField;
+    public JPasswordField getPasswordField() {
+        return passwordField;
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("User Form");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 300);
+            frame.add(new AddUser());
+            frame.setVisible(true);
+        });
+    }
 }
+
 
 
 
