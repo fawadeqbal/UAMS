@@ -56,21 +56,7 @@ public class UASController {
 
     }
     
-    public void addCourse(CourseDTO course,Response responseObj){
-        CommonValidator.validateCourse(course, responseObj);
-        if(responseObj.isSuccessfull()){
-            dalManagerObj.addCourse(course, responseObj);
-        }
-        
-    }
-    
-    
-    public ArrayList<CourseDTO> getCourses(Response response) {
-        return dalManagerObj.getCourses(response);
-    }
-    
-    
-    public void addUser(UserDTO userObj,Response responseObj){
+     public void addUser(UserDTO userObj,Response responseObj){
         CommonValidator.validateUser(userObj, responseObj);
         if(responseObj.isSuccessfull()){
             dalManagerObj.addUser(userObj, responseObj);
@@ -85,6 +71,26 @@ public class UASController {
         dalManagerObj.updatePassword(userObj, responseObj);
     }
     
+    public void deleteUser(UserDTO userObj, Response reponseObj) {
+        
+        dalManagerObj.deleteUser(userObj,reponseObj);
+    }
+    
+    public void addCourse(CourseDTO course,Response responseObj){
+        CommonValidator.validateCourse(course, responseObj);
+        if(responseObj.isSuccessfull()){
+            dalManagerObj.addCourse(course, responseObj);
+        }
+        
+    }
+    
+    
+    public ArrayList<CourseDTO> getCourses(Response response) {
+        return dalManagerObj.getCourses(response);
+    }
+    
+    
+   
     public void addStudent(StudentDTO studentObj,Response responseObj){
         CommonValidator.validateStudent(studentObj,responseObj);
         if(responseObj.isSuccessfull()){
@@ -94,11 +100,6 @@ public class UASController {
     
     public ArrayList<StudentDTO> getStudents(Response response) {
         return dalManagerObj.getStudents(response);
-    }
-
-    public void deleteUser(UserDTO userObj, Response reponseObj) {
-        
-        dalManagerObj.deleteUser(userObj,reponseObj);
     }
     
 }

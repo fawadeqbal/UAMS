@@ -53,19 +53,6 @@ public class DALManager {
         }
     }
 
-    public void addCourse(CourseDTO course, Response responseObj) {
-        Connection connection = mySQL.getConnection();
-        objAdder.addCourse(course, connection, responseObj);
-    }
-
-    public ArrayList<CourseDTO> getCourses(Response response) {
-        Connection connection = mySQL.getConnection();
-        ResultSet resultSet = null;
-        String query = "SELECT * FROM Courses";
-        resultSet = objReader.getRecords(connection, response, query);
-        return objMapper.getCourses(resultSet);
-    }
-
     public void addUser(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
         objAdder.addUser(userObj, connection, responseObj);
@@ -87,6 +74,19 @@ public class DALManager {
     public void deleteUser(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
         objRemover.deleteUser(connection, responseObj, userObj);
+    }
+    
+    public void addCourse(CourseDTO course, Response responseObj) {
+        Connection connection = mySQL.getConnection();
+        objAdder.addCourse(course, connection, responseObj);
+    }
+
+    public ArrayList<CourseDTO> getCourses(Response response) {
+        Connection connection = mySQL.getConnection();
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM Courses";
+        resultSet = objReader.getRecords(connection, response, query);
+        return objMapper.getCourses(resultSet);
     }
 
     public void addStudent(StudentDTO studentObj, Response responseObj) {
