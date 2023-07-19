@@ -14,8 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import com.formdev.flatlaf.FlatLightLaf;
+import controller.UASController;
+import model.UASFactory;
+import model.dto.Response;
+import model.dto.StudentDTO;
 
 public class AddStudent extends JPanel {
+    UASController controllerObj;
     private JTextField regNoField;
     private JTextField nameField;
     private JTextField fatherNameField;
@@ -25,6 +30,7 @@ public class AddStudent extends JPanel {
     private JTextField userEmailField;
 
     public AddStudent() {
+        controllerObj=UASFactory.getUASControllerInstance();
         // Set FlatLaf for a modern look and feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -139,17 +145,15 @@ public class AddStudent extends JPanel {
                 String phoneNumber = phoneNumberField.getText();
                 String userEmail = userEmailField.getText();
 
-                // TODO: Handle the user details submission here
-                // You can use the values entered in the text fields and date field
-                // to add the user details
-                // For example:
-                // UserDetailsDTO userDetails = new UserDetailsDTO(regNo, name, fatherName, dob, cnic, phoneNumber, userEmail);
-                // controllerObj.addUserDetails(userDetails, responseObj);
-                // if (responseObj.isSuccessfull()) {
-                //     JOptionPane.showMessageDialog(regNoField, "User Details Added Successfully");
-                // } else {
-                //     JOptionPane.showMessageDialog(regNoField, "Failed to add user details");
-                // }
+                
+                StudentDTO userDetails = new StudentDTO(regNo, name, fatherName, dob, cnic, phoneNumber, userEmail);
+                Response responseObj=UASFactory.getResponseInstance();
+                controllerObj.addStudent(userDetails, responseObj);
+                if (responseObj.isSuccessfull()) {
+                     JOptionPane.showMessageDialog(regNoField, "User Details Added Successfully");
+                 } else {
+                     JOptionPane.showMessageDialog(regNoField, "Failed to add user details");
+                 }
 
                 // Clear the text fields after submission
                 regNoField.setText("");
