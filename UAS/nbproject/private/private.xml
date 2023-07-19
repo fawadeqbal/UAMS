@@ -3,25 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/dto/StudentDTO.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/dto/Response.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/DBReader.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddStudent.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/controller/UASController.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/panels/UserSettings.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddCourse.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/Dashboard.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/dto/CourseDTO.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/validators/CommonValidator.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/panels/ViewStudents.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddUser.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/DALManager.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/ObjectAdder.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/AdminDashboard.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/ObjectMapper.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/panels/Courses.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/panels/ViewUsers.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/dto/UserDTO.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/panels/AddAttendance.java</file>
         </group>
     </open-files>
 </project-private>
