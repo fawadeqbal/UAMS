@@ -6,14 +6,12 @@ package dal;
 
 import model.dto.CourseDTO;
 import model.dto.Response;
-import java.sql.Connection;
 
 /**
  *
  * @author fawad
  */
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import model.dto.Message;

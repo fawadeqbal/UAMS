@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.Stack;
 import controller.UASController;
 import model.UASFactory;
-import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Response;
 import model.dto.UserDTO;
@@ -23,7 +22,7 @@ import model.dto.UserDTO;
 public class AddAttendance extends JPanel {
 
     UASController controllerObj = UASFactory.getUASControllerInstance();
-ArrayList<ClassDTO> list;
+ArrayList<Object> list;
     private JLabel classLabel;
     private JComboBox<String> classComboBox;
     private JLabel dateLabel;
@@ -45,17 +44,15 @@ ArrayList<ClassDTO> list;
     private void initializeComponents() {
 
         classLabel = new JLabel("Class:");
-        Response response=new Response();
+//        list=controllerObj.getClasses(UASController.objApplicationSession.getUser(), response);
         
-        list=controllerObj.getClasses(UASController.objApplicationSession.getUser(), response);
-        
-         Stack<String> cl=new Stack<>();
-        for(ClassDTO c:list){
-            cl.push(c.getClass_id());
-            System.out.println(c.getClass_id());
-        }
+//         Stack<String> cl=new Stack<>();
+//        for(ClassDTO c:list){
+//            cl.push(c.getClass_id());
+//            System.out.println(c.getClass_id());
+//        }
        
-        classComboBox = new JComboBox<>(cl);
+        classComboBox = new JComboBox<>();
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
 
@@ -70,8 +67,8 @@ ArrayList<ClassDTO> list;
         String timeString = timeFormat.format(currentDate);
         
         timeSlotField.setText(timeString);
-
-        studentTable = new JTable(controllerObj.getStudentsByCourse()) {
+//controllerObj.getStudentsByCourse()
+        studentTable = new JTable() {
             @Override
             public Class<?> getColumnClass(int column) {
                 if (column == 2) {
@@ -171,7 +168,8 @@ ArrayList<ClassDTO> list;
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedCourse = (String) classComboBox.getSelectedItem();
-                DefaultTableModel newTableModel = controllerObj.getStudentsByCourse();
+                //= controllerObj.getStudentsByCourse();
+                DefaultTableModel newTableModel =new DefaultTableModel();
                 studentTable.setModel(newTableModel);
             }
         });
