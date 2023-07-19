@@ -31,7 +31,8 @@ public class DALManager {
 
     public void verifyUser(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        ResultSet resultSet = objReader.getUser(responseObj, user, connection);
+        String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
+        ResultSet resultSet = objReader.getUser(responseObj, user, connection, query);
         if (resultSet == null) {
             System.out.println("Response Error");
             return;
@@ -54,11 +55,10 @@ public class DALManager {
     }
 
     public ArrayList<CourseDTO> getCourses(Response response) {
-        ArrayList<CourseDTO> coursesList = new ArrayList<>();
         Connection connection = mySQL.getConnection();
-
         ResultSet resultSet = null;
-        resultSet = objReader.getCourses(connection, response);
+         String query = "SELECT * FROM Courses";
+        resultSet = objReader.getCourses(connection, response,query);
         return objMapper.getCourses(resultSet);
     }
 
@@ -68,28 +68,27 @@ public class DALManager {
     }
 
     public ArrayList<UserDTO> getUsers(Response response) {
-        ArrayList<UserDTO> userList = new ArrayList<>();
         Connection connection = mySQL.getConnection();
-
         ResultSet resultSet = null;
-        resultSet = objReader.getUsers(connection, response);
+        String query = "SELECT * FROM Users";
+        resultSet = objReader.getUsers(connection, response, query);
         return objMapper.getUsers(resultSet);
     }
-    
+
     public void addStudent(StudentDTO studentObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
         objAdder.addStudent(studentObj, connection, responseObj);
     }
-    
+
     public ArrayList<StudentDTO> getStudents(Response response) {
         Connection connection = mySQL.getConnection();
 
         ResultSet resultSet = null;
-        resultSet = objReader.getStudents(connection, response);
+        String query = "SELECT * FROM Students";
+        resultSet = objReader.getStudents(connection, response, query);
         return objMapper.getStudents(resultSet);
     }
 
-   
 //    public static void main(String[] args) {
 //        DALManager dal=new DALManager();
 //        Response res=UASFactory.getResponseInstance();

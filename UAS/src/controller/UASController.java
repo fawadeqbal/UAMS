@@ -5,11 +5,8 @@
 package controller;
 
 import common.ApplicationSession;
-import common.Student;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import dal.DALManager;
-import java.util.Vector;
 import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Response;
@@ -41,7 +38,6 @@ public class UASController {
 
     public static void expireSession() {
         objApplicationSession = null;
-        System.out.println("Session Expired.");
     }
 
     public static boolean isUserLoggedIn() {
@@ -55,7 +51,6 @@ public class UASController {
             if (responseObj.isSuccessfull()) {
                 initializeSession();
                 objApplicationSession.setUser(user);
-                
             }
         }
 
@@ -71,27 +66,29 @@ public class UASController {
     
     
     public ArrayList<CourseDTO> getCourses(Response response) {
-
         return dalManagerObj.getCourses(response);
     }
     
     
     public void addUser(UserDTO userObj,Response responseObj){
-        dalManagerObj.addUser(userObj, responseObj);
+        CommonValidator.validateUser(userObj, responseObj);
+        if(responseObj.isSuccessfull()){
+            dalManagerObj.addUser(userObj, responseObj);
+        }
     }
     
     public ArrayList<UserDTO> getUsers(Response response) {
-
         return dalManagerObj.getUsers(response);
     }
     
     public void addStudent(StudentDTO studentObj,Response responseObj){
-        dalManagerObj.addStudent(studentObj, responseObj);
+        CommonValidator.validateStudent(studentObj,responseObj);
+        if(responseObj.isSuccessfull()){
+            dalManagerObj.addStudent(studentObj, responseObj);
+        }
     }
     
     public ArrayList<StudentDTO> getStudents(Response response) {
-
-        
         return dalManagerObj.getStudents(response);
     }
     

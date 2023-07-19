@@ -151,7 +151,7 @@ public class AddStudent extends JPanel {
                 Response responseObj = UASFactory.getResponseInstance();
                 controllerObj.addStudent(userDetails, responseObj);
                 if (responseObj.isSuccessfull()) {
-                    JOptionPane.showMessageDialog(regNoField, "User Details Added Successfully");
+                    JOptionPane.showMessageDialog(regNoField, responseObj.getInfoMessages());
                     // Clear the text fields after submission
                     regNoField.setText("");
                     nameField.setText("");
@@ -161,46 +161,10 @@ public class AddStudent extends JPanel {
                     phoneNumberField.setText("");
                     userEmailField.setText("");
                 } else {
-                    JOptionPane.showMessageDialog(regNoField, "Failed to add user details");
+                    JOptionPane.showMessageDialog(regNoField, responseObj.getErrorMessages());
                 }
 
             }
-        });
-    }
-
-    // Getter methods to access the text fields if needed
-    public JTextField getRegNoField() {
-        return regNoField;
-    }
-
-    public JTextField getNameField() {
-        return nameField;
-    }
-
-    public JTextField getFatherNameField() {
-        return fatherNameField;
-    }
-
-   
-    public JTextField getCnicField() {
-        return cnicField;
-    }
-
-    public JTextField getPhoneNumberField() {
-        return phoneNumberField;
-    }
-
-    public JTextField getUserEmailField() {
-        return userEmailField;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("User Details Form");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(400, 400);
-            frame.add(new AddStudent());
-            frame.setVisible(true);
         });
     }
 }

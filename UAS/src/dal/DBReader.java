@@ -21,11 +21,10 @@ import model.dto.UserDTO;
  */
 public class DBReader {
 
-    ResultSet getUser(Response responseObj, UserDTO user, Connection connection) {
+    ResultSet getUser(Response responseObj, UserDTO user, Connection connection, String query) {
         PreparedStatement statement = null;
 
         try {
-            String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
@@ -36,11 +35,10 @@ public class DBReader {
         }
         return null;
     }
-    
-        ResultSet getCourses(Connection connection, Response responseObj) {
+
+    ResultSet getCourses(Connection connection, Response responseObj,String query) {
         PreparedStatement statement = null;
         try {
-            String query = "SELECT * FROM Courses";
             statement = connection.prepareStatement(query);
             return statement.executeQuery();
         } catch (SQLException e) {
@@ -49,10 +47,9 @@ public class DBReader {
         return null;
     }
 
-    ResultSet getUsers(Connection connection, Response responseObj) {
+    ResultSet getUsers(Connection connection, Response responseObj,String query) {
         PreparedStatement statement = null;
         try {
-            String query = "SELECT * FROM Users";
             statement = connection.prepareStatement(query);
             return statement.executeQuery();
         } catch (SQLException e) {
@@ -60,11 +57,10 @@ public class DBReader {
         }
         return null;
     }
-    
-    ResultSet getStudents(Connection connection, Response responseObj) {
+
+    ResultSet getStudents(Connection connection, Response responseObj,String query) {
         PreparedStatement statement = null;
         try {
-            String query = "SELECT * FROM Students";
             statement = connection.prepareStatement(query);
             return statement.executeQuery();
         } catch (SQLException e) {
@@ -88,17 +84,5 @@ public class DBReader {
         }
         return null;
     }
-
-    ResultSet getRecords(String dblQuery, Connection conn) {
-        try {
-            Statement statement = conn.createStatement();
-            return statement.executeQuery(dblQuery);
-        } catch (Exception e) {
-            System.out.println("Error Trace in getRecords() : " + e.getMessage());
-        }
-        return null;
-    }
-
-
 
 }

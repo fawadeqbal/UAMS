@@ -81,12 +81,10 @@ public class AddUser extends JPanel {
         add(roleLabel, gbc);
 
         // Create the ComboBox for role selection with options "Faculty," "Student," and "Admin"
-        String[] roleOptions = { "faculty", "student", "admin" };
+        String[] roleOptions = { "admin", "faculty", "student" };
         roleComboBox = new JComboBox<>(roleOptions);
         gbc.gridx = 1;
         add(roleComboBox, gbc);
-
-        // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
         submitButton.setBackground(new Color(52, 152, 219));
         submitButton.setForeground(Color.WHITE);
@@ -111,34 +109,15 @@ public class AddUser extends JPanel {
                 Response responseObj=UASFactory.getResponseInstance();
                 controllerObj.addUser(userObj, responseObj);
                 if (responseObj.isSuccessfull()) {
-                     JOptionPane.showMessageDialog(emailField, "User Added Successfully");
+                     JOptionPane.showMessageDialog(emailField,responseObj.getInfoMessages() );
                  } else {
-                     JOptionPane.showMessageDialog(emailField, "Failed to add user");
+                     JOptionPane.showMessageDialog(emailField, responseObj.getErrorMessages());
                  }
 
                 // Clear the text fields after submission
                 emailField.setText("");
                 passwordField.setText("");
             }
-        });
-    }
-
-    // Getter methods to access the text fields if needed
-    public JTextField getEmailField() {
-        return emailField;
-    }
-
-    public JPasswordField getPasswordField() {
-        return passwordField;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("User Form");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(400, 300);
-            frame.add(new AddUser());
-            frame.setVisible(true);
         });
     }
 }
