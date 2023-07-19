@@ -5,8 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import model.UASFactory;
 import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
@@ -164,11 +163,11 @@ public class DALManager {
         return objMapper.getTeachers(resultSet);
     }
 
-//    public static void main(String[] args) {
-//        DALManager dal=new DALManager();
-//        Response res=UASFactory.getResponseInstance();
-//        for(TeacherDTO t:dal.getTeachers(res)){
-//            System.out.println(t.toString());
-//        }
-//    }
+    public static void main(String[] args) {
+        DALManager dal=new DALManager();
+        Response res=UASFactory.getResponseInstance();
+        for(TeacherDTO t:dal.getTeachers(res)){
+            System.out.println(t.toString());
+        }
+    }
 }
