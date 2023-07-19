@@ -68,21 +68,21 @@ public class ObjectMapper {
         return classlist;
     }
     
-    StudentDTO getStudent(ResultSet rs) {
-        StudentDTO objCourse=new StudentDTO(); 
-        try{
-        if (rs.next())
-            {
-                               
-                objCourse.setS_Id(rs.getInt(1));
-                objCourse.setF_name(rs.getString(2));
-                objCourse.setL_name(rs.getString(3));
-               
-            }
-        }catch (Exception e){
-        }
-        return objCourse;
-    }
+//    StudentDTO getStudent(ResultSet rs) {
+//        StudentDTO objCourse=new StudentDTO(); 
+//        try{
+//        if (rs.next())
+//            {
+//                               
+//                objCourse.setS_Id(rs.getInt(1));
+//                objCourse.setF_name(rs.getString(2));
+//                objCourse.setL_name(rs.getString(3));
+//               
+//            }
+//        }catch (Exception e){
+//        }
+//        return objCourse;
+//    }
     
     ArrayList<Object> getStudentsByCourse(ResultSet rs) {
         ArrayList<Object> studentslist = new ArrayList<>();

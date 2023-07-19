@@ -17,22 +17,23 @@ import model.dto.StudentDTO;
 import model.dto.UserDTO;
 
 public class DALManager {
+
     ObjectMapper objMapper;
     MySQLConnection mySQL;
     DBReader objReader;
     ObjectAdder objAdder;
 
     public DALManager() {
-        objAdder=new ObjectAdder();
-        objMapper=new ObjectMapper();
-        objReader=new DBReader();
+        objAdder = new ObjectAdder();
+        objMapper = new ObjectMapper();
+        objReader = new DBReader();
         mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAS", "root", "Admin123$");
     }
 
     public void verifyUser(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        ResultSet resultSet = objReader.getUser(responseObj,user,connection);
-        if(resultSet==null){
+        ResultSet resultSet = objReader.getUser(responseObj, user, connection);
+        if (resultSet == null) {
             System.out.println("Response Error");
             return;
         }
@@ -45,47 +46,44 @@ public class DALManager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
-    
-    public void addCourse(CourseDTO course,Response responseObj){
-        Connection connection=mySQL.getConnection();
+
+    public void addCourse(CourseDTO course, Response responseObj) {
+        Connection connection = mySQL.getConnection();
         objAdder.addCourse(course, connection, responseObj);
     }
-    
+
     public ArrayList<CourseDTO> getCourses(Response response) {
         ArrayList<CourseDTO> coursesList = new ArrayList<>();
         Connection connection = mySQL.getConnection();
-        
+
         ResultSet resultSet = null;
-        resultSet=objReader.getCourses(connection, response);
-            return objMapper.getCourses(resultSet);
+        resultSet = objReader.getCourses(connection, response);
+        return objMapper.getCourses(resultSet);
     }
-    
-    public void addUser(UserDTO userObj,Response responseObj){
-        Connection connection=mySQL.getConnection();
+
+    public void addUser(UserDTO userObj, Response responseObj) {
+        Connection connection = mySQL.getConnection();
         objAdder.addUser(userObj, connection, responseObj);
     }
-    
+
     public ArrayList<UserDTO> getUsers(Response response) {
         ArrayList<UserDTO> userList = new ArrayList<>();
         Connection connection = mySQL.getConnection();
-        
+
         ResultSet resultSet = null;
-        resultSet=objReader.getUsers(connection, response);
-            return objMapper.getUsers(resultSet);
+        resultSet = objReader.getUsers(connection, response);
+        return objMapper.getUsers(resultSet);
     }
-    
-    
+
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = objReader.getClasses(responseObj, user, connection);
-        
+
         return objMapper.getClasses(resultSet);
     }
-    
-    
-    
+
 //    
 //    
 //    public static void main(String[] args) {
@@ -102,35 +100,34 @@ public class DALManager {
 //            System.out.println("Total: "+i);
 //        }
 //    }
-
-    public ArrayList<Object> getStudentsByCourse(int id){
+    public ArrayList<Object> getStudentsByCourse(int id) {
         Connection connection = mySQL.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM studentenroll where course_cid = "+id;
+            String query = "SELECT * FROM studentenroll where course_cid = " + id;
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            
-            ObjectMapper mapper=new ObjectMapper();
+
+            ObjectMapper mapper = new ObjectMapper();
             return mapper.getStudentsByCourse(resultSet);
         } catch (Exception ex) {
-            
-        } 
+
+        }
         return null;
     }
-    
-    public StudentDTO getStudent(int id){
+
+    public StudentDTO getStudent(int id) {
         Connection connection = mySQL.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM student where sid = "+id;
+            String query = "SELECT * FROM student where sid = " + id;
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            return objMapper.getStudent(resultSet);
+            //return objMapper.getStudent(resultSet);
         } catch (Exception ex) {
-            
+
         } finally {
 
             try {
@@ -145,7 +142,7 @@ public class DALManager {
                 }
 
             } catch (Exception ex) {
-                
+
             }
         }
         return null;
