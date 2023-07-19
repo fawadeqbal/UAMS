@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.UASFactory;
 import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
@@ -48,6 +47,27 @@ public class DALManager {
             Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    
+    public void addCourse(CourseDTO course,Response responseObj){
+        Connection connection=mySQL.getConnection();
+        objAdder.addCourse(course, connection, responseObj);
+    }
+    
+    public ArrayList<CourseDTO> getCourses(Response response) {
+        ArrayList<CourseDTO> coursesList = new ArrayList<>();
+        Connection connection = mySQL.getConnection();
+        
+        ResultSet resultSet = null;
+        resultSet=objReader.getCourses(connection, response);
+            return objMapper.getCourses(resultSet);
+    }
+    
+    public void addUser(UserDTO userObj,Response responseObj){
+        Connection connection=mySQL.getConnection();
+        objAdder.addUser(userObj, connection, responseObj);
+    }
+    
+    
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
         ResultSet resultSet = objReader.getClasses(responseObj, user, connection);
@@ -55,10 +75,7 @@ public class DALManager {
         return objMapper.getClasses(resultSet);
     }
     
-    public void addCourse(CourseDTO course,Response responseObj){
-        Connection connection=mySQL.getConnection();
-        objAdder.addCourse(course, connection, responseObj);
-    }
+    
     
 //    
 //    
@@ -77,14 +94,6 @@ public class DALManager {
 //        }
 //    }
 
-    public ArrayList<CourseDTO> getCourses(Response response) {
-        ArrayList<CourseDTO> coursesList = new ArrayList<>();
-        Connection connection = mySQL.getConnection();
-        
-        ResultSet resultSet = null;
-        resultSet=objReader.getCourses(connection, response);
-            return objMapper.getCourses(resultSet);
-    }
     public ArrayList<Object> getStudentsByCourse(int id){
         Connection connection = mySQL.getConnection();
         PreparedStatement statement = null;

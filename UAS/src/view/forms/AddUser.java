@@ -14,13 +14,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import controller.UASController;
+import model.UASFactory;
+import model.dto.Response;
+import model.dto.UserDTO;
 
 public class AddUser extends JPanel {
     private JTextField emailField;
     private JPasswordField passwordField;
     private JComboBox<String> roleComboBox;
+    UASController controllerObj;
 
     public AddUser() {
+        controllerObj=new UASController();
         // Set FlatLaf for a modern look and feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -70,7 +76,7 @@ public class AddUser extends JPanel {
         add(roleLabel, gbc);
 
         // Create the ComboBox for role selection with options "Faculty," "Student," and "Admin"
-        String[] roleOptions = { "Faculty", "Student", "Admin" };
+        String[] roleOptions = { "faculty", "student", "admin" };
         roleComboBox = new JComboBox<>(roleOptions);
         gbc.gridx = 1;
         add(roleComboBox, gbc);
@@ -86,20 +92,21 @@ public class AddUser extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 String email = emailField.getText();
-                char[] password = passwordField.getPassword();
+                String password = new String(passwordField.getPassword());
                 String role = (String) roleComboBox.getSelectedItem();
 
                 // TODO: Handle the user submission here
                 // You can use the values entered in the text fields and selected role
                 // to add the user
                 // For example:
-                // UserDTO userObj = new UserDTO(email, new String(password), role);
-                // controllerObj.addUser(userObj, responseObj);
-                // if (responseObj.isSuccessfull()) {
-                //     JOptionPane.showMessageDialog(emailField, "User Added Successfully");
-                // } else {
-                //     JOptionPane.showMessageDialog(emailField, "Failed to add user");
-                // }
+                UserDTO userObj = new UserDTO(email, password, role);
+                Response responseObj=UASFactory.getResponseInstance();
+                controllerObj.addUser(userObj, responseObj);
+                if (responseObj.isSuccessfull()) {
+                     JOptionPane.showMessageDialog(emailField, "User Added Successfully");
+                 } else {
+                     JOptionPane.showMessageDialog(emailField, "Failed to add user");
+                 }
 
                 // Clear the text fields after submission
                 emailField.setText("");

@@ -63,6 +63,26 @@ public class UASController {
         }
 
     }
+    
+    public void addCourse(CourseDTO course,Response responseObj){
+        CommonValidator.validateCourse(course, responseObj);
+        if(responseObj.isSuccessfull()){
+            dalManagerObj.addCourse(course, responseObj);
+        }
+        
+    }
+    
+    
+    public ArrayList<CourseDTO> getCourses(Response response) {
+
+        return dalManagerObj.getCourses(response);
+    }
+    
+    public void addUser(UserDTO userObj,Response responseObj){
+        dalManagerObj.addUser(userObj, responseObj);
+    }
+    
+    
 
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
 
@@ -114,21 +134,11 @@ public class UASController {
         return tableModel;
     }
 
-    public ArrayList<CourseDTO> getCourses(Response response) {
-
-        return dalManagerObj.getCourses(response);
-    }
 
     public StudentDTO getStudent(int id) {
 
         return dalManagerObj.getStudent(id);
     }
     
-    public void addCourse(CourseDTO course,Response responseObj){
-        CommonValidator.validateCourse(course, responseObj);
-        if(responseObj.isSuccessfull()){
-            dalManagerObj.addCourse(course, responseObj);
-        }
-        
-    }
+    
 }
