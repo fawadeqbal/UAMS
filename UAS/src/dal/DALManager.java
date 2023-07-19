@@ -67,6 +67,15 @@ public class DALManager {
         objAdder.addUser(userObj, connection, responseObj);
     }
     
+    public ArrayList<UserDTO> getUsers(Response response) {
+        ArrayList<UserDTO> userList = new ArrayList<>();
+        Connection connection = mySQL.getConnection();
+        
+        ResultSet resultSet = null;
+        resultSet=objReader.getUsers(connection, response);
+            return objMapper.getUsers(resultSet);
+    }
+    
     
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();

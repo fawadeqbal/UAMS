@@ -9,6 +9,7 @@ import model.dto.CourseDTO;
 import java.sql.ResultSet;
 import model.dto.ClassDTO;
 import model.dto.StudentDTO;
+import model.dto.UserDTO;
 /**
  *
  * @author fawad
@@ -30,6 +31,23 @@ public class ObjectMapper {
         }catch (Exception e){
         }
         return courselist;
+    }
+    
+    ArrayList<UserDTO> getUsers(ResultSet rs) {
+        ArrayList<UserDTO> userList = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                UserDTO objUser=new UserDTO();                
+                objUser.setEmail(rs.getString(1));
+                objUser.setPassword(rs.getString(2));
+                objUser.setRole(rs.getString(3));
+                                
+                userList.add(objUser);
+            }
+        }catch (Exception e){
+        }
+        return userList;
     }
     
     ArrayList<ClassDTO> getClasses(ResultSet rs) {

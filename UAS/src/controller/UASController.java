@@ -78,8 +78,14 @@ public class UASController {
         return dalManagerObj.getCourses(response);
     }
     
+    
     public void addUser(UserDTO userObj,Response responseObj){
         dalManagerObj.addUser(userObj, responseObj);
+    }
+    
+    public ArrayList<UserDTO> getUsers(Response response) {
+
+        return dalManagerObj.getUsers(response);
     }
     
     

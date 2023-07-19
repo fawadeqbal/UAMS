@@ -76,6 +76,18 @@ public class DBReader {
         }
         return null;
     }
+    
+    ResultSet getUsers(Connection connection,Response responseObj){
+        PreparedStatement statement = null;
+        try {
+            String query = "SELECT * FROM Users";
+            statement = connection.prepareStatement(query);
+            return statement.executeQuery();
+        }catch(SQLException e){
+            responseObj.messagesList.add(new Message(e.getMessage(),MessageType.Exception));
+        }
+        return null;
+    }
         
     
     
