@@ -14,26 +14,25 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MySQLConnection implements IConnection{
-    private  String url ;
-    private  String username;
-    private  String password;
+public class MySQLConnection implements IConnection {
+    private String url;
+    private String username;
+    private String password;
 
-    public MySQLConnection(String url,String username,String password) {
-        this.url=url;
-        this.username=username;
-        this.password=password;
-       
+    public MySQLConnection(String url, String username, String password) {
+        this.url = url;
+        this.username = username;
+        this.password = password;
     }
 
-    
-    public Connection getConnection()  {
+    public Connection getConnection() {
         try {
             return DriverManager.getConnection(url, username, password);
         } catch (SQLException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Connection Probelm.");
         }
         return null;
     }
 }
+
 

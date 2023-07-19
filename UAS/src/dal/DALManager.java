@@ -35,12 +35,18 @@ public class DALManager {
 
     public void verifyUser(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
-        ResultSet resultSet = objReader.getUser(responseObj, user, connection, query);
-        if (resultSet == null) {
-            System.out.println("Response Error");
+        ResultSet resultSet = null;
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
+            resultSet = objReader.getUser(responseObj, user, connection, query);
+        }
+        if(!responseObj.isSuccessfull()){
             return;
         }
+
         try {
             if (resultSet.next()) {
                 user.setRole(resultSet.getString(3));
@@ -49,17 +55,28 @@ public class DALManager {
                 responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
+            Message message = new Message("Resultset Issue issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+//            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void addCourse(CourseDTO course, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        objAdder.addCourse(course, connection, responseObj);
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            objAdder.addCourse(course, connection, responseObj);
+        }
     }
 
     public ArrayList<CourseDTO> getCourses(Response response) {
         Connection connection = mySQL.getConnection();
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
         ResultSet resultSet = null;
         String query = "SELECT * FROM Courses";
         resultSet = objReader.getRecords(connection, response, query);
@@ -68,11 +85,20 @@ public class DALManager {
 
     public void addUser(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        objAdder.addUser(userObj, connection, responseObj);
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            objAdder.addUser(userObj, connection, responseObj);
+        }
     }
 
     public ArrayList<UserDTO> getUsers(Response response) {
         Connection connection = mySQL.getConnection();
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
         ResultSet resultSet = null;
         String query = "SELECT * FROM Users";
         resultSet = objReader.getRecords(connection, response, query);
@@ -81,21 +107,43 @@ public class DALManager {
 
     public void updatePassword(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        objModifier.updatePassword(userObj, connection, responseObj);
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            objModifier.updatePassword(userObj, connection, responseObj);
+        }
+
     }
 
     public void deleteUser(UserDTO userObj, Response responseObj) {
+
         Connection connection = mySQL.getConnection();
-        objRemover.deleteUser(connection, responseObj, userObj);
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            objRemover.deleteUser(connection, responseObj, userObj);
+        }
     }
 
     public void addStudent(StudentDTO studentObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
-        objAdder.addStudent(studentObj, connection, responseObj);
+        if (connection==null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            responseObj.messagesList.add((message));
+        } else {
+            objAdder.addStudent(studentObj, connection, responseObj);
+        }
     }
 
     public ArrayList<StudentDTO> getStudents(Response response) {
+
         Connection connection = mySQL.getConnection();
+        if(connection==null){
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
 
         ResultSet resultSet = null;
         String query = "SELECT * FROM Students";
@@ -105,6 +153,10 @@ public class DALManager {
 
     public ArrayList<TeacherDTO> getTeachers(Response response) {
         Connection connection = mySQL.getConnection();
+        if(connection==null){
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
 
         ResultSet resultSet = null;
         String query = "SELECT * FROM Teachers";

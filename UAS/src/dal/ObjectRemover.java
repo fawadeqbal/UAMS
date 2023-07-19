@@ -32,15 +32,15 @@ public class ObjectRemover {
                 responseObj.messagesList.add(new Message("User deletion failed",MessageType.Error));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            responseObj.messagesList.add(new Message("An error occurred during user deletion",MessageType.Error));
+            responseObj.messagesList.add(new Message(e.getMessage(),MessageType.Error));
         } finally {
             // Close the PreparedStatement
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    responseObj.messagesList.add(new Message(e.getMessage(),MessageType.Error));
+        
                 }
             }
         }
