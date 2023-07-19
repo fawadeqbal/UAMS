@@ -60,6 +60,18 @@ public class DBReader {
         }
         return null;
     }
+    
+    ResultSet getStudents(Connection connection, Response responseObj) {
+        PreparedStatement statement = null;
+        try {
+            String query = "SELECT * FROM Students";
+            statement = connection.prepareStatement(query);
+            return statement.executeQuery();
+        } catch (SQLException e) {
+            responseObj.messagesList.add(new Message(e.getMessage(), MessageType.Exception));
+        }
+        return null;
+    }
 
     ResultSet getClasses(Response responseObj, UserDTO user, Connection connection) {
         PreparedStatement statement = null;

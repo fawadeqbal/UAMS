@@ -83,6 +83,14 @@ public class DALManager {
         Connection connection = mySQL.getConnection();
         objAdder.addStudent(studentObj, connection, responseObj);
     }
+    
+    public ArrayList<StudentDTO> getStudents(Response response) {
+        Connection connection = mySQL.getConnection();
+
+        ResultSet resultSet = null;
+        resultSet = objReader.getStudents(connection, response);
+        return objMapper.getStudents(resultSet);
+    }
 
     public ArrayList<ClassDTO> getClasses(UserDTO user, Response responseObj) {
         Connection connection = mySQL.getConnection();
@@ -97,11 +105,11 @@ public class DALManager {
         DALManager dal=new DALManager();
         Response res=UASFactory.getResponseInstance();
         
-        dal.addStudent(new StudentDTO("FA21-BSE-012","Fawad","Saleem Akbar",new Date(),"15101","123","fawadeqbal@yahoo.com"), res);
+        dal.getStudents(res);
         if(res.isSuccessfull()){
-            System.out.println(res.getInfoMessages());
+            System.out.println("yes");
         }else{
-            System.out.println(res.getErrorMessages());
+            System.out.println("no");
         }
     }
     public ArrayList<Object> getStudentsByCourse(int id) {

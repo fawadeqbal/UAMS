@@ -7,6 +7,7 @@ package dal;
 import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
+import java.util.Date;
 import model.dto.ClassDTO;
 import model.dto.StudentDTO;
 import model.dto.UserDTO;
@@ -48,6 +49,27 @@ public class ObjectMapper {
         }catch (Exception e){
         }
         return userList;
+    }
+    
+    ArrayList<StudentDTO> getStudents(ResultSet rs) {
+        ArrayList<StudentDTO> studentsList = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                StudentDTO objStudent=new StudentDTO();                
+                objStudent.setRegNo(rs.getString(1));
+                objStudent.setName(rs.getString(2));
+                objStudent.setFatherName(rs.getString(3));
+                objStudent.setDob((rs.getDate(4)));
+                objStudent.setCnic(rs.getString(5));
+                objStudent.setPhoneNumber(rs.getString(6));
+                objStudent.setUserEmail(rs.getString(7));
+                studentsList.add(objStudent);
+            }
+        }catch (Exception e){
+            
+        }
+        return studentsList;
     }
     
     ArrayList<ClassDTO> getClasses(ResultSet rs) {

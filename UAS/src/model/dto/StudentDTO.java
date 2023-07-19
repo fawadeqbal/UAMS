@@ -23,6 +23,11 @@ public class StudentDTO {
         
     }
 
+    @Override
+    public String toString() {
+        return "StudentDTO{" + "regNo=" + regNo + ", name=" + name + ", fatherName=" + fatherName + ", dob=" + dob + ", cnic=" + cnic + ", phoneNumber=" + phoneNumber + ", userEmail=" + userEmail + '}';
+    }
+
     public StudentDTO(String regNo, String name, String fatherName, Date dob, String cnic, String phoneNumber, String userEmail) {
         this.regNo = regNo;
         this.name = name;
