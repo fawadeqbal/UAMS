@@ -44,8 +44,13 @@ public class AddUser extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         add(titleLabel, gbc);
+        
+        JLabel descriptionLabel = new JLabel("Please fill out the following details to add a new User:");
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        add(descriptionLabel, gbc);
 
         // Email
         JLabel emailLabel = new JLabel("Email:");
@@ -83,6 +88,8 @@ public class AddUser extends JPanel {
 
         // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
+        submitButton.setBackground(new Color(52, 152, 219));
+        submitButton.setForeground(Color.WHITE);
         gbc.gridy++;
         gbc.gridx = 1;
         gbc.gridwidth = 1;

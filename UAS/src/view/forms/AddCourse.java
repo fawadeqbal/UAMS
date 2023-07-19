@@ -89,8 +89,10 @@ public class AddCourse extends JPanel {
 
         // Submit button (Note: This button won't perform any action in this example)
         JButton submitButton = new JButton("Submit");
+        submitButton.setBackground(new Color(52, 152, 219));
+        submitButton.setForeground(Color.WHITE);
         gbc.gridy++;
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridwidth = 2;
         add(submitButton, gbc);
 
