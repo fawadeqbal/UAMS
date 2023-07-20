@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import model.dto.TeacherCourseViewDTO;
 
 public class AssignCourse extends JPanel {
     private UASController objController;
@@ -84,9 +85,9 @@ public class AssignCourse extends JPanel {
 
     private void loadTableData() {
         Response response = UASFactory.getResponseInstance();
-        List<TeacherCourseDTO> assignCourseList = objController.getAssignCourseTeacher(response);
-        for (TeacherCourseDTO assignCourse : assignCourseList) {
-            tableModel.addRow(new Object[]{objController.getCourseById(assignCourse.getCourseCode(), response).getCourseName(),objController.getCourseById(assignCourse.getCourseCode(), response).getCreditHours(), objController.getTeacherById(assignCourse.getFacultyId(), response).getName()});
+        List<TeacherCourseViewDTO> assignCourseList = objController.getAssignCourseTeacher(response);
+        for (TeacherCourseViewDTO assignCourse : assignCourseList) {
+            tableModel.addRow(new Object[]{assignCourse.getCourseName(),assignCourse.getCreditHours(),assignCourse.getTeacherName()});
         }
     }
 

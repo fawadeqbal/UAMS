@@ -12,6 +12,7 @@ import model.dto.CourseDTO;
 import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherCourseDTO;
+import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 import model.validators.CommonValidator;
@@ -117,7 +118,7 @@ public class UASController {
         dalManagerObj.assignCourseTeacher(teacher, course, response);
     }
 
-    public ArrayList<TeacherCourseDTO> getAssignCourseTeacher(Response response) {
+    public ArrayList<TeacherCourseViewDTO> getAssignCourseTeacher(Response response) {
         return dalManagerObj.getAssignCourseTeacher(response);
     }
     public TeacherDTO getTeacherById(int id,Response response){
@@ -125,17 +126,19 @@ public class UASController {
         teacher.setId(id);
         return dalManagerObj.getTeacherbyId(teacher, response);
     }
+    
+    public TeacherDTO getTeacherByEmail(Response response){
+        UserDTO user=UASController.objApplicationSession.getUser();
+        return dalManagerObj.getTeacherByEmail(user, response);
+    }
     public CourseDTO getCourseById(String courseCode,Response response){
         CourseDTO course=new CourseDTO();
         course.setCourseCode(courseCode);
         return dalManagerObj.getCoursebyId(course, response);
     }
-//    public static void main(String[] args) {
-//        DALManager dalManagerObj = UASFactory.getDALManagerInstance();
-//        ArrayList<TeacherCourseDTO> list=dalManagerObj.getAssignCourseTeacher(new Response());
-//        for(TeacherCourseDTO s:list){
-//            System.out.println(s.getCourseCode());
-//        }
-//    }
+    public static void main(String[] args) {
+        UASController c = UASFactory.getUASControllerInstance();
+       
+    }
     
 }

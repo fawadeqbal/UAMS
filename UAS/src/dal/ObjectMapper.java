@@ -13,6 +13,7 @@ import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherCourseDTO;
+import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 /**
@@ -107,7 +108,7 @@ public class ObjectMapper {
         return teacherList;
     }
 
-    TeacherDTO getTeacherById(ResultSet rs) {
+    TeacherDTO getTeacher(ResultSet rs) {
         TeacherDTO teacher = new TeacherDTO();
         try{
         if (rs.next())
@@ -136,14 +137,16 @@ public class ObjectMapper {
         return course;
     }
 
-    ArrayList<TeacherCourseDTO> getAssignCourseTeacher(ResultSet rs) {
-        ArrayList<TeacherCourseDTO> assignCourseList=new ArrayList<>();
+    ArrayList<TeacherCourseViewDTO> getAssignCourseTeacher(ResultSet rs) {
+        ArrayList<TeacherCourseViewDTO> assignCourseList=new ArrayList<>();
         try{
         while (rs.next())
             {
-                TeacherCourseDTO cf=new TeacherCourseDTO();
-                cf.setCourseCode(rs.getString(1));
-                cf.setFacultyId(rs.getInt(2));
+                TeacherCourseViewDTO cf=new TeacherCourseViewDTO();
+                
+                cf.setTeacherName(rs.getString(1));
+                cf.setCourseName(rs.getString(2));
+                cf.setCreditHours(rs.getInt(3));
                 assignCourseList.add(cf);
             }
         }catch (Exception e){

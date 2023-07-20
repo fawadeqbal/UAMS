@@ -11,6 +11,7 @@ import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherCourseDTO;
+import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
@@ -112,7 +113,7 @@ public class DALManager {
         ResultSet resultSet = null;
         String query = "SELECT * FROM Teachers WHERE teacher_id=?";
         resultSet = objReader.getTeacher(teacher, connection, response, query);
-        return objMapper.getTeacherById(resultSet);
+        return objMapper.getTeacher(resultSet);
     }
 
     public void updatePassword(UserDTO userObj, Response responseObj) {
@@ -177,10 +178,10 @@ public class DALManager {
     public static void main(String[] args) {
         DALManager dal = new DALManager();
         Response res = UASFactory.getResponseInstance();
-        ArrayList<TeacherCourseDTO> list=dal.getAssignCourseTeacher(res);
-        for(TeacherCourseDTO s:list){
-            System.out.println(s.getCourseCode());
-        }
+//        ArrayList<TeacherCourseDTO> list=dal.getAssignCourseTeacher(res);
+//        for(TeacherCourseDTO s:list){
+//            System.out.println(s.getCourseCode());
+//        }
 
     }
 
@@ -204,16 +205,27 @@ public class DALManager {
         }
     }
 
-    public ArrayList<TeacherCourseDTO> getAssignCourseTeacher(Response response) {
+    public ArrayList<TeacherCourseViewDTO> getAssignCourseTeacher(Response response) {
         Connection connection = mySQL.getConnection();
         if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM teacher_course";
+        String query = "SELECT * FROM TeacherCourseView;";
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getAssignCourseTeacher(resultSet);
+    }
+    public TeacherDTO getTeacherByEmail(UserDTO user,Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM Teachers WHERE Users_email=?;";
+        resultSet = objReader.getTeacherEmail(user,connection, response, query);
+        return objMapper.getTeacher(resultSet);
     }
 
 }

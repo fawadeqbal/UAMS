@@ -82,4 +82,19 @@ public class DBReader {
         return null;
     }
 
+    ResultSet getTeacherEmail(UserDTO user, Connection connection, Response response, String query) {
+        PreparedStatement statement = null;
+        try {
+            
+            statement = connection.prepareStatement(query);
+            statement.setString(1, user.getEmail());
+            return statement.executeQuery();
+
+        } catch (Exception ex) {
+            response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
+
+        }
+        return null;
+    }
+
 }
