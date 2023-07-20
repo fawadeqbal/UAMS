@@ -60,6 +60,7 @@ public class AddUser extends JPanel {
         add(emailLabel, gbc);
 
         emailField = new JTextField(20);
+        emailField.setText("@gmail.com");
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         add(emailField, gbc);
@@ -71,6 +72,7 @@ public class AddUser extends JPanel {
         add(passwordLabel, gbc);
 
         passwordField = new JPasswordField(20);
+        passwordField.setText("root");
         gbc.gridx = 1;
         add(passwordField, gbc);
 
@@ -81,7 +83,7 @@ public class AddUser extends JPanel {
         add(roleLabel, gbc);
 
         // Create the ComboBox for role selection with options "Faculty," "Student," and "Admin"
-        String[] roleOptions = { "admin", "faculty", "student" };
+        String[] roleOptions = { "student", "faculty", "admin" };
         roleComboBox = new JComboBox<>(roleOptions);
         gbc.gridx = 1;
         add(roleComboBox, gbc);
@@ -115,8 +117,8 @@ public class AddUser extends JPanel {
                  }
 
                 // Clear the text fields after submission
-                emailField.setText("");
-                passwordField.setText("");
+                emailField.setText("@gmail.com");
+                passwordField.setText("root");
             }
         });
     }

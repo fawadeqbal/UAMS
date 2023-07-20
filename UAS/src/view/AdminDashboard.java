@@ -10,7 +10,6 @@ package view;
  */
 import view.components.UTCTime;
 import javax.swing.*;
-import view.panels.LoginUI;
 import controller.UASController;
 import japa.parser.ParseException;
 import java.awt.*;

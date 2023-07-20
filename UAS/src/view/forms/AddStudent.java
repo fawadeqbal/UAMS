@@ -62,6 +62,7 @@ public class AddStudent extends JPanel {
         add(regNoLabel, gbc);
 
         regNoField = new JTextField(20);
+        regNoField.setText("FA21-BSE-");
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         add(regNoField, gbc);
@@ -123,6 +124,7 @@ public class AddStudent extends JPanel {
         add(userEmailLabel, gbc);
 
         userEmailField = new JTextField(20);
+        userEmailField.setText("@gmail.com");
         gbc.gridx = 1;
         add(userEmailField, gbc);
 
@@ -142,7 +144,8 @@ public class AddStudent extends JPanel {
                 String regNo = regNoField.getText();
                 String name = nameField.getText();
                 String fatherName = fatherNameField.getText();
-                Date dob = (Date) dobField.getModel().getValue();
+                //
+                Date dob = (Date)dobField.getModel().getValue();
                 String cnic = cnicField.getText();
                 String phoneNumber = phoneNumberField.getText();
                 String userEmail = userEmailField.getText();
@@ -153,13 +156,13 @@ public class AddStudent extends JPanel {
                 if (responseObj.isSuccessfull()) {
                     JOptionPane.showMessageDialog(regNoField, responseObj.getInfoMessages());
                     // Clear the text fields after submission
-                    regNoField.setText("");
+                    regNoField.setText("FA21-BSE-");
                     nameField.setText("");
                     fatherNameField.setText("");
                     //dobField.se(new Date());
                     cnicField.setText("");
                     phoneNumberField.setText("");
-                    userEmailField.setText("");
+                    userEmailField.setText("@gmail.com");
                 } else {
                     JOptionPane.showMessageDialog(regNoField, responseObj.getErrorMessages());
                 }

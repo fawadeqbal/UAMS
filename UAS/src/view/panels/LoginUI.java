@@ -28,11 +28,12 @@ public class LoginUI extends JFrame {
         setIconImage(icon.getImage());
         setLayout(new BorderLayout());
 
-        JPanel mainPanel = new JPanel();
+        KGradientPanel mainPanel = new KGradientPanel();
+        mainPanel.setkStartColor(Color.MAGENTA);
+        mainPanel.setkEndColor(Color.BLUE);
         mainPanel.setLayout(new GridBagLayout());
-        mainPanel.setBackground(Color.WHITE);
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel);
+        
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -41,21 +42,27 @@ public class LoginUI extends JFrame {
 
         JLabel titleLabel = new JLabel("Login");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(new Color(41, 128, 185));
+        titleLabel.setForeground(new Color(255, 255, 255));
         mainPanel.add(titleLabel, gbc);
 
         gbc.gridy++;
         JLabel usernameLabel = new JLabel("Email:");
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        usernameLabel.setForeground(Color.WHITE);
         mainPanel.add(usernameLabel, gbc);
 
         gbc.gridy++;
         JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        passwordLabel.setForeground(Color.WHITE);
         mainPanel.add(passwordLabel, gbc);
 
         gbc.gridx++;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         userIDField = new JTextField(20);
+        userIDField.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        userIDField.setForeground(new java.awt.Color(0, 0, 0));
         userIDField.setText("fawadeqbal@yahoo.com");
         userIDField.addKeyListener(new KeyAdapter() {
             @Override
@@ -72,7 +79,10 @@ public class LoginUI extends JFrame {
         gbc.gridy++;
         passwordField = new JPasswordField(20);
         passwordField.setText("root");
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        passwordField.setForeground(new java.awt.Color(0, 0, 0));
         JButton loginButton = new JButton("Login");
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 14));
         loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(new Color(41, 128, 185));
         loginButton.setFocusPainted(false);
