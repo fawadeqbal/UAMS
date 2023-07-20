@@ -151,8 +151,6 @@ public class AdminDashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UASController.expireSession();
-                dispose();
-                new LoginUI().setVisible(true);
             }
         });
 

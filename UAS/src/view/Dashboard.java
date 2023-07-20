@@ -12,10 +12,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.UASController;
+import model.UASFactory;
+import model.dto.Response;
 import view.panels.LoginUI;
 
 public class Dashboard extends JFrame {
 
+    UASController controller = UASFactory.getUASControllerInstance();
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
@@ -24,7 +27,6 @@ public class Dashboard extends JFrame {
         if (!UASController.isUserLoggedIn()) {
             LoginUI loginScreen = new LoginUI();
             loginScreen.setVisible(true);
-            this.setVisible(false);
             this.dispose();
         } else {
 
@@ -118,8 +120,6 @@ public class Dashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UASController.expireSession();
-                dispose();
-                new LoginUI().setVisible(true);
             }
         });
 
@@ -150,83 +150,31 @@ public class Dashboard extends JFrame {
 
                 contentPanel.removeAll();
                 if (buttonText.equals("Home")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
+                    contentPanel.add(new Home());
 
-                    } else {
-                        Home homePanel = new Home();
-                        contentPanel.add(homePanel);
-                    }
                 } else if (buttonText.equals("Add Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        System.out.println("Session expired");
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
 
-                    } else {
-                        contentPanel.add(new AddAttendance());
-                    }
+                    contentPanel.add(new AddAttendance());
 
                 } else if (buttonText.equals("View Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
 
-                    } else {
-                        contentPanel.add(new ViewAttendance());
-                    }
+                    contentPanel.add(new ViewAttendance());
 
                 } else if (buttonText.equals("Delete Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
 
-                    } else {
-                        contentPanel.add(new DeleteAttendance());
-                    }
+                    contentPanel.add(new DeleteAttendance());
 
                 } else if (buttonText.equals("Modify Attendance")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
 
-                    } else {
-                        contentPanel.add(new ModifyAttendance());
-                    }
+                    contentPanel.add(new ModifyAttendance());
 
                 } else if (buttonText.equals("User Settings")) {
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
 
-                    } else {
-                        contentPanel.add(new UserSettings());
-                    }
+                    contentPanel.add(new UserSettings());
 
                 } else if (buttonText.equals("Reports")) {
 
-                    if (UASController.isSessionExpired()) {
-                        UASController.expireSession();
-                        dispose();
-                        LoginUI loginScreen = new LoginUI();
-                        loginScreen.setVisible(true);
-
-                    } else {
-                        contentPanel.add(new Reports());
-                    }
+                    contentPanel.add(new Reports());
 
                 }
                 contentPanel.revalidate();
@@ -243,7 +191,7 @@ public class Dashboard extends JFrame {
         add(contentPanel, BorderLayout.CENTER);
         String[] parts = UASController.objApplicationSession.getUser().getEmail().split("@");
         String username = parts[0];
-        JLabel welcomeLabel = new JLabel("Hey there "+username+"!");
+        JLabel welcomeLabel = new JLabel("Hey there " + controller.getTeacherByEmail(new Response()).getName() + "!");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         welcomeLabel.setForeground(new Color(41, 128, 185));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);

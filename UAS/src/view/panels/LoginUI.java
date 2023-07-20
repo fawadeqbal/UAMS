@@ -113,10 +113,14 @@ public class LoginUI extends JFrame {
                 controllerObj.verifyUser(user, responseObj);
                 if (responseObj.isSuccessfull()) {
                     if(UASController.objApplicationSession.getUser().getRole().equals("admin")){
-                        new AdminDashboard().setVisible(true);
+                        AdminDashboard admin=new AdminDashboard();
+                        admin.setVisible(true);
+                        UASController.objApplicationSession.setCurrentScreen(admin);
                         dispose();
                     }else{
-                        new Dashboard().setVisible(true);
+                        Dashboard dashboard=new Dashboard();
+                        dashboard.setVisible(true);
+                        UASController.objApplicationSession.setCurrentScreen(dashboard);
                         dispose();
                     }
 
