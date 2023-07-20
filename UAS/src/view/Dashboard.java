@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
+import view.components.charts.SemesterAttendanceReport;
 import view.panels.LoginUI;
 
 public class Dashboard extends JFrame {
@@ -77,7 +78,7 @@ public class Dashboard extends JFrame {
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        JButton homeButton = createMenuButton("Home");
+        JButton homeButton = createMenuButton("Dashboard");
 
         JButton viewAttendanceButton = createMenuButton("View Attendance");
         menuPanel.add(homeButton, gbc);
@@ -149,8 +150,8 @@ public class Dashboard extends JFrame {
                 String buttonText = button.getText();
 
                 contentPanel.removeAll();
-                if (buttonText.equals("Home")) {
-                    contentPanel.add(new Home());
+                if (buttonText.equals("Dashboard")) {
+                    contentPanel.add(new SemesterAttendanceReport(), BorderLayout.CENTER);
 
                 } else if (buttonText.equals("Add Attendance")) {
 
@@ -186,15 +187,11 @@ public class Dashboard extends JFrame {
 
     private void createContentPanel() {
         contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout()); // Set layout manager for the content panel
+        contentPanel.add(new SemesterAttendanceReport(), BorderLayout.CENTER); // Add the chart to the center of the content panel
 
-        contentPanel.setLayout(new BorderLayout());
+        // Add the contentPanel to the main frame
         add(contentPanel, BorderLayout.CENTER);
-        String[] parts = UASController.objApplicationSession.getUser().getEmail().split("@");
-        String username = parts[0];
-        JLabel welcomeLabel = new JLabel("Hey there " + controller.getTeacherByEmail(new Response()).getName() + "!");
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        welcomeLabel.setForeground(new Color(41, 128, 185));
-        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPanel.add(welcomeLabel, BorderLayout.CENTER);
     }
+
 }
