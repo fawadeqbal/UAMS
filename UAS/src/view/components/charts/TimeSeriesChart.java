@@ -8,9 +8,9 @@ import org.jfree.data.time.TimeSeriesCollection;
 
 import javax.swing.*;
 
-public class TimeSeriesChartExample extends JFrame {
+public class TimeSeriesChart extends JFrame {
 
-    public TimeSeriesChartExample() {
+    public TimeSeriesChart() {
         super("Time Series Chart Example");
 
         TimeSeries series = new TimeSeries("Data Series");
@@ -36,6 +36,6 @@ public class TimeSeriesChartExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(TimeSeriesChartExample::new);
+        SwingUtilities.invokeLater(TimeSeriesChart::new);
     }
 }

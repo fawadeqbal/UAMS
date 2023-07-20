@@ -8,9 +8,9 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 
-public class PieChartExample extends JFrame {
+public class PieChart extends JFrame {
 
-    public PieChartExample() {
+    public PieChart() {
         super("Pie Chart Example");
 
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -31,6 +31,6 @@ public class PieChartExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(PieChartExample::new);
+        SwingUtilities.invokeLater(PieChart::new);
     }
 }

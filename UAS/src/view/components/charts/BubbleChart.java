@@ -7,9 +7,9 @@ import org.jfree.data.xy.DefaultXYZDataset;
 
 import javax.swing.*;
 
-public class BubbleChartExample extends JFrame {
+public class BubbleChart extends JFrame {
 
-    public BubbleChartExample() {
+    public BubbleChart() {
         super("Bubble Chart Example");
 
         DefaultXYZDataset dataset = createDataset();
@@ -34,6 +34,6 @@ public class BubbleChartExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(BubbleChartExample::new);
+        SwingUtilities.invokeLater(BubbleChart::new);
     }
 }

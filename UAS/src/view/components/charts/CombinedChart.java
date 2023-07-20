@@ -20,9 +20,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
-public class CombinedChartExample extends JFrame {
+public class CombinedChart extends JFrame {
 
-    public CombinedChartExample() {
+    public CombinedChart() {
         super("Combined Chart Example");
 
         CategoryDataset barDataset = createBarDataset();
@@ -82,6 +82,6 @@ public class CombinedChartExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(CombinedChartExample::new);
+        SwingUtilities.invokeLater(CombinedChart::new);
     }
 }

@@ -110,8 +110,11 @@ public class CommonValidator {
     }
 
     private static void validateTeacherID(int id, Response response) {
-        if (id < 5000) {
+        if (id == 0) {
+            response.messagesList.add(new Message("Faculty ID cannot be 0.", MessageType.Error));
+        }else if (id<5000){
             response.messagesList.add(new Message("Faculty ID cannot be less than 5000.", MessageType.Error));
+        
         }
     }
 

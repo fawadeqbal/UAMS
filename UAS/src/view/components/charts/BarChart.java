@@ -8,14 +8,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 
-public class AreaChartExample extends JFrame {
+public class BarChart extends JFrame {
 
-    public AreaChartExample() {
-        super("Area Chart Example");
+    public BarChart() {
+        super("Bar Chart Example");
 
         CategoryDataset dataset = createDataset();
 
-        JFreeChart chart = ChartFactory.createAreaChart("Area Chart Example", "Category", "Value", dataset);
+        JFreeChart chart = ChartFactory.createBarChart("Bar Chart Example", "Category", "Value", dataset);
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -38,6 +38,6 @@ public class AreaChartExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(AreaChartExample::new);
+        SwingUtilities.invokeLater(BarChart::new);
     }
 }

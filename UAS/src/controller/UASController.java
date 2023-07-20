@@ -165,9 +165,4 @@ public class UASController {
         return dalManagerObj.getCoursebyId(course, response);
     }
 
-    public static void main(String[] args) {
-        UASController c = UASFactory.getUASControllerInstance();
-
-    }
-
 }

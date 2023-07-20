@@ -8,10 +8,10 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
-public class ScatterPlotExample extends JFrame {
+public class LineChart extends JFrame {
 
-    public ScatterPlotExample() {
-        super("Scatter Plot Example");
+    public LineChart() {
+        super("Line Chart Example");
 
         XYSeries series = new XYSeries("Data Series");
         series.add(1, 5);
@@ -23,7 +23,7 @@ public class ScatterPlotExample extends JFrame {
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
 
-        JFreeChart chart = ChartFactory.createScatterPlot("Scatter Plot Example", "X", "Y", dataset);
+        JFreeChart chart = ChartFactory.createXYLineChart("Line Chart Example", "X", "Y", dataset);
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -36,6 +36,6 @@ public class ScatterPlotExample extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ScatterPlotExample::new);
+        SwingUtilities.invokeLater(LineChart::new);
     }
 }

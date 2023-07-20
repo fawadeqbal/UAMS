@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProgressBarExample extends JFrame {
+public class ProgressBar extends JFrame {
     private JProgressBar progressBar;
     
-    public ProgressBarExample() {
+    public ProgressBar() {
         progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
         JButton startButton = new JButton("Start");
@@ -44,6 +44,6 @@ public class ProgressBarExample extends JFrame {
     }
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProgressBarExample::new);
+        SwingUtilities.invokeLater(ProgressBar::new);
     }
 }

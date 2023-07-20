@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
-import view.components.charts.SemesterAttendanceReport;
+import view.panels.SemesterAttendanceReport;
 import view.panels.LoginUI;
 
 public class Dashboard extends JFrame {

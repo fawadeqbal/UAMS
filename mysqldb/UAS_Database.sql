@@ -44,23 +44,6 @@ INSERT INTO `Admins` VALUES ('Fawad Iqbal','03149972883','fawadeqbal@yahoo.com')
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `ClassCourseStudentView`
---
-
-DROP TABLE IF EXISTS `ClassCourseStudentView`;
-/*!50001 DROP VIEW IF EXISTS `ClassCourseStudentView`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `ClassCourseStudentView` AS SELECT 
- 1 AS `class_id`,
- 1 AS `course_code`,
- 1 AS `course_name`,
- 1 AS `credit_hours`,
- 1 AS `regno`,
- 1 AS `student_name`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `Courses`
 --
 
@@ -84,21 +67,6 @@ LOCK TABLES `Courses` WRITE;
 INSERT INTO `Courses` VALUES ('CS207','Database','4'),('CSC103','Programming Fundamentals','4'),('CSC207','Data Structures','4'),('CSC209','Object Oriented Software Engineering','4'),('CSC215','HCI','3'),('CSC218','Object Oriented Programming','4'),('CSC308','Operating System','2'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4'),('MGT112','Marketing','3'),('MTH108','Calculus 1','3');
 /*!40000 ALTER TABLE `Courses` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Temporary view structure for view `FacultyCoursesView`
---
-
-DROP TABLE IF EXISTS `FacultyCoursesView`;
-/*!50001 DROP VIEW IF EXISTS `FacultyCoursesView`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `FacultyCoursesView` AS SELECT 
- 1 AS `teacher_id`,
- 1 AS `teacher_name`,
- 1 AS `Courses_course_code`,
- 1 AS `course_name`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `Students`
@@ -134,20 +102,6 @@ INSERT INTO `Students` VALUES ('FA23-BSE-001','Idrees Khan','Khush Khawas','2006
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `TeacherCourseView`
---
-
-DROP TABLE IF EXISTS `TeacherCourseView`;
-/*!50001 DROP VIEW IF EXISTS `TeacherCourseView`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `TeacherCourseView` AS SELECT 
- 1 AS `teacher_name`,
- 1 AS `course_name`,
- 1 AS `credit_hours`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `Teachers`
 --
 
@@ -176,6 +130,38 @@ INSERT INTO `Teachers` VALUES (5000,'Sana Malik','1234567890','sana_malik@cuiatd
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Timetable`
+--
+
+DROP TABLE IF EXISTS `Timetable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Timetable` (
+  `slot_slot_id` int NOT NULL,
+  `class_room_class_room_id` varchar(10) NOT NULL,
+  `class_class_id` varchar(45) NOT NULL,
+  `class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
+  `class_teacher_course_Teachers_teacher_id` int NOT NULL,
+  PRIMARY KEY (`slot_slot_id`,`class_room_class_room_id`),
+  KEY `fk_schedual_slot1_idx` (`slot_slot_id`),
+  KEY `fk_schedual_class_room1_idx` (`class_room_class_room_id`),
+  KEY `fk_schedual_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`,`class_teacher_course_Teachers_teacher_id`),
+  CONSTRAINT `fk_schedual_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`, `class_teacher_course_Teachers_teacher_id`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`, `teacher_course_Teachers_teacher_id`),
+  CONSTRAINT `fk_schedual_class_room1` FOREIGN KEY (`class_room_class_room_id`) REFERENCES `class_room` (`class_room_id`),
+  CONSTRAINT `fk_schedual_slot1` FOREIGN KEY (`slot_slot_id`) REFERENCES `slot` (`slot_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Timetable`
+--
+
+LOCK TABLES `Timetable` WRITE;
+/*!40000 ALTER TABLE `Timetable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Timetable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Users`
 --
 
@@ -201,6 +187,35 @@ INSERT INTO `Users` VALUES ('faizanswabi95@gmail.com','root','student'),('fawade
 UNLOCK TABLES;
 
 --
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `attendance` (
+  `attedance_id` int NOT NULL,
+  `lecture_lecture_id` int NOT NULL,
+  `Students_regno` varchar(15) NOT NULL,
+  `status` tinyint NOT NULL,
+  PRIMARY KEY (`attedance_id`),
+  KEY `fk_attendance_lecture1_idx` (`lecture_lecture_id`),
+  KEY `fk_attendance_Students1_idx` (`Students_regno`),
+  CONSTRAINT `fk_attendance_lecture1` FOREIGN KEY (`lecture_lecture_id`) REFERENCES `lecture` (`lecture_id`),
+  CONSTRAINT `fk_attendance_Students1` FOREIGN KEY (`Students_regno`) REFERENCES `Students` (`regno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `class`
 --
 
@@ -211,7 +226,7 @@ CREATE TABLE `class` (
   `teacher_course_Courses_course_code` varchar(10) NOT NULL,
   `teacher_course_Teachers_teacher_id` int NOT NULL,
   `class_id` varchar(45) NOT NULL,
-  PRIMARY KEY (`class_id`,`teacher_course_Courses_course_code`),
+  PRIMARY KEY (`class_id`,`teacher_course_Courses_course_code`,`teacher_course_Teachers_teacher_id`),
   KEY `fk_registration_teacher_course1_idx` (`teacher_course_Courses_course_code`,`teacher_course_Teachers_teacher_id`),
   CONSTRAINT `fk_registration_teacher_course1` FOREIGN KEY (`teacher_course_Courses_course_code`, `teacher_course_Teachers_teacher_id`) REFERENCES `teacher_course` (`Courses_course_code`, `Teachers_teacher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -260,12 +275,13 @@ DROP TABLE IF EXISTS `lecture`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lecture` (
   `lecture_id` int NOT NULL,
-  `class_class_id` varchar(45) NOT NULL,
-  `class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
-  `lecture_title` varchar(45) NOT NULL,
+  `lecture_date` date NOT NULL,
+  `lecture_topic` varchar(45) NOT NULL,
+  `schedual_slot_slot_id` int NOT NULL,
+  `schedual_class_room_class_room_id` varchar(10) NOT NULL,
   PRIMARY KEY (`lecture_id`),
-  KEY `fk_lecture_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`),
-  CONSTRAINT `fk_lecture_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`)
+  KEY `fk_lecture_schedual1_idx` (`schedual_slot_slot_id`,`schedual_class_room_class_room_id`),
+  CONSTRAINT `fk_lecture_schedual1` FOREIGN KEY (`schedual_slot_slot_id`, `schedual_class_room_class_room_id`) REFERENCES `Timetable` (`slot_slot_id`, `class_room_class_room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,15 +302,11 @@ DROP TABLE IF EXISTS `slot`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `slot` (
-  `slot_no` int NOT NULL,
-  `class_class_id` varchar(45) NOT NULL,
-  `class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
-  `class_room_class_room_id` varchar(10) NOT NULL,
-  PRIMARY KEY (`slot_no`),
-  KEY `fk_slot_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`),
-  KEY `fk_slot_class_room1_idx` (`class_room_class_room_id`),
-  CONSTRAINT `fk_slot_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`),
-  CONSTRAINT `fk_slot_class_room1` FOREIGN KEY (`class_room_class_room_id`) REFERENCES `class_room` (`class_room_id`)
+  `slot_id` int NOT NULL,
+  `day_of_week` enum('monday','tuesday','wednesday','thursday','friday') DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  PRIMARY KEY (`slot_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -318,10 +330,11 @@ CREATE TABLE `student_class` (
   `Students_regno` varchar(15) NOT NULL,
   `class_class_id` varchar(45) NOT NULL,
   `class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`Students_regno`,`class_class_id`),
+  `class_teacher_course_Teachers_teacher_id` int NOT NULL,
+  PRIMARY KEY (`Students_regno`),
   KEY `fk_student_class_Students1_idx` (`Students_regno`),
-  KEY `fk_student_class_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`),
-  CONSTRAINT `fk_student_class_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`),
+  KEY `fk_student_class_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`,`class_teacher_course_Teachers_teacher_id`),
+  CONSTRAINT `fk_student_class_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`, `class_teacher_course_Teachers_teacher_id`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`, `teacher_course_Teachers_teacher_id`),
   CONSTRAINT `fk_student_class_Students1` FOREIGN KEY (`Students_regno`) REFERENCES `Students` (`regno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -332,7 +345,7 @@ CREATE TABLE `student_class` (
 
 LOCK TABLES `student_class` WRITE;
 /*!40000 ALTER TABLE `student_class` DISABLE KEYS */;
-INSERT INTO `student_class` VALUES ('FA23-BSE-001','bse-4b','CSC103');
+INSERT INTO `student_class` VALUES ('FA23-BSE-001','bse-4b','CSC103',0);
 /*!40000 ALTER TABLE `student_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,63 +373,9 @@ CREATE TABLE `teacher_course` (
 
 LOCK TABLES `teacher_course` WRITE;
 /*!40000 ALTER TABLE `teacher_course` DISABLE KEYS */;
-INSERT INTO `teacher_course` VALUES ('CSC103',5000),('CSC207',5000),('CSC209',5000),('CSC103',5001),('CSC207',5001),('CSC209',5001),('EEE121',5002),('EEE241',5002),('MGT112',5002),('MTH108',5003),('CSC218',5004);
+INSERT INTO `teacher_course` VALUES ('CSC103',5000),('CSC207',5000),('CSC209',5000),('CSC103',5001),('CSC207',5001),('CSC209',5001),('EEE121',5002),('EEE241',5002),('MGT112',5002),('MTH108',5003),('CSC218',5004),('CSC308',5004);
 /*!40000 ALTER TABLE `teacher_course` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Final view structure for view `ClassCourseStudentView`
---
-
-/*!50001 DROP VIEW IF EXISTS `ClassCourseStudentView`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `ClassCourseStudentView` AS select distinct `cl`.`class_id` AS `class_id`,`cl`.`teacher_course_Courses_course_code` AS `course_code`,`c`.`course_name` AS `course_name`,`c`.`credit_hours` AS `credit_hours`,`s`.`regno` AS `regno`,`s`.`student_name` AS `student_name` from ((((`class` `cl` join `teacher_course` `tc` on((`cl`.`teacher_course_Courses_course_code` = `tc`.`Courses_course_code`))) join `Courses` `c` on((`tc`.`Courses_course_code` = `c`.`course_code`))) join `student_class` `sc` on(((`cl`.`class_id` = `sc`.`class_class_id`) and (`cl`.`teacher_course_Courses_course_code` = `sc`.`class_teacher_course_Courses_course_code`)))) join `Students` `s` on((`sc`.`Students_regno` = `s`.`regno`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `FacultyCoursesView`
---
-
-/*!50001 DROP VIEW IF EXISTS `FacultyCoursesView`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `FacultyCoursesView` AS select `t`.`teacher_id` AS `teacher_id`,`t`.`teacher_name` AS `teacher_name`,`tc`.`Courses_course_code` AS `Courses_course_code`,`c`.`course_name` AS `course_name` from ((`Teachers` `t` join `teacher_course` `tc` on((`t`.`teacher_id` = `tc`.`Teachers_teacher_id`))) join `Courses` `c` on((`tc`.`Courses_course_code` = `c`.`course_code`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `TeacherCourseView`
---
-
-/*!50001 DROP VIEW IF EXISTS `TeacherCourseView`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `TeacherCourseView` AS select `t`.`teacher_name` AS `teacher_name`,`c`.`course_name` AS `course_name`,`c`.`credit_hours` AS `credit_hours` from ((`Teachers` `t` join `teacher_course` `tc` on((`t`.`teacher_id` = `tc`.`Teachers_teacher_id`))) join `Courses` `c` on((`tc`.`Courses_course_code` = `c`.`course_code`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -427,4 +386,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-21  0:00:40
+-- Dump completed on 2023-07-21  2:34:58
