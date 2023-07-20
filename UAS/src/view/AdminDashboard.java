@@ -8,6 +8,7 @@ package view;
  *
  * @author fawad
  */
+import view.components.UTCTime;
 import javax.swing.*;
 import view.panels.LoginUI;
 import controller.UASController;
