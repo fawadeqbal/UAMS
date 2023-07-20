@@ -221,6 +221,7 @@ public class DALManager {
         if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
+            return new TeacherDTO();
         }
         ResultSet resultSet = null;
         String query = "SELECT * FROM Teachers WHERE Users_email=?;";
