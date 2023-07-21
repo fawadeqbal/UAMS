@@ -176,15 +176,7 @@ public class DALManager {
         return objMapper.getTeachers(resultSet);
     }
 
-    public static void main(String[] args) {
-        DALManager dal = new DALManager();
-        Response res = UASFactory.getResponseInstance();
-//        ArrayList<TeacherCourseDTO> list=dal.getAssignCourseTeacher(res);
-//        for(TeacherCourseDTO s:list){
-//            System.out.println(s.getCourseCode());
-//        }
-
-    }
+   
 
     public void addTeacher(TeacherDTO teacher, Response response) {
         Connection connection = mySQL.getConnection();
@@ -256,4 +248,16 @@ public class DALManager {
         return objMapper.getCoursesofTecher(resultSet);
     }
 
+    public ArrayList<StudentDTO> getStudentByClassIDCourseCode(ClassDTO classObj, CourseDTO course, Response response) {
+       Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT student_name,student_regno FROM view_students_by_class_and_course WHERE class_id=? AND course_code=?;";
+        resultSet = objReader.getStudentResult(classObj,course, connection, response, query);
+        return objMapper.getStudentList(resultSet);
+    }
+  
 }

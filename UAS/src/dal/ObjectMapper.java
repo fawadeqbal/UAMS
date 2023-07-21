@@ -188,4 +188,21 @@ public class ObjectMapper {
     
     }
 
+    ArrayList<StudentDTO> getStudentList(ResultSet rs) {
+       
+    ArrayList<StudentDTO> studentsList = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                StudentDTO objStudent=new StudentDTO();                
+                objStudent.setName(rs.getString(1));
+                objStudent.setRegNo(rs.getString(2));
+                studentsList.add(objStudent);
+            }
+        }catch (Exception e){
+            System.out.println("Error in mapping"+e.getMessage());
+        }
+        return studentsList;
+    }
+
 }

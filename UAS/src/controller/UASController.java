@@ -175,5 +175,8 @@ public class UASController {
         return dalManagerObj.getCoursesByClassIDTeacherID(classObj,teacher, response);
     }
     
-
+    public ArrayList<StudentDTO> getStudentByClassIDCourseCode(CourseDTO course,ClassDTO classObj,Response response) {
+        
+        return dalManagerObj.getStudentByClassIDCourseCode(classObj,course, response);
+    }
 }

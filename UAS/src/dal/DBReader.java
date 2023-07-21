@@ -115,4 +115,20 @@ public class DBReader {
     
     }
 
+    ResultSet getStudentResult(ClassDTO classObj, CourseDTO course, Connection connection, Response response, String query) {
+    PreparedStatement statement = null;
+        try {
+            
+            statement = connection.prepareStatement(query);
+            statement.setString(1, classObj.getClassId());
+            statement.setString(2, course.getCourseCode());
+            return statement.executeQuery();
+        } catch (Exception ex) {
+            System.out.println("Error in Reader"+ex.getMessage());
+            response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
+
+        }
+        return null;     
+    }
+
 }
