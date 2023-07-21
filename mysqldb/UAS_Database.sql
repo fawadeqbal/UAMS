@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `uas` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `uas`;
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: localhost    Database: uas
+-- Host: 127.0.0.1    Database: uas
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.33-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,88 @@ USE `uas`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Temporary view structure for view `CourseView`
+--
+
+DROP TABLE IF EXISTS `CourseView`;
+/*!50001 DROP VIEW IF EXISTS `CourseView`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `CourseView` AS SELECT 
+ 1 AS `course_code`,
+ 1 AS `course_name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `StudentsByTeacherCourseClass`
+--
+
+DROP TABLE IF EXISTS `StudentsByTeacherCourseClass`;
+/*!50001 DROP VIEW IF EXISTS `StudentsByTeacherCourseClass`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `StudentsByTeacherCourseClass` AS SELECT 
+ 1 AS `student_regno`,
+ 1 AS `student_name`,
+ 1 AS `father_name`,
+ 1 AS `dob`,
+ 1 AS `cnic`,
+ 1 AS `phone_number`,
+ 1 AS `class_id`,
+ 1 AS `course_code`,
+ 1 AS `teacher_id`,
+ 1 AS `teacher_name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `TeacherClassView`
+--
+
+DROP TABLE IF EXISTS `TeacherClassView`;
+/*!50001 DROP VIEW IF EXISTS `TeacherClassView`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `TeacherClassView` AS SELECT 
+ 1 AS `teacher_id`,
+ 1 AS `teacher_name`,
+ 1 AS `class_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `TeacherClassesCourses`
+--
+
+DROP TABLE IF EXISTS `TeacherClassesCourses`;
+/*!50001 DROP VIEW IF EXISTS `TeacherClassesCourses`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `TeacherClassesCourses` AS SELECT 
+ 1 AS `teacher_id`,
+ 1 AS `teacher_name`,
+ 1 AS `course_code`,
+ 1 AS `course_name`,
+ 1 AS `class_id`,
+ 1 AS `teacher_course_Courses_course_code`,
+ 1 AS `teacher_course_Teachers_teacher_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `TeacherCourseView`
+--
+
+DROP TABLE IF EXISTS `TeacherCourseView`;
+/*!50001 DROP VIEW IF EXISTS `TeacherCourseView`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `TeacherCourseView` AS SELECT 
+ 1 AS `teacher_id`,
+ 1 AS `teacher_name`,
+ 1 AS `Courses_course_code`,
+ 1 AS `course_name`,
+ 1 AS `credit_hours`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `admins`
@@ -95,7 +177,7 @@ CREATE TABLE `class` (
 
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
-INSERT INTO `class` VALUES ('CSC103',5000,'bse-4b');
+INSERT INTO `class` VALUES ('CS207',5000,'bse-4b'),('CSC103',5000,'bse-4b'),('CSC209',5001,'bse-4b');
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,6 +207,21 @@ INSERT INTO `class_room` VALUES ('A210',40,'AC, projector'),('Z220',40,'AC, proj
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `course_details_view`
+--
+
+DROP TABLE IF EXISTS `course_details_view`;
+/*!50001 DROP VIEW IF EXISTS `course_details_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `course_details_view` AS SELECT 
+ 1 AS `course_name`,
+ 1 AS `course_code`,
+ 1 AS `faculty_id`,
+ 1 AS `class_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `courses`
 --
 
@@ -145,7 +242,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES ('CS207','Database','4'),('CSC103','Data Structures','4'),('CSC209','Object Oriented Software Engineering','4'),('CSC215','HCI','3'),('CSC218','Object Oriented Programming','4'),('CSC219','Web Technology','3'),('CSC308','Operating System','2'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4'),('MGT112','Marketing','3'),('MTH108','Calculus 1','3'),('MTH205','Statistics','3');
+INSERT INTO `courses` VALUES ('CS207','Database','4'),('CSC103','Data Structures','4'),('CSC209','Object Oriented Software Engineering','3'),('CSC215','HCI','3'),('CSC218','Object Oriented Programming','4'),('CSC219','Web Technology','3'),('CSC308','Operating System','2'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4'),('MGT112','Marketing','3'),('MTH108','Calculus 1','3'),('MTH205','Statistics','3');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +387,7 @@ CREATE TABLE `teacher_course` (
 
 LOCK TABLES `teacher_course` WRITE;
 /*!40000 ALTER TABLE `teacher_course` DISABLE KEYS */;
-INSERT INTO `teacher_course` VALUES ('CSC103',5000);
+INSERT INTO `teacher_course` VALUES ('CS207',5000),('CSC103',5000),('CSC209',5001),('CS207',5005),('MTH205',5006),('CSC219',5007);
 /*!40000 ALTER TABLE `teacher_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,6 +475,114 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES ('aashan@gmail.com','root','student'),('abdullah@gmail.com','root','student'),('adnan@gmail.com','root','student'),('aizazullah@gmail.com','root','student'),('aleena@gmail.com','root','student'),('arbab@gmail.com','root','student'),('ehtasham@gmail.com','root','student'),('faizan@gmail.com','root','student'),('faizanswabi95@gmail.com','root','student'),('fawad@gmail.com','root','student'),('fawadeqbal@yahoo.com','root','admin'),('idrees447701@gmail.com','root','student'),('mansoor@yahoo.com','root','student'),('moeed@gmail.com','root','student'),('muhammadali@cuiatd.edu.pk','root','faculty'),('mukhtiarzamin@cuiatd.edu.pk','root','faculty'),('rabnawazjadoon@cuiatd.edu.pk','root','faculty'),('rahmanali@gmail.com','root','student'),('sairabhatti@cuiatd.edu.pk','root','faculty'),('sana_malik@cuiatd.edu.pk','root','faculty'),('usmanashraf@cuiatd.edu.pk','root','faculty'),('waqasjadoon@cuiatd.edu.pk','root','faculty'),('ziaulwahid@cuiatd.edu.pk','root','faculty');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `CourseView`
+--
+
+/*!50001 DROP VIEW IF EXISTS `CourseView`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `CourseView` AS select `co`.`course_code` AS `course_code`,`co`.`course_name` AS `course_name` from (((`class` `c` join `teacher_course` `tc` on(((`c`.`teacher_course_Courses_course_code` = `tc`.`Courses_course_code`) and (`c`.`teacher_course_Teachers_teacher_id` = `tc`.`Teachers_teacher_id`)))) join `teachers` `t` on((`tc`.`Teachers_teacher_id` = `t`.`teacher_id`))) join `courses` `co` on((`tc`.`Courses_course_code` = `co`.`course_code`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `StudentsByTeacherCourseClass`
+--
+
+/*!50001 DROP VIEW IF EXISTS `StudentsByTeacherCourseClass`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `StudentsByTeacherCourseClass` AS select `s`.`regno` AS `student_regno`,`s`.`student_name` AS `student_name`,`s`.`father_name` AS `father_name`,`s`.`dob` AS `dob`,`s`.`cnic` AS `cnic`,`s`.`phone_number` AS `phone_number`,`sc`.`class_class_id` AS `class_id`,`sc`.`class_teacher_course_Courses_course_code` AS `course_code`,`t`.`teacher_id` AS `teacher_id`,`t`.`teacher_name` AS `teacher_name` from ((((`students` `s` join `student_class` `sc` on((`s`.`regno` = `sc`.`Students_regno`))) join `class` `cl` on(((`sc`.`class_class_id` = `cl`.`class_id`) and (`sc`.`class_teacher_course_Courses_course_code` = `cl`.`teacher_course_Courses_course_code`) and (`sc`.`class_teacher_course_Teachers_teacher_id` = `cl`.`teacher_course_Teachers_teacher_id`)))) join `teacher_course` `tc` on(((`cl`.`teacher_course_Courses_course_code` = `tc`.`Courses_course_code`) and (`cl`.`teacher_course_Teachers_teacher_id` = `tc`.`Teachers_teacher_id`)))) join `teachers` `t` on((`tc`.`Teachers_teacher_id` = `t`.`teacher_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `TeacherClassView`
+--
+
+/*!50001 DROP VIEW IF EXISTS `TeacherClassView`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `TeacherClassView` AS select `tc`.`Teachers_teacher_id` AS `teacher_id`,`t`.`teacher_name` AS `teacher_name`,`c`.`class_id` AS `class_id` from ((`teacher_course` `tc` join `teachers` `t` on((`tc`.`Teachers_teacher_id` = `t`.`teacher_id`))) join `class` `c` on(((`tc`.`Courses_course_code` = `c`.`teacher_course_Courses_course_code`) and (`tc`.`Teachers_teacher_id` = `c`.`teacher_course_Teachers_teacher_id`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `TeacherClassesCourses`
+--
+
+/*!50001 DROP VIEW IF EXISTS `TeacherClassesCourses`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `TeacherClassesCourses` AS select `t`.`teacher_id` AS `teacher_id`,`t`.`teacher_name` AS `teacher_name`,`tc`.`Courses_course_code` AS `course_code`,`c`.`course_name` AS `course_name`,`cl`.`class_id` AS `class_id`,`cl`.`teacher_course_Courses_course_code` AS `teacher_course_Courses_course_code`,`cl`.`teacher_course_Teachers_teacher_id` AS `teacher_course_Teachers_teacher_id` from (((`teachers` `t` join `teacher_course` `tc` on((`t`.`teacher_id` = `tc`.`Teachers_teacher_id`))) join `courses` `c` on((`tc`.`Courses_course_code` = `c`.`course_code`))) join `class` `cl` on(((`tc`.`Courses_course_code` = `cl`.`teacher_course_Courses_course_code`) and (`tc`.`Teachers_teacher_id` = `cl`.`teacher_course_Teachers_teacher_id`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `TeacherCourseView`
+--
+
+/*!50001 DROP VIEW IF EXISTS `TeacherCourseView`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `TeacherCourseView` AS select `t`.`teacher_id` AS `teacher_id`,`t`.`teacher_name` AS `teacher_name`,`tc`.`Courses_course_code` AS `Courses_course_code`,`c`.`course_name` AS `course_name`,`c`.`credit_hours` AS `credit_hours` from ((`teachers` `t` join `teacher_course` `tc` on((`t`.`teacher_id` = `tc`.`Teachers_teacher_id`))) join `courses` `c` on((`tc`.`Courses_course_code` = `c`.`course_code`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `course_details_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `course_details_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `course_details_view` AS select `c`.`course_name` AS `course_name`,`c`.`course_code` AS `course_code`,`tc`.`Teachers_teacher_id` AS `faculty_id`,`cl`.`class_id` AS `class_id` from ((`courses` `c` join `teacher_course` `tc` on((`c`.`course_code` = `tc`.`Courses_course_code`))) join `class` `cl` on(((`tc`.`Courses_course_code` = `cl`.`teacher_course_Courses_course_code`) and (`tc`.`Teachers_teacher_id` = `cl`.`teacher_course_Teachers_teacher_id`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -388,4 +593,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-21  4:03:14
+-- Dump completed on 2023-07-21  5:48:41

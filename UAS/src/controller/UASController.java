@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dal.DALManager;
 import javax.swing.JFrame;
 import model.UASFactory;
+import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Response;
 import model.dto.StudentDTO;
@@ -164,5 +165,15 @@ public class UASController {
         course.setCourseCode(courseCode);
         return dalManagerObj.getCoursebyId(course, response);
     }
+    public ArrayList<ClassDTO> getClassesByTeacherID(Response response) {
+        TeacherDTO teacher = getTeacherByEmail(response);
+        return dalManagerObj.getClassesByTeacherID(teacher, response);
+    }
+    
+    public ArrayList<TeacherCourseViewDTO> getCoursesByClassIDTeacherID(ClassDTO classObj,Response response) {
+        TeacherDTO teacher = getTeacherByEmail(response);
+        return dalManagerObj.getCoursesByClassIDTeacherID(classObj,teacher, response);
+    }
+    
 
 }

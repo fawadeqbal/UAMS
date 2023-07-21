@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.util.ArrayList;
 import model.UASFactory;
+import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
@@ -30,7 +31,7 @@ public class DALManager {
         objAdder = new ObjectAdder();
         objMapper = new ObjectMapper();
         objReader = new DBReader();
-        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/UAS", "root", "Admin123$");
+        mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/uas", "root", "Admin123$");
     }
 
     public void verifyUser(UserDTO user, Response responseObj) {
@@ -40,7 +41,7 @@ public class DALManager {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
         } else {
-            String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
             resultSet = objReader.getUser(responseObj, user, connection, query);
         }
         if (responseObj.isSuccessfull()) {
@@ -65,7 +66,7 @@ public class DALManager {
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Courses";
+        String query = "SELECT * FROM courses";
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getCourses(resultSet);
     }
@@ -87,7 +88,7 @@ public class DALManager {
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Users";
+        String query = "SELECT * FROM users";
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getUsers(resultSet);
     }
@@ -99,7 +100,7 @@ public class DALManager {
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Courses WHERE course_code=?";
+        String query = "SELECT * FROM courses WHERE course_code=?";
         resultSet = objReader.getCourse(course, connection, response, query);
         return objMapper.getCourseById(resultSet);
     }
@@ -111,7 +112,7 @@ public class DALManager {
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Teachers WHERE teacher_id=?";
+        String query = "SELECT * FROM teachers WHERE teacher_id=?";
         resultSet = objReader.getTeacher(teacher, connection, response, query);
         return objMapper.getTeacher(resultSet);
     }
@@ -157,7 +158,7 @@ public class DALManager {
         }
 
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Students";
+        String query = "SELECT * FROM students";
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getStudents(resultSet);
     }
@@ -170,7 +171,7 @@ public class DALManager {
         }
 
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Teachers";
+        String query = "SELECT * FROM teachers";
         resultSet = objReader.getRecords(connection, response, query);
         return objMapper.getTeachers(resultSet);
     }
@@ -224,9 +225,35 @@ public class DALManager {
             return new TeacherDTO();
         }
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Teachers WHERE Users_email=?;";
+        String query = "SELECT * FROM teachers WHERE Users_email=?;";
         resultSet = objReader.getTeacherEmail(user,connection, response, query);
         return objMapper.getTeacher(resultSet);
+    }
+    public ArrayList<ClassDTO> getClassesByTeacherID(TeacherDTO teacher,Response response){
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT DISTINCT class_id FROM TeacherClassView WHERE teacher_id = ?;";
+        resultSet = objReader.getTeacher(teacher, connection, response, query);
+        return objMapper.getClasses(resultSet);
+        
+    }
+
+    
+
+    public ArrayList<TeacherCourseViewDTO> getCoursesByClassIDTeacherID(ClassDTO classObj, TeacherDTO teacher, Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM course_details_view WHERE faculty_id=? AND class_id=?";
+        resultSet = objReader.getCourses(classObj,teacher, connection, response, query);
+        return objMapper.getCoursesofTecher(resultSet);
     }
 
 }

@@ -12,6 +12,15 @@ public class TeacherCourseViewDTO {
     private String courseName;
     private String teacherName;
     private int creditHours;
+    private String courseCode;
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
 
     public int getCreditHours() {
         return creditHours;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.dto.ClassDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
@@ -144,15 +145,47 @@ public class ObjectMapper {
             {
                 TeacherCourseViewDTO cf=new TeacherCourseViewDTO();
                 
-                cf.setTeacherName(rs.getString(1));
-                cf.setCourseName(rs.getString(2));
-                cf.setCreditHours(rs.getInt(3));
+                cf.setTeacherName(rs.getString(2));
+                cf.setCourseName(rs.getString(4));
+                cf.setCreditHours(rs.getInt(5));
                 assignCourseList.add(cf);
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
         return assignCourseList;
+    }
+
+    ArrayList<ClassDTO> getClasses(ResultSet rs) {
+       ArrayList<ClassDTO> classList=new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                ClassDTO c=new ClassDTO();
+                c.setClassId(rs.getString(1));
+                classList.add(c);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return classList;
+    }
+
+    ArrayList<TeacherCourseViewDTO> getCoursesofTecher(ResultSet rs) {
+        ArrayList<TeacherCourseViewDTO> courseList=new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                TeacherCourseViewDTO cf=new TeacherCourseViewDTO();
+                cf.setCourseName(rs.getString(1));
+                cf.setCourseCode(rs.getString(2));
+                courseList.add(cf);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return courseList;
+    
     }
 
 }

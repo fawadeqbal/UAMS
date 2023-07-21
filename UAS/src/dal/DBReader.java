@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.dto.ClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
@@ -95,6 +96,23 @@ public class DBReader {
 
         }
         return null;
+    }
+
+    ResultSet getCourses(ClassDTO classObj, TeacherDTO teacher, Connection connection, Response response, String query) {
+    PreparedStatement statement = null;
+        try {
+            
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, teacher.getId());
+            statement.setString(2, classObj.getClassId());
+            return statement.executeQuery();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
+
+        }
+        return null;    
+    
     }
 
 }

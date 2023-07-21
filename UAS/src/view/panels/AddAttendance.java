@@ -13,14 +13,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import controller.UASController;
+import java.util.Stack;
 import model.UASFactory;
+import model.dto.ClassDTO;
+import model.dto.Response;
+import model.dto.TeacherCourseDTO;
+import model.dto.TeacherCourseViewDTO;
 
 public class AddAttendance extends JPanel {
 
-    UASController controllerObj = UASFactory.getUASControllerInstance();
-    ArrayList<Object> list;
+    UASController controllerObj;
     private JLabel classLabel;
+    private JLabel courseLabel;
     private JComboBox<String> classComboBox;
+    private JComboBox<String> courseComboBox;
     private JLabel dateLabel;
     private JDatePicker datePicker;
     private JLabel timeSlotLabel;
@@ -32,6 +38,7 @@ public class AddAttendance extends JPanel {
     private JCheckBox checkAllCheckBox;
 
     public AddAttendance() {
+        controllerObj = UASFactory.getUASControllerInstance();
         initializeComponents();
         setupLayout();
         addListeners();
@@ -40,14 +47,44 @@ public class AddAttendance extends JPanel {
     private void initializeComponents() {
 
         classLabel = new JLabel("Class:");
-//        list=controllerObj.getClasses(UASController.objApplicationSession.getUser(), response);
+        courseLabel = new JLabel("Course:");
+        ArrayList<ClassDTO> list = controllerObj.getClassesByTeacherID(new Response());
 
-//         Stack<String> cl=new Stack<>();
-//        for(ClassDTO c:list){
-//            cl.push(c.getClass_id());
-//            System.out.println(c.getClass_id());
-//        }
-        classComboBox = new JComboBox<>();
+        Stack<String> cl = new Stack<>();
+        for (ClassDTO c : list) {
+            cl.push(c.getClassId());
+        }
+        classComboBox = new JComboBox<>(cl);
+        courseComboBox = new JComboBox<>();
+        String selectedClass = (String) classComboBox.getSelectedItem();
+                ClassDTO classObj = new ClassDTO();
+                classObj.setClassId(selectedClass);
+                ArrayList<TeacherCourseViewDTO> list1 = controllerObj.getCoursesByClassIDTeacherID(classObj, new Response());
+
+                // Clear the existing items from the courseComboBox
+                courseComboBox.removeAllItems();
+
+                // Add the new items to the courseComboBox
+                for (TeacherCourseViewDTO c : list1) {
+                    courseComboBox.addItem(c.getCourseName() + "-" + c.getCourseCode());
+                }
+        
+//        classComboBox.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Get the selected course from the combo box
+//                String selectedClass = (String) classComboBox.getSelectedItem();
+//                ClassDTO classObj = new ClassDTO();
+//                classObj.setClassId(selectedClass);
+//                ArrayList<TeacherCourseViewDTO> list = controllerObj.getCoursesByClassIDTeacherID(classObj,new Response());
+//
+//                Stack<String> course = new Stack<>();
+//                for (TeacherCourseViewDTO c : list) {
+//                    cl.push(c.getCourseName()+"-"+c.getCourseCode());
+//                }
+//                courseComboBox= new JComboBox<>(course);
+//            }
+//        });
         dateLabel = new JLabel("Date:");
         datePicker = new JDatePicker(new Date());
 
@@ -101,10 +138,14 @@ public class AddAttendance extends JPanel {
         gbc.gridx = 1;
         add(classComboBox, gbc);
         //Add course
-
+        gbc.gridx = 0;
+        gbc.gridy++;
+        add(courseLabel, gbc);
+        gbc.gridx = 1;
+        add(courseComboBox, gbc);
         // Add date label and date picker
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy++;
         add(dateLabel, gbc);
 
         gbc.gridx = 1;
@@ -112,7 +153,7 @@ public class AddAttendance extends JPanel {
 
         // Add time slot label and text field
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy++;
         add(timeSlotLabel, gbc);
 
         gbc.gridx = 1;
@@ -120,7 +161,7 @@ public class AddAttendance extends JPanel {
 
         // Add remarks label and text field
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy++;
         add(remarksLabel, gbc);
 
         gbc.gridx = 1;
@@ -130,7 +171,7 @@ public class AddAttendance extends JPanel {
         // Add check/uncheck all checkbox
         checkAllCheckBox = new JCheckBox("Check/Uncheck All");
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy++;
         gbc.gridwidth = 2;
         gbc.weightx = 1;
         gbc.weighty = 0;
@@ -140,7 +181,7 @@ public class AddAttendance extends JPanel {
 
         // Add student table
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy++;
         gbc.gridwidth = 2;
         gbc.weightx = 1;
         gbc.weighty = 1;
@@ -150,7 +191,7 @@ public class AddAttendance extends JPanel {
 
         // Add add attendance button
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy++;
         gbc.gridwidth = 2;
         gbc.weighty = 0;
         gbc.fill = GridBagConstraints.CENTER;
@@ -162,10 +203,18 @@ public class AddAttendance extends JPanel {
         classComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCourse = (String) classComboBox.getSelectedItem();
-                //= controllerObj.getStudentsByCourse();
-                DefaultTableModel newTableModel = new DefaultTableModel();
-                studentTable.setModel(newTableModel);
+                String selectedClass = (String) classComboBox.getSelectedItem();
+                ClassDTO classObj = new ClassDTO();
+                classObj.setClassId(selectedClass);
+                ArrayList<TeacherCourseViewDTO> list = controllerObj.getCoursesByClassIDTeacherID(classObj, new Response());
+
+                // Clear the existing items from the courseComboBox
+                courseComboBox.removeAllItems();
+
+                // Add the new items to the courseComboBox
+                for (TeacherCourseViewDTO c : list) {
+                    courseComboBox.addItem(c.getCourseName() + "-" + c.getCourseCode());
+                }
             }
         });
 
