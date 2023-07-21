@@ -21,7 +21,7 @@ public class ObjectModifier {
     public void updatePassword(UserDTO userObj,Connection connection,Response responseObj) {
     try {
         // Prepare the SQL query
-        String query = "UPDATE Users SET password = ? WHERE email = ?";
+        String query = "UPDATE users SET password = ? WHERE email = ?";
         PreparedStatement statement = connection.prepareStatement(query);
 
         // Set the values for the parameters in the query
