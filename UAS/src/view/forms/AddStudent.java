@@ -163,7 +163,7 @@ public class AddStudent extends JPanel {
                     cnicField.setText("");
                     phoneNumberField.setText("");
                     userEmailField.setText("@gmail.com");
-                } else {
+                } else{
                     JOptionPane.showMessageDialog(regNoField, responseObj.getErrorMessages());
                 }
 

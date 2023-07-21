@@ -105,8 +105,19 @@ public class CommonValidator {
     }
 
     private static void validateCNIC(String cnic, Response responseObj) {
-        if (cnic == null || cnic.length() < 13) {
-            responseObj.messagesList.add(new Message("CNIC length cannot be less than 13.", MessageType.Error));
+        if (cnic == null || cnic.length() != 15) {
+            responseObj.messagesList.add(new Message("CNIC length must be exactly 15 characters.", MessageType.Error));
+            return;
+        }
+
+        // Regular expression pattern for a valid Pakistani CNIC format
+        String cnicRegex = "^[0-9]{5}-[0-9]{7}-[0-9]{1}$";
+
+        Pattern pattern = Pattern.compile(cnicRegex);
+        Matcher matcher = pattern.matcher(cnic);
+
+        if (!matcher.matches()) {
+            responseObj.messagesList.add(new Message("Invalid CNIC format. The correct format is 00000-0000000-0.", MessageType.Error));
         }
     }
 
@@ -115,7 +126,6 @@ public class CommonValidator {
             responseObj.messagesList.add(new Message("Phone number length cannot be less than 6.", MessageType.Error));
         }
     }
-
 
     private static void validateTeacherID(int id, Response response) {
         if (id == 0) {
