@@ -25,7 +25,7 @@ public class ObjectAdder {
     public void addCourse(CourseDTO course, Connection connection, Response objResponse) {
         try {
             // Prepare the SQL query
-            String query = "INSERT INTO Courses (course_code, course_name, credit_hours) VALUES (?, ?, ?)";
+            String query = "INSERT INTO courses (course_code, course_name, credit_hours) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Set the values for the parameters in the query
@@ -53,7 +53,7 @@ public class ObjectAdder {
     public void addUser(UserDTO userObj, Connection connection, Response objResponse) {
         try {
             // Prepare the SQL query
-            String query = "INSERT INTO Users (email, password, role) VALUES (?, ?, ?)";
+            String query = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Set the values for the parameters in the query
@@ -73,7 +73,7 @@ public class ObjectAdder {
             }
         } catch (SQLException e) {
             // Handle any SQL errors
-            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+            objResponse.messagesList.add(new Message("User already exists.", MessageType.Error));
 
         }
     }
@@ -81,7 +81,7 @@ public class ObjectAdder {
     public void addStudent(StudentDTO studentObj, Connection connection, Response objResponse) {
         try {
             // Prepare the SQL query
-            String query = "INSERT INTO Students (regno, student_name, father_name, dob, cnic, phone_number, Users_email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO students (regno, student_name, father_name, dob, cnic, phone_number, Users_email) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, studentObj.getRegNo());
@@ -97,14 +97,14 @@ public class ObjectAdder {
 
             if (rowsAffected > 0) {
                 // Course added successfully
-                objResponse.messagesList.add(new Message("User added successfully.", MessageType.Information));
+                objResponse.messagesList.add(new Message("Student added successfully.", MessageType.Information));
             } else {
                 // Failed to add the course
-                objResponse.messagesList.add(new Message("Failed to add new User.", MessageType.Error));
+                objResponse.messagesList.add(new Message("Failed to add new Student.", MessageType.Error));
             }
         } catch (SQLException e) {
             // Handle any SQL errors
-            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+            objResponse.messagesList.add(new Message("Student already exists.", MessageType.Error));
 
         }
     }
@@ -112,7 +112,7 @@ public class ObjectAdder {
     void addTeacher(TeacherDTO teacher, Connection connection, Response objResponse) {
          try {
             // Prepare the SQL query
-            String query = "INSERT INTO Teachers (teacher_id, teacher_name, phone_number, Users_email) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO teachers (teacher_id, teacher_name, phone_number, Users_email) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(1, teacher.getId());
@@ -132,7 +132,7 @@ public class ObjectAdder {
             }
         } catch (SQLException e) {
             // Handle any SQL errors
-            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+            objResponse.messagesList.add(new Message("Teacher already exists", MessageType.Error));
 
         }
     }
@@ -158,7 +158,7 @@ public class ObjectAdder {
             }
         } catch (SQLException e) {
             // Handle any SQL errors
-            objResponse.messagesList.add(new Message(e.getMessage(), MessageType.Error));
+            objResponse.messagesList.add(new Message("Course already assigned to the specific faculty member.", MessageType.Error));
 
         }
     }

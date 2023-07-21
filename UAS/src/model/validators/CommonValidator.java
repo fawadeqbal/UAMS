@@ -9,6 +9,9 @@ import model.dto.StudentDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CommonValidator {
 
     public static void validateUser(UserDTO objUser, Response objResponse) {
@@ -23,14 +26,14 @@ public class CommonValidator {
         validateDOB(student.getDob(), responseObj);
         validateCNIC(student.getCnic(), responseObj);
         validatePhoneNumber(student.getPhoneNumber(), responseObj);
-        validateUserEmail(student.getUserEmail(), responseObj);
+        isValidEmail(student.getUserEmail(), responseObj);
     }
 
     public static void validateTeacher(TeacherDTO teacher, Response response) {
         validateTeacherID(teacher.getId(), response);
         validateName(teacher.getName(), response);
         validatePhoneNumber(teacher.getPhoneNumber(), response);
-        validateUserEmail(teacher.getEmail(), response);
+        isValidEmail(teacher.getEmail(), response);
 
     }
 
@@ -54,8 +57,18 @@ public class CommonValidator {
     private static void isValidEmail(String email, Response objResponse) {
         if (email == null || email.length() < 3) {
             objResponse.messagesList.add(new Message("Email is not valid, Provide valid email with at least 3 characters.", MessageType.Error));
+            return;
         }
 
+        // Regular expression pattern for a valid email format
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (!matcher.matches()) {
+            objResponse.messagesList.add(new Message("Email format is not valid, Provide a valid email address.", MessageType.Error));
+        }
     }
 
     private static void isValidPassword(String password, Response objResponse) {
@@ -103,18 +116,13 @@ public class CommonValidator {
         }
     }
 
-    private static void validateUserEmail(String userEmail, Response responseObj) {
-        if (userEmail == null || userEmail.length() < 5) {
-            responseObj.messagesList.add(new Message("User email length cannot be less than 5.", MessageType.Error));
-        }
-    }
 
     private static void validateTeacherID(int id, Response response) {
         if (id == 0) {
             response.messagesList.add(new Message("Faculty ID cannot be 0.", MessageType.Error));
-        }else if (id<5000){
+        } else if (id < 5000) {
             response.messagesList.add(new Message("Faculty ID cannot be less than 5000.", MessageType.Error));
-        
+
         }
     }
 

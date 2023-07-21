@@ -15,7 +15,7 @@ public class ObjectRemover {
 
         try {
             // Prepare the SQL statement with a parameterized query
-            String query = "DELETE FROM Users WHERE email = ?";
+            String query = "DELETE FROM users WHERE email = ?";
             preparedStatement = connection.prepareStatement(query);
 
             // Set the parameter values
