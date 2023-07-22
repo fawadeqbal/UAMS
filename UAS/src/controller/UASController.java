@@ -102,8 +102,10 @@ public class UASController {
     }
 
     public void deleteUser(UserDTO userObj, Response reponseObj) {
-
-        dalManagerObj.deleteUser(userObj, reponseObj);
+        CommonValidator.validateUser(userObj, reponseObj);
+        if(reponseObj.isSuccessfull()){
+            dalManagerObj.deleteUser(userObj, reponseObj);
+        }
     }
 
     public void addCourse(CourseDTO course, Response responseObj) {
