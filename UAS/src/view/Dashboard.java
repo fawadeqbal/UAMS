@@ -5,7 +5,7 @@ import view.panels.Home;
 import view.panels.ViewAttendance;
 import view.panels.ModifyAttendance;
 import view.panels.DeleteAttendance;
-import view.panels.AddAttendance;
+import view.forms.AddAttendance;
 import view.panels.Reports;
 import javax.swing.*;
 import java.awt.*;
@@ -77,8 +77,8 @@ public class Dashboard extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
-
-        JButton homeButton = createMenuButton("Dashboard");
+        if(UASController.objApplicationSession.getUser().getRole().equals("student")){
+            JButton homeButton = createMenuButton("Dashboard");
 
         JButton viewAttendanceButton = createMenuButton("View Attendance");
         menuPanel.add(homeButton, gbc);
@@ -86,6 +86,9 @@ public class Dashboard extends JFrame {
 
         menuPanel.add(viewAttendanceButton, gbc);
         gbc.gridy++;
+        }
+
+        
         if (UASController.objApplicationSession.getUser().getRole().equals("faculty")) {
             JButton addAttendanceButton = createMenuButton("Add Attendance");
             JButton deleteAttendanceButton = createMenuButton("Delete Attendance");
@@ -100,10 +103,13 @@ public class Dashboard extends JFrame {
 
         }
         JButton settingsButton = createMenuButton("User Settings");
-        JButton reportsButton = createMenuButton("Reports");
+        if(UASController.objApplicationSession.getUser().getRole().equals("student")){
+            JButton reportsButton = createMenuButton("Reports");
 
         menuPanel.add(reportsButton, gbc);
         gbc.gridy++;
+        }
+        
         menuPanel.add(settingsButton, gbc);
         gbc.gridy++;
         gbc.gridy++;
@@ -188,7 +194,13 @@ public class Dashboard extends JFrame {
     private void createContentPanel() {
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout()); // Set layout manager for the content panel
-        contentPanel.add(new SemesterAttendanceReport(), BorderLayout.CENTER); // Add the chart to the center of the content panel
+        if(UASController.objApplicationSession.getUser().getRole().equals("student")){
+            contentPanel.add(new SemesterAttendanceReport(), BorderLayout.CENTER); // Add the chart to the center of the content panel
+        }else{
+            contentPanel.add(new AddAttendance(), BorderLayout.CENTER); // Add the chart to the center of the content panel
+        }
+        
+        
 
         // Add the contentPanel to the main frame
         add(contentPanel, BorderLayout.CENTER);

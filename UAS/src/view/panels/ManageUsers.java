@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.forms.AddUser;
+import static view.panels.Component.createMenuButton;
 
 public class ManageUsers extends JPanel {
     private CardLayout cardLayout;
@@ -19,7 +20,7 @@ public class ManageUsers extends JPanel {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
-        // Create the AddStudent and ViewStudents panels
+        // Create the AddUser and ViewUsers panels
         addUserPanel = new AddUser();
         manageUsersPanel = new ViewUsers();
 
@@ -31,14 +32,16 @@ public class ManageUsers extends JPanel {
         add(cardPanel, BorderLayout.CENTER);
 
         // Create a navigation bar with buttons to switch between panels
-        JPanel navBarPanel = new JPanel(new FlowLayout());
-        JButton addUserButton = new JButton("Add User");
-        JButton viewUsersButton = new JButton("View Users");
-        navBarPanel.add(addUserButton);
-        navBarPanel.add(viewUsersButton);
-        add(navBarPanel, BorderLayout.NORTH);
+        JPanel navBarPanel = new JPanel();
+        navBarPanel.setLayout(new BoxLayout(navBarPanel, BoxLayout.X_AXIS));
 
-        // Add action listeners to the navigation bar buttons
+        JButton addUserButton = createMenuButton("Add User");
+        JButton viewUsersButton = createMenuButton("View Users");
+
+        // Apply styles to the navigation bar
+        navBarPanel.setBackground(new Color(173, 216, 230)); // Light blue background color
+        navBarPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Margin and padding
+
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,5 +55,16 @@ public class ManageUsers extends JPanel {
                 cardLayout.show(cardPanel, "ViewUsers");
             }
         });
+
+        // Add the buttons to the navigation bar panel in
+        // Add the buttons to the navigation bar panel in the desired order
+        navBarPanel.add(addUserButton);
+        navBarPanel.add(Box.createHorizontalStrut(10)); // Add a gap of 10 pixels
+        navBarPanel.add(viewUsersButton);
+
+        // Add the navigation bar panel to the main panel
+        add(navBarPanel, BorderLayout.NORTH);
     }
+
+    
 }

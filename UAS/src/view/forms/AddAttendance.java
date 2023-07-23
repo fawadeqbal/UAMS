@@ -1,4 +1,4 @@
-package view.panels;
+package view.forms;
 
 import org.jdatepicker.JDatePicker;
 
@@ -21,6 +21,7 @@ import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherCourseDTO;
 import model.dto.TeacherCourseViewDTO;
+import view.panels.Component;
 
 public class AddAttendance extends JPanel {
 
@@ -102,8 +103,7 @@ public class AddAttendance extends JPanel {
 
         // Set checkbox renderer for the "Present" column
         studentTable.getColumnModel().getColumn(2).setCellRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+            public JCheckBox getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                     boolean hasFocus, int row, int column) {
                 JCheckBox checkBox = new JCheckBox();
                 checkBox.setSelected((boolean) value);

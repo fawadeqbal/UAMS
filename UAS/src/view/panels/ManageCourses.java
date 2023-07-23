@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.forms.AddCourse;
+import static view.panels.Component.createMenuButton;
 
 public class ManageCourses extends JPanel {
     private CardLayout cardLayout;
@@ -19,7 +20,7 @@ public class ManageCourses extends JPanel {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
-        // Create the AddStudent and ViewStudents panels
+        // Create the AddCourse and Courses panels
         addCoursePanel = new AddCourse();
         viewCoursesPanel = new Courses();
 
@@ -31,14 +32,16 @@ public class ManageCourses extends JPanel {
         add(cardPanel, BorderLayout.CENTER);
 
         // Create a navigation bar with buttons to switch between panels
-        JPanel navBarPanel = new JPanel(new FlowLayout());
-        JButton addCourseButton = new JButton("Add Course");
-        JButton viewCoursesButton = new JButton("View Courses");
-        navBarPanel.add(addCourseButton);
-        navBarPanel.add(viewCoursesButton);
-        add(navBarPanel, BorderLayout.NORTH);
+        JPanel navBarPanel = new JPanel();
+        navBarPanel.setLayout(new BoxLayout(navBarPanel, BoxLayout.X_AXIS));
 
-        // Add action listeners to the navigation bar buttons
+        JButton addCourseButton = createMenuButton("Add Course");
+        JButton viewCoursesButton = createMenuButton("View Courses");
+
+        // Apply styles to the navigation bar
+        navBarPanel.setBackground(new Color(173, 216, 230)); // Light blue background color
+        navBarPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Margin and padding
+
         addCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,5 +55,13 @@ public class ManageCourses extends JPanel {
                 cardLayout.show(cardPanel, "ViewCourses");
             }
         });
+
+        // Add a gap of 10 pixels between the buttons
+        navBarPanel.add(addCourseButton);
+        navBarPanel.add(Box.createHorizontalStrut(10)); // Add a gap of 10 pixels
+        navBarPanel.add(viewCoursesButton);
+
+        // Add the navigation bar panel to the main panel
+        add(navBarPanel, BorderLayout.NORTH);
     }
 }
