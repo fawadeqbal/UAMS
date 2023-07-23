@@ -30,7 +30,7 @@ import javax.swing.JToolBar;
  */
 public class KGradientPanel extends JPanel {
 
-    public Color kStartColor = Color.MAGENTA;
+    public Color kStartColor = Color.GRAY;
     public Color kEndColor = Color.BLUE;
     public boolean kTransparentControls = true;
     public int kGradientFocus = 500;

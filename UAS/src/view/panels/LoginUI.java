@@ -28,9 +28,10 @@ public class LoginUI extends JFrame {
         setIconImage(icon.getImage());
         setLayout(new BorderLayout());
 
-        KGradientPanel mainPanel = new KGradientPanel();
-        mainPanel.setkStartColor(Color.MAGENTA);
-        mainPanel.setkEndColor(Color.BLUE);
+//        KGradientPanel mainPanel = new KGradientPanel();
+//        mainPanel.setkStartColor(Color.DARK_GRAY);
+//        mainPanel.setkEndColor(new Color(255,255,255));
+JPanel mainPanel=new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         add(mainPanel);
         
@@ -42,19 +43,19 @@ public class LoginUI extends JFrame {
 
         JLabel titleLabel = new JLabel("Login");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(new Color(255, 255, 255));
+        titleLabel.setForeground(new Color(41, 128, 185));
         mainPanel.add(titleLabel, gbc);
 
         gbc.gridy++;
         JLabel usernameLabel = new JLabel("Email:");
         usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        usernameLabel.setForeground(Color.WHITE);
+        usernameLabel.setForeground(Color.BLACK);
         mainPanel.add(usernameLabel, gbc);
 
         gbc.gridy++;
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        passwordLabel.setForeground(Color.WHITE);
+        passwordLabel.setForeground(Color.BLACK);
         mainPanel.add(passwordLabel, gbc);
 
         gbc.gridx++;

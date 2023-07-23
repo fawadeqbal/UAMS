@@ -5,8 +5,10 @@
         <group>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/AddStudent.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/dto/TeacherDTO.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/panels/ViewUsers.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/ObjectAdder.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/DALManager.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/panels/LoginUI.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/ObjectRemover.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/validators/CommonValidator.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/ObjectModifier.java</file>

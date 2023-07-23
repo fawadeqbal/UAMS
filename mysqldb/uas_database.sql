@@ -138,7 +138,7 @@ CREATE TABLE `class` (
 
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
-INSERT INTO `class` VALUES ('CSC103',5000,'bse-4a'),('CSC103',5000,'bse-4b'),('CSC209',5001,'bse-4b');
+INSERT INTO `class` VALUES ('CSC103',5000,'bse-4a'),('CSC103',5000,'bse-4b'),('CSC209',5001,'bse-4b'),('PHM118',5008,'phm-4b');
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES ('CS207','Database','4'),('CSC103','Data Structures','4'),('CSC209','Object Oriented Software Engineering','3'),('CSC215','HCI','3'),('CSC218','Object Oriented Programming','4'),('CSC219','Web Technology','3'),('CSC308','Operating System','2'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4'),('MGT112','Marketing','3'),('MTH108','Calculus 1','3'),('MTH205','Statistics','3');
+INSERT INTO `courses` VALUES ('CS207','Database','4'),('CSC103','Data Structures','4'),('CSC209','Object Oriented Software Engineering','3'),('CSC215','HCI','3'),('CSC218','Object Oriented Programming','4'),('CSC219','Web Technology','3'),('CSC308','Operating System','2'),('EEE121','Electric Circuits Analysis I','4'),('EEE241','Digital Logic Design','4'),('MGT112','Marketing','3'),('MTH108','Calculus 1','3'),('MTH205','Statistics','3'),('PHM118','Pharmacology','4');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +287,7 @@ CREATE TABLE `student_class` (
 
 LOCK TABLES `student_class` WRITE;
 /*!40000 ALTER TABLE `student_class` DISABLE KEYS */;
-INSERT INTO `student_class` VALUES ('FA21-BSE-001','bse-4b','CSC103',5000),('FA21-BSE-002','bse-4b','CSC103',5000),('FA21-BSE-004','bse-4b','CSC103',5000),('FA21-BSE-006','bse-4b','CSC103',5000),('FA21-BSE-007','bse-4b','CSC103',5000),('FA21-BSE-008','bse-4b','CSC103',5000),('FA21-BSE-009','bse-4b','CSC103',5000),('FA21-BSE-010','bse-4b','CSC103',5000),('FA21-BSE-011','bse-4b','CSC103',5000),('FA21-BSE-012','bse-4a','CSC103',5000),('FA21-BSE-012','bse-4b','CSC103',5000),('FA21-BSE-012','bse-4b','CSC209',5001);
+INSERT INTO `student_class` VALUES ('FA21-BSE-001','bse-4b','CSC103',5000),('FA21-BSE-002','bse-4b','CSC103',5000),('FA21-BSE-004','bse-4b','CSC103',5000),('FA21-BSE-006','bse-4b','CSC103',5000),('FA21-BSE-007','bse-4b','CSC103',5000),('FA21-BSE-008','bse-4b','CSC103',5000),('FA21-BSE-009','bse-4b','CSC103',5000),('FA21-BSE-010','bse-4b','CSC103',5000),('FA21-BSE-011','bse-4b','CSC103',5000),('FA21-BSE-012','bse-4a','CSC103',5000),('FA21-BSE-012','bse-4b','CSC103',5000),('FA21-BSE-012','bse-4b','CSC209',5001),('FA21-PHM-098','phm-4b','PHM118',5008);
 /*!40000 ALTER TABLE `student_class` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +320,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES ('FA21-BSE-001','Aashan Khan Swati','Ashiq Hussain','2002-07-21','13503-4884164-1','3229209300','aashan@gmail.com'),('FA21-BSE-002','Abdul Moeed','Muhammad Jamil','2002-07-22','17301-0392400-5','3124262378','moeed@gmail.com'),('FA21-BSE-004','Abdullah','Habib ur Rehman','2002-07-22','13503-0371711-1','3460011412','abdullah@gmail.com'),('FA21-BSE-006','Adnan Ahmad','Zulfiqar Ali','2002-07-21','61101-0313784-9','3482220851','adnan@gmail.com'),('FA21-BSE-007','Aizaz Ullah','Jamal Khalid','2002-07-21','13101-0429138-9','3488972921','aizazullah@gmail.com'),('FA21-BSE-008','Aleena Farooq','Muhammad Farooq','2002-07-21','37405-4470637-6','3184041138','aleena@gmail.com'),('FA21-BSE-009','Arbab Arif','Muhammad Arif','2002-07-21','13503-7913325-9','3449526544','arbab@gmail.com'),('FA21-BSE-010','Ehtasham Anwar','Muhammad Anwar','2002-07-21','13101-7658061-5','3489851338','ehtasham@gmail.com'),('FA21-BSE-011','Faizan','Murad Ali','2002-07-21','16202-6378857-3','3118108409','faizanswabi95@gmail.com'),('FA21-BSE-012','Fawad Iqbal','Saleem Akbar','2002-07-21','15101-4926678-7','3149972883','fawad@gmail.com');
+INSERT INTO `students` VALUES ('FA21-BSE-001','Aashan Khan Swati','Ashiq Hussain','2002-07-21','13503-4884164-1','3229209300','aashan@gmail.com'),('FA21-BSE-002','Abdul Moeed','Muhammad Jamil','2002-07-22','17301-0392400-5','3124262378','moeed@gmail.com'),('FA21-BSE-004','Abdullah','Habib ur Rehman','2002-07-22','13503-0371711-1','3460011412','abdullah@gmail.com'),('FA21-BSE-006','Adnan Ahmad','Zulfiqar Ali','2002-07-21','61101-0313784-9','3482220851','adnan@gmail.com'),('FA21-BSE-007','Aizaz Ullah','Jamal Khalid','2002-07-21','13101-0429138-9','3488972921','aizazullah@gmail.com'),('FA21-BSE-008','Aleena Farooq','Muhammad Farooq','2002-07-21','37405-4470637-6','3184041138','aleena@gmail.com'),('FA21-BSE-009','Arbab Arif','Muhammad Arif','2002-07-21','13503-7913325-9','3449526544','arbab@gmail.com'),('FA21-BSE-010','Ehtasham Anwar','Muhammad Anwar','2002-07-21','13101-7658061-5','3489851338','ehtasham@gmail.com'),('FA21-BSE-011','Faizan','Murad Ali','2002-07-21','16202-6378857-3','3118108409','faizanswabi95@gmail.com'),('FA21-BSE-012','Fawad Iqbal','Saleem Akbar','2002-07-21','15101-4926678-7','3149972883','fawad@gmail.com'),('FA21-PHM-098','Mansoor Ahmad','Sher Wali Khan','2002-09-10','15103-0371408-7','0310-8695145','mansoor@yahoo.com');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,7 +348,7 @@ CREATE TABLE `teacher_course` (
 
 LOCK TABLES `teacher_course` WRITE;
 /*!40000 ALTER TABLE `teacher_course` DISABLE KEYS */;
-INSERT INTO `teacher_course` VALUES ('CS207',5000),('CSC103',5000),('CSC209',5001),('CS207',5005),('MTH205',5006),('CSC219',5007);
+INSERT INTO `teacher_course` VALUES ('CS207',5000),('CSC103',5000),('CSC209',5001),('CS207',5005),('MTH205',5006),('CSC219',5007),('PHM118',5008);
 /*!40000 ALTER TABLE `teacher_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +367,7 @@ CREATE TABLE `teachers` (
   PRIMARY KEY (`teacher_id`),
   KEY `fk_Teachers_Users_idx` (`Users_email`),
   CONSTRAINT `fk_Teachers_Users` FOREIGN KEY (`Users_email`) REFERENCES `users` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5008 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5009 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +376,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (5000,'Sana Malik','1234567890','sana_malik@cuiatd.edu.pk'),(5001,'Muhktiar Zamin','0987654321','mukhtiarzamin@cuiatd.edu.pk'),(5002,'Zia Ul Wahid','0987654321','ziaulwahid@cuiatd.edu.pk'),(5003,'Saira Bhatti','1234567890','sairabhatti@cuiatd.edu.pk'),(5004,'Waqas Jadoon','1234554321','waqasjadoon@cuiatd.edu.pk'),(5005,'Dr. Rab Nawaz Jadoon','01112225558','rabnawazjadoon@cuiatd.edu.pk'),(5006,'Usman Ashraf','123456789','usmanashraf@cuiatd.edu.pk'),(5007,'Muhammad Ali','1234567890','muhammadali@cuiatd.edu.pk');
+INSERT INTO `teachers` VALUES (5000,'Sana Malik','1234567890','sana_malik@cuiatd.edu.pk'),(5001,'Muhktiar Zamin','0987654321','mukhtiarzamin@cuiatd.edu.pk'),(5002,'Zia Ul Wahid','0987654321','ziaulwahid@cuiatd.edu.pk'),(5003,'Saira Bhatti','1234567890','sairabhatti@cuiatd.edu.pk'),(5004,'Waqas Jadoon','1234554321','waqasjadoon@cuiatd.edu.pk'),(5005,'Dr. Rab Nawaz Jadoon','01112225558','rabnawazjadoon@cuiatd.edu.pk'),(5006,'Usman Ashraf','123456789','usmanashraf@cuiatd.edu.pk'),(5007,'Muhammad Ali','1234567890','muhammadali@cuiatd.edu.pk'),(5008,'Dr. Nabi Shah','123456789','nabishah@cuiatd.edu.pk');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +433,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('aashan@gmail.com','root','student'),('abdullah@gmail.com','root','student'),('adnan@gmail.com','root','student'),('aizazullah@gmail.com','root','student'),('aleena@gmail.com','root','student'),('arbab@gmail.com','root','student'),('ehtasham@gmail.com','root','student'),('faizan@gmail.com','root','student'),('faizanswabi95@gmail.com','root','student'),('fawad@gmail.com','root','student'),('fawadeqbal@yahoo.com','root','admin'),('idrees447701@gmail.com','root','student'),('mansoor@yahoo.com','root','student'),('moeed@gmail.com','root','student'),('muhammadali@cuiatd.edu.pk','root','faculty'),('mukhtiarzamin@cuiatd.edu.pk','root','faculty'),('rabnawazjadoon@cuiatd.edu.pk','root','faculty'),('rahmanali@gmail.com','root','student'),('sairabhatti@cuiatd.edu.pk','root','faculty'),('sana_malik@cuiatd.edu.pk','root','faculty'),('usmanashraf@cuiatd.edu.pk','root','faculty'),('waqasjadoon@cuiatd.edu.pk','root','faculty'),('ziaulwahid@cuiatd.edu.pk','root','faculty');
+INSERT INTO `users` VALUES ('aashan@gmail.com','root','student'),('abdullah@gmail.com','root','student'),('adnan@gmail.com','root','student'),('aizazullah@gmail.com','root','student'),('aleena@gmail.com','root','student'),('arbab@gmail.com','root','student'),('ehtasham@gmail.com','root','student'),('faizan@gmail.com','root','student'),('faizanswabi95@gmail.com','root','student'),('fawad@gmail.com','root','student'),('fawadeqbal@yahoo.com','root','admin'),('idrees447701@gmail.com','root','student'),('mansoor@yahoo.com','1234','student'),('moeed@gmail.com','root','student'),('muhammadali@cuiatd.edu.pk','root','faculty'),('mukhtiarzamin@cuiatd.edu.pk','root','faculty'),('nabishah@cuiatd.edu.pk','root','faculty'),('rabnawazjadoon@cuiatd.edu.pk','root','faculty'),('rahmanali@gmail.com','root','student'),('sairabhatti@cuiatd.edu.pk','root','faculty'),('sana_malik@cuiatd.edu.pk','root','faculty'),('usmanashraf@cuiatd.edu.pk','root','faculty'),('waqasjadoon@cuiatd.edu.pk','root','faculty'),('ziaulwahid@cuiatd.edu.pk','root','faculty');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -551,4 +551,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-21 23:08:12
+-- Dump completed on 2023-07-23  6:35:17
