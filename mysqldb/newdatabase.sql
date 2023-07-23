@@ -169,29 +169,14 @@ CREATE TABLE `lecture` (
   `lecture_id` int NOT NULL,
   `lecture_date` date NOT NULL,
   `lecture_topic` varchar(45) NOT NULL,
-  `student_class_Students_regno` varchar(15) NOT NULL,
-  `student_class_class_class_id` varchar(45) NOT NULL,
-  `student_class_class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
-  `student_class_class_teacher_course_Teachers_teacher_id` int NOT NULL,
+  `class_class_id` varchar(45) NOT NULL,
+  `class_teacher_course_Courses_course_code` varchar(10) NOT NULL,
+  `class_teacher_course_Teachers_teacher_id` int NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
   PRIMARY KEY (`lecture_id`),
-  KEY `fk_lecture_student_class1_idx` (`student_class_Students_regno`,`student_class_class_class_id`,`student_class_class_teacher_course_Courses_course_code`,`student_class_class_teacher_course_Teachers_teacher_id`),
-  CONSTRAINT `fk_lecture_student_class1` FOREIGN KEY (`student_class_Students_regno`, `student_class_class_class_id`, `student_class_class_teacher_course_Courses_course_code`, `student_class_class_teacher_course_Teachers_teacher_id`) REFERENCES `student_class` (`Students_regno`, `class_class_id`, `class_teacher_course_Courses_course_code`, `class_teacher_course_Teachers_teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `slot`
---
-
-DROP TABLE IF EXISTS `slot`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `slot` (
-  `slot_id` int NOT NULL,
-  `day_of_week` enum('monday','tuesday','wednesday','thursday','friday') DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  PRIMARY KEY (`slot_id`)
+  KEY `fk_lecture_class1_idx` (`class_class_id`,`class_teacher_course_Courses_course_code`,`class_teacher_course_Teachers_teacher_id`),
+  CONSTRAINT `fk_lecture_class1` FOREIGN KEY (`class_class_id`, `class_teacher_course_Courses_course_code`, `class_teacher_course_Teachers_teacher_id`) REFERENCES `class` (`class_id`, `teacher_course_Courses_course_code`, `teacher_course_Teachers_teacher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -403,4 +388,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-23  7:04:33
+-- Dump completed on 2023-07-23  8:23:04
