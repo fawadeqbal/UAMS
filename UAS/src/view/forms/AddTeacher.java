@@ -1,6 +1,7 @@
 package view.forms;
 
 import controller.UASController;
+import java.awt.Color;
 import model.UASFactory;
 import model.dto.Response;
 import model.dto.TeacherDTO;
@@ -34,14 +35,22 @@ public class AddTeacher extends JPanel {
         
         constraints.insets = new Insets(5, 5, 5, 5);
         
-        JLabel titleLabel = new JLabel("Add Teacher Details");
+        JLabel titleLabel = new JLabel("Add Teacher");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
         add(titleLabel, constraints);
+        
+        //Description Label
+        JLabel descriptionLabel = new JLabel("Please fill out the following details to add a new Teacher:");
+        constraints.gridy++;
+        constraints.gridwidth = 2;
+        add(descriptionLabel, constraints);
         constraints.gridy++;
         constraints.gridwidth = 1;
+        
+        
         // ID label and text field
         JLabel idLabel = new JLabel("ID:");
         constraints.gridx=0;
@@ -90,6 +99,8 @@ public class AddTeacher extends JPanel {
         constraints.gridy++;
         constraints.gridwidth = 2;
         JButton addButton = new JButton("Add Teacher");
+        addButton.setBackground(new Color(52, 152, 219));
+        addButton.setForeground(Color.WHITE);
         addButton.addActionListener(e -> addTeacher());
         add(addButton, constraints);
     }

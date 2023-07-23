@@ -42,12 +42,18 @@ public class AddStudent extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
 
         // Title: Add User Details
-        JLabel titleLabel = new JLabel("Add Student Details");
+        JLabel titleLabel = new JLabel("Add Student");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         add(titleLabel, gbc);
+        
+        //Description: about the form
+        JLabel descriptionLabel = new JLabel("Please fill out the following details to add a new Student:");
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        add(descriptionLabel, gbc);
 
         // Registration Number
         JLabel regNoLabel = new JLabel("Registration No:");
