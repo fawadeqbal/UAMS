@@ -19,12 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
 import view.forms.AddCourse;
-import view.forms.AddStudent;
 import view.forms.AddUser;
 import view.panels.AddTeacher;
 import view.panels.AssignCourse;
 import view.panels.Courses;
-import view.panels.ViewStudents;
+import view.panels.ManageCourses;
+import view.panels.ManageStudents;
+import view.panels.ManageTeachers;
+import view.panels.ManageUsers;
 import view.panels.ViewTeachers;
 import view.panels.ViewUsers;
 
@@ -107,29 +109,20 @@ public class AdminDashboard extends JFrame {
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        JButton addStudentButton = createMenuButton("Add Student");
-        menuPanel.add(addStudentButton, gbc);
+//        JButton addStudentButton = createMenuButton("Add Student");
+//        menuPanel.add(addStudentButton, gbc);
+//        gbc.gridy++;
+        JButton manageStudentsButton = createMenuButton("Manage Students");
+        menuPanel.add(manageStudentsButton, gbc);
         gbc.gridy++;
-        JButton viewStudentsButton = createMenuButton("View Students");
-        menuPanel.add(viewStudentsButton, gbc);
+        JButton manageCourseButton = createMenuButton("Manage Courses");
+        menuPanel.add(manageCourseButton, gbc);
         gbc.gridy++;
-        JButton addCourseButton = createMenuButton("Add Course");
-        menuPanel.add(addCourseButton, gbc);
+        JButton manageUserButton = createMenuButton("Manage Users");
+        menuPanel.add(manageUserButton, gbc);
         gbc.gridy++;
-        JButton viewCoursesButton = createMenuButton("View Courses");
-        menuPanel.add(viewCoursesButton, gbc);
-        gbc.gridy++;
-        JButton addUserButton = createMenuButton("Add User");
-        menuPanel.add(addUserButton, gbc);
-        gbc.gridy++;
-        JButton viewUsersButton = createMenuButton("View Users");
-        menuPanel.add(viewUsersButton, gbc);
-        gbc.gridy++;
-        JButton addTeacherButton = createMenuButton("Add Teacher");
-        menuPanel.add(addTeacherButton, gbc);
-        gbc.gridy++;
-        JButton viewTeachersButton = createMenuButton("View Teachers");
-        menuPanel.add(viewTeachersButton, gbc);
+        JButton manageTeacherButton = createMenuButton("Manage Teachers");
+        menuPanel.add(manageTeacherButton, gbc);
         gbc.gridy++;
         JButton assignCourseTeacherButton = createMenuButton("Assign Course Teacher");
         menuPanel.add(assignCourseTeacherButton, gbc);
@@ -179,22 +172,14 @@ public class AdminDashboard extends JFrame {
                 String buttonText = button.getText();
 
                 contentPanel.removeAll();
-                if (buttonText.equals("Add Course")) {
-                    contentPanel.add(new AddCourse());
-                } else if (buttonText.equals("View Courses")) {
-                    contentPanel.add(new Courses());
-                } else if (buttonText.equals("Add User")) {
-                    contentPanel.add(new AddUser());
-                } else if (buttonText.equals("View Users")) {
-                    contentPanel.add(new ViewUsers());
-                } else if (buttonText.equals("Add Student")) {
-                    contentPanel.add(new AddStudent());
-                } else if (buttonText.equals("View Students")) {
-                    contentPanel.add(new ViewStudents());
-                }else if (buttonText.equals("View Teachers")) {
-                    contentPanel.add(new ViewTeachers());
-                }else if (buttonText.equals("Add Teacher")) {
-                    contentPanel.add(new AddTeacher());
+                if (buttonText.equals("Manage Courses")) {
+                    contentPanel.add(new ManageCourses());
+                } else if (buttonText.equals("Manage Users")) {
+                    contentPanel.add(new ManageUsers());
+                } else if (buttonText.equals("Manage Students")) {
+                    contentPanel.add(new ManageStudents());
+                }else if (buttonText.equals("Manage Teachers")) {
+                    contentPanel.add(new ManageTeachers());
                 } else if (buttonText.equals("Assign Course Teacher")) {
                     contentPanel.add(new AssignCourse());
                 }
