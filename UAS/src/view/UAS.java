@@ -1,6 +1,6 @@
 package view;
 
-import view.panels.LoginUI;
+import view.forms.LoginUI;
 import javax.swing.*;
 
 public class UAS {

@@ -13,7 +13,7 @@ import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 import model.validators.CommonValidator;
-import view.panels.LoginUI;
+import view.forms.LoginUI;
 
 /**
  *

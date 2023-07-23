@@ -21,7 +21,7 @@ import model.dto.Response;
 import model.dto.StudentDTO;
 import model.dto.TeacherCourseDTO;
 import model.dto.TeacherCourseViewDTO;
-import view.panels.Component;
+import view.components.Component;
 
 public class AddAttendance extends JPanel {
 

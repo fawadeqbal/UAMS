@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 /**
@@ -15,20 +11,17 @@ import japa.parser.ParseException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
-import view.forms.AddCourse;
-import view.forms.AddUser;
-import view.panels.AddTeacher;
-import view.panels.AssignCourse;
-import view.panels.Courses;
-import view.panels.ManageCourses;
-import view.panels.ManageStudents;
-import view.panels.ManageTeachers;
-import view.panels.ManageUsers;
-import view.panels.ViewTeachers;
-import view.panels.ViewUsers;
+import view.forms.LoginUI;
+import view.components.ManageCourses;
+import view.components.ManageStudents;
+import view.components.ManageTeachers;
+import view.components.ManageUsers;
+import view.forms.AssignmentDashboard;
 
 public class AdminDashboard extends JFrame {
 
@@ -37,8 +30,13 @@ public class AdminDashboard extends JFrame {
     private JPanel contentPanel;
 
     public AdminDashboard() {
-
-        setTitle("Attendance Management System - Dashboard");
+         if (!UASController.isUserLoggedIn()) {
+            LoginUI loginScreen = new LoginUI();
+            loginScreen.setVisible(true);
+            this.dispose();
+        } else {
+             
+        setTitle("Attendance Management System - Admin Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
@@ -54,6 +52,7 @@ public class AdminDashboard extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+        }
 
     }
 
@@ -63,6 +62,14 @@ public class AdminDashboard extends JFrame {
         headerPanel.setLayout(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
+       // Add WindowListener to handle closing event
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    // Call the method to expire the session and handle any other necessary cleanup
+                    UASController.expireSession();
+                }
+            });
 
         JLabel titleLabel = new JLabel("Admin Dashboard");
         titleLabel.setForeground(new Color(250, 250, 250));
@@ -124,7 +131,7 @@ public class AdminDashboard extends JFrame {
         JButton manageTeacherButton = createMenuButton("Manage Teachers");
         menuPanel.add(manageTeacherButton, gbc);
         gbc.gridy++;
-        JButton assignCourseTeacherButton = createMenuButton("Assign Course Teacher");
+        JButton assignCourseTeacherButton = createMenuButton("Assignment Dashboard");
         menuPanel.add(assignCourseTeacherButton, gbc);
         gbc.gridy++;
 
@@ -180,8 +187,8 @@ public class AdminDashboard extends JFrame {
                     contentPanel.add(new ManageStudents());
                 }else if (buttonText.equals("Manage Teachers")) {
                     contentPanel.add(new ManageTeachers());
-                } else if (buttonText.equals("Assign Course Teacher")) {
-                    contentPanel.add(new AssignCourse());
+                } else if (buttonText.equals("Assignment Dashboard")) {
+                    contentPanel.add(new AssignmentDashboard());
                 }
                 
                 

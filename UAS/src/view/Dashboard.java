@@ -1,21 +1,22 @@
 package view;
 
-import view.panels.UserSettings;
-import view.panels.Home;
-import view.panels.ViewAttendance;
-import view.panels.ModifyAttendance;
-import view.panels.DeleteAttendance;
+import view.forms.UserSettings;
+import view.components.ViewAttendance;
+import view.components.ModifyAttendance;
+import view.forms.DeleteAttendance;
 import view.forms.AddAttendance;
-import view.panels.Reports;
+import view.components.Reports;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.UASController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import model.UASFactory;
 import model.dto.Response;
-import view.panels.SemesterAttendanceReport;
-import view.panels.LoginUI;
+import view.components.charts.SemesterAttendanceReport;
+import view.forms.LoginUI;
 
 public class Dashboard extends JFrame {
 
@@ -143,6 +144,15 @@ public class Dashboard extends JFrame {
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button.putClientProperty("JButton.buttonType", "roundRect"); // Use roundRect button type
         button.putClientProperty("JButton.selectedBackground", new Color(52, 152, 219));
+        
+        // Add WindowListener to handle closing event
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    // Call the method to expire the session and handle any other necessary cleanup
+                    UASController.expireSession();
+                }
+            });
 
         // Hover Effect
         button.addMouseListener(new java.awt.event.MouseAdapter() {
