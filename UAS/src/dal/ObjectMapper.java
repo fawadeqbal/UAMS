@@ -9,6 +9,7 @@ import model.dto.CourseDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.dto.ClassDTO;
+import model.dto.CourseClassDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
@@ -156,13 +157,17 @@ public class ObjectMapper {
         return assignCourseList;
     }
 
-    ArrayList<ClassDTO> getClasses(ResultSet rs) {
-       ArrayList<ClassDTO> classList=new ArrayList<>();
+    ArrayList<CourseClassDTO> getClasses(ResultSet rs) {
+       ArrayList<CourseClassDTO> classList=new ArrayList<>();
         try{
         while (rs.next())
             {
-                ClassDTO c=new ClassDTO();
-                c.setClassId(rs.getString(1));
+                CourseClassDTO c=new CourseClassDTO();
+                c.setCourseCode(rs.getString(1));
+                c.setCourseName(rs.getString(2));
+                c.setFacultyId(rs.getInt(3));
+                c.setClassId(rs.getString(4));
+                
                 classList.add(c);
             }
         }catch (Exception e){
@@ -203,6 +208,26 @@ public class ObjectMapper {
             System.out.println("Error in mapping"+e.getMessage());
         }
         return studentsList;
+    }
+
+    StudentDTO getStudent(ResultSet rs) {
+        StudentDTO objStudent = new StudentDTO();
+        try{
+        if (rs.next())
+            {
+                                
+                objStudent.setRegNo(rs.getString(1));
+                objStudent.setName(rs.getString(2));
+                objStudent.setFatherName(rs.getString(3));
+                objStudent.setDob((rs.getDate(4)));
+                objStudent.setCnic(rs.getString(5));
+                objStudent.setPhoneNumber(rs.getString(6));
+                objStudent.setUserEmail(rs.getString(7));
+            }
+        }catch (Exception e){
+        }
+        return objStudent;
+        
     }
 
 }

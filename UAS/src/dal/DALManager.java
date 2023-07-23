@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import model.UASFactory;
 import model.dto.ClassDTO;
+import model.dto.CourseClassDTO;
 import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
@@ -116,6 +117,17 @@ public class DALManager {
         resultSet = objReader.getTeacher(teacher, connection, response, query);
         return objMapper.getTeacher(resultSet);
     }
+    public StudentDTO getStudentbyId(StudentDTO student, Response response) {
+        Connection connection = mySQL.getConnection();
+        if (connection == null) {
+            Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
+            response.messagesList.add((message));
+        }
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM students WHERE regno=?";
+        resultSet = objReader.getStudent(student, connection, response, query);
+        return objMapper.getStudent(resultSet);
+    }
 
     public void updatePassword(UserDTO userObj, Response responseObj) {
         Connection connection = mySQL.getConnection();
@@ -221,14 +233,14 @@ public class DALManager {
         resultSet = objReader.getTeacherEmail(user,connection, response, query);
         return objMapper.getTeacher(resultSet);
     }
-    public ArrayList<ClassDTO> getClassesByTeacherID(TeacherDTO teacher,Response response){
+    public ArrayList<CourseClassDTO> getClassesByTeacherID(TeacherDTO teacher,Response response){
         Connection connection = mySQL.getConnection();
         if (connection == null) {
             Message message = new Message("Database Connection issue please contact customer services.", MessageType.Exception);
             response.messagesList.add((message));
         }
         ResultSet resultSet = null;
-        String query = "SELECT DISTINCT class_id FROM TeacherClassView WHERE teacher_id = ?;";
+        String query = "SELECT * FROM course_details_view WHERE faculty_id=?;";
         resultSet = objReader.getTeacher(teacher, connection, response, query);
         return objMapper.getClasses(resultSet);
         

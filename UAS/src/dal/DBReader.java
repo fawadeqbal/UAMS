@@ -14,6 +14,7 @@ import model.dto.CourseDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
+import model.dto.StudentDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
 
@@ -62,6 +63,7 @@ public class DBReader {
             return statement.executeQuery();
 
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
 
         }
@@ -129,6 +131,21 @@ public class DBReader {
 
         }
         return null;     
+    }
+
+    ResultSet getStudent(StudentDTO student, Connection connection, Response response, String query) {
+        PreparedStatement statement = null;
+        try {
+            
+            statement = connection.prepareStatement(query);
+            statement.setString(1, student.getRegNo());
+            return statement.executeQuery();
+
+        } catch (Exception ex) {
+            response.messagesList.add(new Message(ex.getMessage(), MessageType.Exception));
+
+        }
+        return null;
     }
 
 }

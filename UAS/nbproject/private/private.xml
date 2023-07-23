@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/AssignCourseTeacher.java</file>
-            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/AdminDashboard.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/dto/CourseClassDTO.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/ObjectMapper.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/DALManager.java</file>
-            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/ViewAssignedCoursesToTeacher.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/dal/DBReader.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/AddAttendance.java</file>
             <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/controller/UASController.java</file>
-            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/AssignmentDashboard.java</file>
-            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/view/forms/AssignTeacherClass.java</file>
+            <file>file:/Practice/FA21-BSE-012/OOS/Project/UAMS/UAS/src/model/dto/CourseDTO.java</file>
         </group>
     </open-files>
 </project-private>
