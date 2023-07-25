@@ -16,6 +16,7 @@ public class CommonValidator {
 
     public static void validateUser(UserDTO objUser, Response objResponse) {
         isValidEmail(objUser.getEmail(), objResponse);
+        if(objResponse.isSuccessfull())
         isValidPassword(objUser.getPassword(), objResponse);
     }
 
@@ -44,19 +45,19 @@ public class CommonValidator {
 
     private static void isValidCourseName(String courseName, Response objResponse) {
         if (courseName == null || courseName.length() == 0) {
-            objResponse.messagesList.add(new Message("Course Name is not valid, Provide valid Course Name.", MessageType.Error));
+            objResponse.messagesList.add(new Message("Course Name is not valid, provide valid Course Name.", MessageType.Error));
         }
     }
 
     private static void isValidCourseCode(String courseCode, Response objResponse) {
         if (courseCode == null || courseCode.length() == 0) {
-            objResponse.messagesList.add(new Message("Course Code is not valid, Provide valid Course Code.", MessageType.Error));
+            objResponse.messagesList.add(new Message("Course Code is not valid, provide valid Course Code.", MessageType.Error));
         }
     }
 
     private static void isValidEmail(String email, Response objResponse) {
-        if (email == null || email.length() < 3) {
-            objResponse.messagesList.add(new Message("Email is not valid, Provide valid email with at least 3 characters.", MessageType.Error));
+        if (email == null || email.length() < 6) {
+            objResponse.messagesList.add(new Message("Email is not valid, provide valid email (standard email abc@xyz.co) with at least 6 characters.", MessageType.Error));
             return;
         }
 
@@ -67,26 +68,26 @@ public class CommonValidator {
         Matcher matcher = pattern.matcher(email);
 
         if (!matcher.matches()) {
-            objResponse.messagesList.add(new Message("Email format is not valid, Provide a valid email address.", MessageType.Error));
+            objResponse.messagesList.add(new Message("Email format is not valid.", MessageType.Error));
         }
     }
 
     private static void isValidPassword(String password, Response objResponse) {
         if (password == null || password.length() < 3) {
-            objResponse.messagesList.add(new Message("Password is not valid, Provide valid password with at least 3 characters.", MessageType.Error));
+            objResponse.messagesList.add(new Message("Password is not valid, provide valid password with at least 3 characters.", MessageType.Error));
         }
 
     }
 
     private static void validateRegNo(String regNo, Response responseObj) {
         if (regNo == null || regNo.length() < 12) {
-            responseObj.messagesList.add(new Message("Reg No# is not valid, Provide valid Reg No# with at least 12 characters.", MessageType.Error));
+            responseObj.messagesList.add(new Message("Reg No# is not valid, provide valid Reg No# with at least 12 characters.", MessageType.Error));
         }
     }
 
     private static void validateName(String name, Response responseObj) {
         if (name == null || name.length() < 3) {
-            responseObj.messagesList.add(new Message("Name is not valid, Provide valid Name with at least 3 characters.", MessageType.Error));
+            responseObj.messagesList.add(new Message("Name is not valid, provide valid Name with at least 3 characters.", MessageType.Error));
         }
     }
 

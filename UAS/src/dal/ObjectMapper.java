@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import model.dto.CourseDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.dto.ClassDTO;
 import model.dto.CourseClassDTO;
 import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
-import model.dto.TeacherCourseDTO;
 import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
@@ -29,10 +27,10 @@ public class ObjectMapper {
                 user.setRole(resultSet.getString(3));
                 responseObj.messagesList.add(new Message("Successfully Login", MessageType.Information));
             } else {
-                responseObj.messagesList.add(new Message("Invalid credentials check your username and password", MessageType.Error));
+                responseObj.messagesList.add(new Message("Invalid credentials check your email and password", MessageType.Error));
             }
         } catch (SQLException ex) {
-            Message message = new Message("Resultset Issue issue please contact customer services.", MessageType.Exception);
+            Message message = new Message("Resultset issue please contact customer services.", MessageType.Exception);
             responseObj.messagesList.add((message));
 //            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
         }
