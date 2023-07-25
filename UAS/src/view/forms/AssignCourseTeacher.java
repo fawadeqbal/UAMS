@@ -32,6 +32,8 @@ public class AssignCourseTeacher extends JPanel {
 
         // Create the Assign button
         JButton assignButton = new JButton("Assign Course");
+        assignButton.setBackground(new Color(52, 152, 219));
+        assignButton.setForeground(Color.WHITE);
         assignButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

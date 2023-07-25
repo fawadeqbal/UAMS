@@ -98,7 +98,7 @@ public class AddTeacher extends JPanel {
         constraints.gridx = 0;
         constraints.gridy++;
         constraints.gridwidth = 2;
-        JButton addButton = new JButton("Add Teacher");
+        JButton addButton = new JButton("Submit");
         addButton.setBackground(new Color(52, 152, 219));
         addButton.setForeground(Color.WHITE);
         addButton.addActionListener(e -> addTeacher());
