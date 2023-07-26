@@ -3,20 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddAttendance.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddStudent.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/UAS.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/controller/UASController.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddCourse.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AssignTeacherClass.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/components/ManageTeachers.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/LoginUI.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddTeacher.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AssignmentDashboard.java</file>
             <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/validators/CommonValidator.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/DBReader.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/UASFactory.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/db/IConnection.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/common/ApplicationSession.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/controller/UASController.java</file>
             <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AddUser.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/AssignCourseTeacher.java</file>
-            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/model/dto/TeacherDTO.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/DALManager.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/ObjectMapper.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/view/forms/LoginUI.java</file>
+            <file>file:/D:/4th%20Semester/OOSE/OOSE_Project/UAMS/UAS/src/dal/db/MySQLConnection.java</file>
         </group>
     </open-files>
 </project-private>
