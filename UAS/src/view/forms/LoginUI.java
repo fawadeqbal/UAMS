@@ -5,7 +5,6 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import com.formdev.flatlaf.FlatLightLaf;
 import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
@@ -20,7 +19,7 @@ public class LoginUI extends JFrame {
 
     public LoginUI() {
         controllerObj = UASFactory.getUASControllerInstance();
-        FlatLightLaf.install();
+      
         setTitle("UAS - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600, 400));
