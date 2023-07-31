@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import com.formdev.flatlaf.FlatLightLaf;
 import controller.UASController;
 import model.UASFactory;
 import model.dto.Response;
@@ -29,13 +28,7 @@ public class AddStudent extends JPanel {
 
     public AddStudent() {
         controllerObj = UASFactory.getUASControllerInstance();
-        // Set FlatLaf for a modern look and feel
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
+    
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);

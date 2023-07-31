@@ -4,6 +4,7 @@ import dal.db.MySQLConnection;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.util.ArrayList;
+
 import model.UASFactory;
 import model.dto.ClassDTO;
 import model.dto.CourseClassDTO;
@@ -12,7 +13,6 @@ import model.dto.Message;
 import model.dto.MessageType;
 import model.dto.Response;
 import model.dto.StudentDTO;
-import model.dto.TeacherCourseDTO;
 import model.dto.TeacherCourseViewDTO;
 import model.dto.TeacherDTO;
 import model.dto.UserDTO;
@@ -27,12 +27,12 @@ public class DALManager {
     ObjectRemover objRemover;
 
     public DALManager() {
-        objRemover = new ObjectRemover();
-        objModifier = new ObjectModifier();
-        objAdder = new ObjectAdder();
-        objMapper = new ObjectMapper();
-        objReader = new DBReader();
         mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/uas", "root", "Admin123$");
+        objAdder = UASFactory.getInstanceOfObjectAdder();
+        objRemover = UASFactory.getInstanceOfObjectRemover();
+        objModifier = UASFactory.getInstanceOfObjectModifier();
+        objMapper = UASFactory.getInstanceOfObjectMapper();
+        objReader = UASFactory.getInstanceOfDBReader();
     }
 
     public void verifyUser(UserDTO user, Response responseObj) {

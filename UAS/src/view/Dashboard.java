@@ -13,14 +13,11 @@ import java.awt.event.ActionListener;
 import controller.UASController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import model.UASFactory;
-import model.dto.Response;
 import view.components.charts.SemesterAttendanceReport;
 import view.forms.LoginUI;
 
 public class Dashboard extends JFrame {
 
-    UASController controller = UASFactory.getUASControllerInstance();
     private JPanel headerPanel;
     private JPanel menuPanel;
     private JPanel contentPanel;
@@ -31,8 +28,10 @@ public class Dashboard extends JFrame {
             loginScreen.setVisible(true);
             this.dispose();
         } else {
-
-            setTitle("Attendance Management System - Dashboard");
+            if(UASController.objApplicationSession.getUser().getRole().equals("faculty"))
+            setTitle("University Attendance System -Faculty Dashboard");
+            else
+                setTitle("University Attendance System -Student Dashboard");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
             setLayout(new BorderLayout());
@@ -58,7 +57,7 @@ public class Dashboard extends JFrame {
         headerPanel.setPreferredSize(new Dimension(800, 75));
         add(headerPanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Attendance Management System");
+        JLabel titleLabel = new JLabel("University Attendance System");
         titleLabel.setForeground(new Color(250, 250, 250));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -209,10 +208,7 @@ public class Dashboard extends JFrame {
         }else{
             contentPanel.add(new AddAttendance(), BorderLayout.CENTER); // Add the chart to the center of the content panel
         }
-        
-        
 
-        // Add the contentPanel to the main frame
         add(contentPanel, BorderLayout.CENTER);
     }
 
