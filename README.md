@@ -1,9 +1,55 @@
-# 💫 Introduction:
-Our Java-based Attendance System is a robust desktop application built with a focus on efficiency and user-friendliness. It seamlessly employs the MVC architecture, ensuring clear separation of concerns in the codebase. With a well-structured backend, this system incorporates best practices, making it an ideal choice for educational institutions. It offers three distinct dashboards for students, faculty, and administrators, facilitating a streamlined and organized attendance management process.
+# University Attendance System
 
+Welcome to our Java-based Attendance System! This desktop application is designed with a focus on efficiency and user-friendliness to streamline attendance management processes in educational institutions.
 
-# 💻 Tech Stack:
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) ![Apache Ant](https://img.shields.io/badge/Apache%20Ant-A81C7D?style=for-the-badge&logo=Apache%20Ant&logoColor=white) ![GIT](https://img.shields.io/badge/Git-fc6d26?style=for-the-badge&logo=git&logoColor=white) ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 
+## Features
 
+- **MVC Architecture**: The system employs the Model-View-Controller (MVC) architecture to ensure a clear separation of concerns in the codebase, making it easy to maintain and extend.
 
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+- **Robust Backend**: With a well-structured backend, the system incorporates best practices to ensure reliability and scalability.
+
+- **Three Dashboards**: The system offers three distinct dashboards for students, faculty, and administrators, providing tailored experiences and facilitating a streamlined attendance management process.
+
+## Tech Stack
+
+- **Java Swing**: The user interface of the application is built using Java Swing, providing a rich and interactive experience for users.
+
+- **MySQL**: The system uses MySQL as the backend database to store and manage attendance data efficiently.
+
+## Layered Architecture
+
+The system follows a layered architecture to ensure modularity and scalability:
+
+1. **Presentation Layer**: Responsible for handling user interactions and displaying information to users through the Java Swing interface.
+   
+2. **Business Logic Layer**: Implements the core logic of the application, including attendance tracking, user authentication, and data validation.
+
+3. **Data Access Layer**: Manages interactions with the MySQL database, including querying and updating attendance data.
+
+## Getting Started
+
+To run the Attendance System locally:
+
+1. Ensure you have Java and MySQL installed on your system.
+
+2. Clone the repository to your local machine:
+   ```
+   git clone (https://github.com/fawadeqbal/UAMS)
+   ```
+
+3. Set up the MySQL database and import the provided schema.
+
+4. Open the project in your preferred Java IDE.
+
+5. Compile and run the project to launch the Attendance System application.
+
+## Contributors
+
+- Fawad Iqbal(https://github.com/fawadeqbal)
+- Faizan (https://github.com/faizan-kh)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+Feel free to contribute, report issues, or suggest enhancements. Happy coding!
