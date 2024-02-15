@@ -34,7 +34,7 @@ To run the Attendance System locally:
 
 2. Clone the repository to your local machine:
    ```
-   git clone (https://github.com/fawadeqbal/UAMS)
+   git clone https://github.com/fawadeqbal/UAMS
    ```
 
 3. Set up the MySQL database and import the provided schema.
@@ -45,8 +45,8 @@ To run the Attendance System locally:
 
 ## Contributors
 
-- Fawad Iqbal(https://github.com/fawadeqbal)
-- Faizan (https://github.com/faizan-kh)
+- Fawad Iqbal https://github.com/fawadeqbal
+- Faizan https://github.com/faizan-kh
 
 ## License
 
